@@ -39,7 +39,7 @@
 - Licht regelen
 - Energie efficient werken van huishoudapparaten
 - Energie efficient werken van electronica
-- ...
+- Andere
 
 ## Knowlegde base: Ontology
 ## Agent framework
