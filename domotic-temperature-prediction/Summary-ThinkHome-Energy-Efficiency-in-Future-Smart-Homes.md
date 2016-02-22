@@ -42,3 +42,10 @@
 - ...
 
 ## Knowlegde base: Ontology
+## Agent framework
+- bv. Java Agent Development Framwork (JADE)
+- TH-MAS volgt Prometheus methodologie
+  - formele stijl en notatie
+  - stelt een iteratief proces voor
+
+## Control strategies
