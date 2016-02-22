@@ -13,3 +13,4 @@ De 3 belangrijkste features zijn:
 - Open: het aantal geconnecteerde bronnen en toestellen kunnen variëren in de tijd en het is niet nodig om het controle mechanisme te herdefiniëren.
 
 In multi-agent systemen zijn belangrijke operaties: coördinatie en communicatie tussen agents, verwijderen van agents die niet langer aanwezig zijn en het toevoegen van agents wanneer nodig.
+
