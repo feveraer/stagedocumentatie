@@ -15,3 +15,21 @@
   - Bewoners ondersteunen, niet betuttelen
 
 ## System Overview
+- Doel van het syteem is om flexibel, modulair en compatibel te zijn.
+- Mechanismen overnemen van de neuropsychologie en psychoanalyse
+  - Systeem heeft een bewust zijn
+
+- Er moet een bruikbare interactie mogelijk zijn tussen het systeem en de gebruiker
+- Mag de gebruiker niet hinderen maar moet alomtegenwoordig zijn
+
+- Het systeem kan de gebruiker aanwijzingen geven over hoe energie bespaart kan worden
+
+### Onderdelen
+- Knowledge base (KB)
+  - Alle relevante concepten bijhouden
+  - Fundatie voor MAS
+  - Biedt kennis aan om de optimale strategie te kunnen bepalen
+- Multiagent system (MAS)
+  - Maakt gebruik van expliciete data of data uit de KB
+  - MAS voert taken uit en bepaalt de strategie
+  - Alle agenten werken samen om het systeem te optimaliseren
