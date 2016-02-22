@@ -49,3 +49,4 @@
   - stelt een iteratief proces voor
 
 ## Control strategies
+Hoe worden ideale omstandigheden bepaalt?
