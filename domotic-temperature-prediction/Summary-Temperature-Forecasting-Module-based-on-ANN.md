@@ -40,3 +40,6 @@ Temperatuur signaal in 3 opdelen:
 ## Neural networks description
 - Het ANN krijgt het de uur component van de huidige tijd
 - Het ANN berekent een window van mogelijke voorspellingen
+
+## Conclusion
+- Een ANN voor de temperatuur binnenshuis te voorspellen werd geïmplementeerd
