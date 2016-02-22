@@ -33,3 +33,12 @@
   - Maakt gebruik van expliciete data of data uit de KB
   - MAS voert taken uit en bepaalt de strategie
   - Alle agenten werken samen om het systeem te optimaliseren
+
+## Use Cases
+- Temperatuur regelen
+- Licht regelen
+- Energie efficient werken van huishoudapparaten
+- Energie efficient werken van electronica
+- ...
+
+## Knowlegde base: Ontology
