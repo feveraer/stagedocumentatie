@@ -36,3 +36,7 @@ Temperatuur signaal in 3 opdelen:
 3. Testen
 
 1 en 2 bevatten data van dezelfde dag, 3 bevat data van een week later.
+
+## Neural networks description
+- Het ANN krijgt het de uur component van de huidige tijd
+- Het ANN berekent een window van mogelijke voorspellingen
