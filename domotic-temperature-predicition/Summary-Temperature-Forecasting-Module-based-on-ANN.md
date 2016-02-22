@@ -28,3 +28,11 @@ Setup van het huis beschrijven
         - monitoren en controleren van de huidige staat
     - Intelegentie modules
 - Het complete pakket van alle software en intellegentie modules zijn het controle en monitoring systeem.
+
+## Data preprocessing
+Temperatuur signaal in 3 opdelen:
+1. ANN trainen
+2. Model valideren
+3. Testen
+
+1 en 2 bevatten data van dezelfde dag, 3 bevat data van een week later.
