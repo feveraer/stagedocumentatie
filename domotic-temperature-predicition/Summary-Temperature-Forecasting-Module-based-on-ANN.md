@@ -7,3 +7,24 @@
   - Artificiële intellegentie technieken
   - Huis automatisatie
   - Standalone modules voor ieder subsysteem, die als agent fungeert.
+
+## Domotic home environment setup
+Setup van het huis beschrijven
+
+### Hardware architecture
+- Europese standaard KNX
+- KNX modules groeperen per functionaliteit
+- Werken zonder de Master Control Server (MCS)
+- MCS kan status van de sensoren lezen en kan bijsturen via TCP/IP
+
+### Software architecture
+- Software bestaat uit 3 lagen:
+  - KNX-IP brug:
+    - Data ophalen van de KNX
+  - Data persistentie laag
+    - Bemonsteren
+  - Verschillende applicaties
+    - iOS applicatie
+        - monitoren en controleren van de huidige staat
+    - Intelegentie modules
+- Het complete pakket van alle software en intellegentie modules zijn het controle en monitoring systeem.
