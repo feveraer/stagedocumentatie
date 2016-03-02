@@ -15,9 +15,9 @@ sudo addgroup hadoop
 sudo adduser --ingroup hadoop hadoop
 
 echo "Download and extract Hadoop"
-wget http://apache.rediris.es/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz
-sudo tar -xzvf hadoop-2.7.0.tar.gz -C /usr/local/lib/
-sudo chown -R hadoop:hadoop /usr/local/lib/hadoop-2.7.0
+wget http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
+sudo tar -xzvf hadoop-2.7.2.tar.gz -C /usr/local/lib/
+sudo chown -R hadoop:hadoop /usr/local/lib/hadoop-2.7.2
 
 echo "Create HDFS directories"
 sudo mkdir -p /var/lib/hadoop/hdfs/namenode
