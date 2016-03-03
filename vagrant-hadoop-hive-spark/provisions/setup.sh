@@ -56,7 +56,47 @@ export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/sbin/
 
 hdfs namenode -format
 
+echo "Starting hadoop"
+
 start-dfs.sh
 start-yarn.sh
+
+echo "Downloading Hive"
+wget ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-2.0.0/apache-hive-2.0.0-bin.tar.gz
+
+echo "Extracting Hive"
+sudo tar -xzvf apache-hive-2.0.0-bin.tar.gz -C /usr/local/lib
+sudo chown -R vagrant /usr/local/lib/apache-hive-2.0.0-bin
+
+echo "Setting up environment for Hive"
+echo "export HIVE_HOME=/usr/local/lib/apache-hive-2.0.0-bin" >> /home/vagrant/.bashrc
+source /home/vagrant/.bashrc
+export PATH=$PATH:$HIVE_HOME/bin
+export CLASSPATH=$CLASSPATH:/usr/local/lib/hadoop-2.7.2/lib/*:.
+export CLASSPATH=$CLASSPATH:/usr/local/lib/apache-hive-2.0.0-bin /lib/*:
+cp -f /vagrant/resources/hive-env.sh /usr/local/lib/apache-hive-2.0.0-bin/conf
+
+echo "Downloading Apache Derby"
+wget http://apache.cu.be//db/derby/db-derby-10.12.1.1/db-derby-10.12.1.1-bin.tar.gz
+echo "Extracting Apache derby"
+sudo tar -xzvf db-derby-10.12.1.1-bin.tar.gz -C /usr/local/lib
+sudo chown -R vagrant /usr/local/lib/db-derby-10.12.1.1-bin
+
+echo "Configuring Apache Derby"
+echo "export DERBY_HOME=/usr/local/lib/db-derby-10.12.1.1-bin" >> /home/vagrant/.bashrc
+source /home/vagrant/.bashrc
+export PATH=$PATH:$DERBY_HOME/bin
+export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar
+mkdir $DERBY_HOME/data
+
+echo "Configuring Metastore of Hive"
+cp -f /vagrant/resources/hive-site.xml /usr/local/lib/apache-hive-2.0.0-bin/conf
+cp -f /vagrant/resources/jpox.properties /usr/local/lib/apache-hive-2.0.0-bin/conf
+
+echo "Verifying Hive"
+hadoop fs -mkdir /tmp
+hadoop fs -mkdir /user/hive/warehouse
+hadoop fs -chmod g+w /tmp
+hadoop fs -chmod g+w /user/hive/warehouse
 
 echo "I'm alive and kicking"
