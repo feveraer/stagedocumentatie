@@ -68,7 +68,7 @@ echo "Downloading Hive"
 wget ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-2.0.0/apache-hive-2.0.0-bin.tar.gz
 
 echo "Extracting Hive"
-sudo tar -xzvf apache-hive-2.0.0-bin.tar.gz -C /usr/local/lib
+sudo tar -xzf apache-hive-2.0.0-bin.tar.gz -C /usr/local/lib
 sudo chown -R vagrant /usr/local/lib/apache-hive-2.0.0-bin
 
 echo "Setting up environment for Hive"
@@ -103,6 +103,13 @@ hadoop fs -chmod g+w /tmp
 hadoop fs -chmod g+w /user/hive/warehouse
 
 echo "Downloading Spark 1.6.0"
+wget http://apache.cu.be/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
 
+echo "Extracting Spark"
+sudo tar -xf spark-1.6.0-bin-hadoop2.6.tgz -C /opt
+sudo chown -R vagrant /opt/spark-1.6.0-bin-hadoop2.6
+
+echo "Configuration in spark-env.sh"
+cp /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh.template /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh
 
 echo "I'm alive and kicking"
