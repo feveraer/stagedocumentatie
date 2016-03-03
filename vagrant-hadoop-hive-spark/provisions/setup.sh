@@ -61,6 +61,9 @@ echo "Starting hadoop"
 start-dfs.sh
 start-yarn.sh
 
+echo "Make HDFS home directory"
+hadoop fs mkdir -p /user/vagrant
+
 echo "Downloading Hive"
 wget ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-2.0.0/apache-hive-2.0.0-bin.tar.gz
 
@@ -98,5 +101,8 @@ hadoop fs -mkdir /tmp
 hadoop fs -mkdir /user/hive/warehouse
 hadoop fs -chmod g+w /tmp
 hadoop fs -chmod g+w /user/hive/warehouse
+
+echo "Downloading Spark 1.6.0"
+
 
 echo "I'm alive and kicking"
