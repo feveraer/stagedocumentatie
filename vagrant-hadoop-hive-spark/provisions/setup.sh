@@ -62,7 +62,7 @@ start-dfs.sh
 start-yarn.sh
 
 echo "Make HDFS home directory"
-hadoop fs mkdir -p /user/vagrant
+hadoop fs -mkdir -p /user/vagrant
 
 echo "Downloading Hive"
 wget ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-2.0.0/apache-hive-2.0.0-bin.tar.gz
