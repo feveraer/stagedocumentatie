@@ -1,11 +1,19 @@
 #!/bin/bash
 
-echo "Provisioning virtual machine..."
-echo "Update the source list"
-sudo apt-get update
+echo " ==================================="
+echo "| Provisioning virtual machine ...  |"
+echo " ==================================="
+echo 
+echo " ==================================="
+echo "| Updating the source list ...      |"
+echo " ==================================="
+sudo apt-get update -qq
 
-echo "Installing java"
-sudo apt-get install -y default-jdk
+echo
+echo " ==================================="
+echo "| Installing Java 7 ...             |"
+echo " ==================================="
+sudo apt-get install -y -qq default-jdk
 
 #echo "Installing SSH"
 #sudo apt-get install -y openssh-server
@@ -14,11 +22,14 @@ sudo apt-get install -y default-jdk
 # sudo addgroup hadoop
 # sudo adduser --ingroup hadoop hadoop
 
-echo "Setting up profile"
-cp -f /vagrant/resources/profile /etc/profile
-source /etc/profile
-
-echo "Download and extract Hadoop"
+echo
+echo " ==================================="
+echo "| Downloading Hadoop 2.7.2 ...      |"
+echo " ==================================="
+echo
+echo " ==================================="
+echo "| Extracting Hadoop ...             |"
+echo " ==================================="
 wget -q http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
 sudo tar -xzf hadoop-2.7.2.tar.gz -C /usr/local/lib/
 sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2
@@ -34,7 +45,10 @@ sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2
 #echo "Create SSH key and add it to authorized keys"
 #ssh-keygen -t rsa -P "" -f ~/.ssh/id_rsa
 # ssh-copy-id -i ~/.ssh/id_rsa localhost
-echo "Configure hadoop"
+echo
+echo " ==================================="
+echo "| Configuring Hadoop ...            |"
+echo " ==================================="
 
 echo "export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre" >> /home/vagrant/.bashrc
 echo "export HADOOP_INSTALL=/usr/local/lib/hadoop-2.7.2" >> /home/vagrant/.bashrc
@@ -55,42 +69,78 @@ cp -f /vagrant/resources/yarn-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 cp -f /vagrant/resources/mapred-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 cp -f /vagrant/resources/hdfs-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 
-echo "Do nodeformat"
+echo
+echo " ==================================="
+echo "| Setting up /etc/profile ...       |"
+echo " ==================================="
+cp -f /vagrant/resources/profile /etc/profile
+source /etc/profile
+
+echo
+echo " ==================================="
+echo "| Formatting Hadoop namenode ...    |"
+echo " ==================================="
 hdfs namenode -format
 
-echo "Starting hadoop"
+echo
+echo " ==================================="
+echo "| Starting Hadoop ...               |"
+echo " ==================================="
+start-all.sh
 
-start-dfs.sh
-start-yarn.sh
-
-echo "Make HDFS home directory"
+echo
+echo " ==================================="
+echo "| Making HDFS home directory ...    |"
+echo " ==================================="
 hadoop fs -mkdir -p /user/vagrant
 
-echo "Downloading Hive"
+echo
+echo " ==================================="
+echo "| Downloading Hive 1.2 ...          |"
+echo " ==================================="
 wget -q ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
 
-echo "Extracting Hive"
+echo
+echo " ==================================="
+echo "| Extracting Hive ...               |"
+echo " ==================================="
 sudo tar -xzf apache-hive-1.2.1-bin.tar.gz -C /usr/local/lib
 sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin
 
-echo "Verifying Hive"
+echo
+echo " ==================================="
+echo "| Verifying Hive ...                |"
+echo " ==================================="
 hadoop fs -mkdir /tmp
 hadoop fs -mkdir -p /user/hive/warehouse
 hadoop fs -chmod g+w /tmp
 hadoop fs -chmod g+w /user/hive/warehouse
 
-echo "Downloading Spark 1.6.0"
+echo
+echo " ==================================="
+echo "| Downloading Spark 1.6 ...         |"
+echo " ==================================="
 wget -q http://apache.cu.be/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
 
-echo "Extracting Spark"
+echo
+echo " ==================================="
+echo "| Extracting Spark ...              |"
+echo " ==================================="
 sudo tar -xf spark-1.6.0-bin-hadoop2.6.tgz -C /opt
 sudo chown -R vagrant /opt/spark-1.6.0-bin-hadoop2.6
 
-echo "Load configuration Spark"
+echo
+echo " ==================================="
+echo "| Configuring Spark ...             |"
+echo " ==================================="
 cp -f /vagrant/resources/spark-env.sh /opt/spark-1.6.0-bin-hadoop2.6/conf
 cp -f /vagrant/resources/spark-defaults.conf /opt/spark-1.6.0-bin-hadoop2.6/conf
 
-echo "I'm alive and kicking"
+echo
+echo " ==================================="
+echo "| SYSTEM ALIVE AND KICKING!         |"
+echo " ==================================="
+echo
 echo "If errors with Hadoop:"
 echo "  sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2"
 echo "  hdfs namenode -format"
