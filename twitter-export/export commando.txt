@@ -1,0 +1,8 @@
+select "ID", "UserID",  "UserName", "Tweet", "Timestamp", "FavoriteCount", "TweetID", "InReplyToTweetID", "IsoLanguageCode", "Latitude", "Longitude", "RetweetCount", "isRetweet", "isFavorited"
+union
+select * from ugenttwitter5.collecttweetuni limit 10
+into outfile '/home/twitter/csv/twitter_1.csv'
+fields enclosed by ''
+terminated by '´~¨`^'
+escaped by ''
+lines terminated by '\r\n';
