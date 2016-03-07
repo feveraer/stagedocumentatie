@@ -19,8 +19,8 @@ cp -f /vagrant/resources/profile /etc/profile
 source /etc/profile
 
 echo "Download and extract Hadoop"
-wget http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
-sudo tar -xzvf hadoop-2.7.2.tar.gz -C /usr/local/lib/
+wget -q http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
+sudo tar -xzf hadoop-2.7.2.tar.gz -C /usr/local/lib/
 sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2
 
 # echo "Create HDFS directories"
@@ -67,7 +67,7 @@ echo "Make HDFS home directory"
 hadoop fs -mkdir -p /user/vagrant
 
 echo "Downloading Hive"
-wget ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
+wget -q ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
 
 echo "Extracting Hive"
 sudo tar -xzf apache-hive-1.2.1-bin.tar.gz -C /usr/local/lib
@@ -80,7 +80,7 @@ hadoop fs -chmod g+w /tmp
 hadoop fs -chmod g+w /user/hive/warehouse
 
 echo "Downloading Spark 1.6.0"
-wget http://apache.cu.be/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
+wget -q http://apache.cu.be/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
 
 echo "Extracting Spark"
 sudo tar -xf spark-1.6.0-bin-hadoop2.6.tgz -C /opt
