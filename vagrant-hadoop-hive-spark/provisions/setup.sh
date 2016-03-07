@@ -110,7 +110,6 @@ sudo tar -xf spark-1.6.0-bin-hadoop2.6.tgz -C /opt
 sudo chown -R vagrant /opt/spark-1.6.0-bin-hadoop2.6
 
 echo "Configuration in spark-env.sh"
-cp -f /vagrant/resources/spark-env.sh /opt/spark-1.6.0-bin-hadoop2.6/conf
-cp -f /vagrant/resources/spark-defaults.conf /opt/spark-1.6.0-bin-hadoop2.6/conf
+cp /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh.template /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh
 
 echo "I'm alive and kicking"
