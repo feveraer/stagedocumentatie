@@ -1,19 +1,18 @@
 #!/bin/bash
 
-echo " ==================================="
-echo "| Provisioning virtual machine ...  |"
-echo " ==================================="
-echo 
+bold=$(tput bold)
+normal=$(tput sgr0)
+
 echo " ==================================="
 echo "| Updating the source list ...      |"
 echo " ==================================="
-sudo apt-get update -qq
+sudo apt-get -qq update
 
 echo
 echo " ==================================="
 echo "| Installing Java 7 ...             |"
 echo " ==================================="
-sudo apt-get install -y -qq default-jdk
+sudo apt-get -qq install -y default-jdk
 
 #echo "Installing SSH"
 #sudo apt-get install -y openssh-server
@@ -26,13 +25,13 @@ echo
 echo " ==================================="
 echo "| Downloading Hadoop 2.7.2 ...      |"
 echo " ==================================="
+wget -q http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
+
 echo
 echo " ==================================="
 echo "| Extracting Hadoop ...             |"
 echo " ==================================="
-wget -q http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
 sudo tar -xzf hadoop-2.7.2.tar.gz -C /usr/local/lib/
-sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2
 
 # echo "Create HDFS directories"
 # sudo mkdir -p /var/lib/hadoop/hdfs/namenode
@@ -42,9 +41,6 @@ sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2
 # echo "Log in as the hadoop user"
 # sudo su - hadoop
 
-#echo "Create SSH key and add it to authorized keys"
-#ssh-keygen -t rsa -P "" -f ~/.ssh/id_rsa
-# ssh-copy-id -i ~/.ssh/id_rsa localhost
 echo
 echo " ==================================="
 echo "| Configuring Hadoop ...            |"
@@ -52,8 +48,6 @@ echo " ==================================="
 
 echo "export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre" >> /home/vagrant/.bashrc
 echo "export HADOOP_INSTALL=/usr/local/lib/hadoop-2.7.2" >> /home/vagrant/.bashrc
-# echo "export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/bin" >> /home/vagrant/.bashrc
-# echo "export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/sbin" >> /home/vagrant/.bashrc
 echo "export HADOOP_MAPRED_HOME=/usr/local/lib/hadoop-2.7.2" >> /home/vagrant/.bashrc
 echo "export HADOOP_COMMON_HOME=/usr/local/lib/hadoop-2.7.2" >> /home/vagrant/.bashrc
 echo "export HADOOP_HDFS_HOME=/usr/local/lib/hadoop-2.7.2" >> /home/vagrant/.bashrc
@@ -69,30 +63,15 @@ cp -f /vagrant/resources/yarn-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 cp -f /vagrant/resources/mapred-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 cp -f /vagrant/resources/hdfs-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 
+mkdir /usr/local/lib/hadoop-2.7.2/logs
+sudo chown -fR vagrant /usr/local/lib/hadoop-2.7.2
+
 echo
 echo " ==================================="
 echo "| Setting up /etc/profile ...       |"
 echo " ==================================="
 cp -f /vagrant/resources/profile /etc/profile
 source /etc/profile
-
-echo
-echo " ==================================="
-echo "| Formatting Hadoop namenode ...    |"
-echo " ==================================="
-hdfs namenode -format
-
-echo
-echo " ==================================="
-echo "| Starting Hadoop ...               |"
-echo " ==================================="
-start-all.sh
-
-echo
-echo " ==================================="
-echo "| Making HDFS home directory ...    |"
-echo " ==================================="
-hadoop fs -mkdir -p /user/vagrant
 
 echo
 echo " ==================================="
@@ -106,15 +85,6 @@ echo "| Extracting Hive ...               |"
 echo " ==================================="
 sudo tar -xzf apache-hive-1.2.1-bin.tar.gz -C /usr/local/lib
 sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin
-
-echo
-echo " ==================================="
-echo "| Verifying Hive ...                |"
-echo " ==================================="
-hadoop fs -mkdir /tmp
-hadoop fs -mkdir -p /user/hive/warehouse
-hadoop fs -chmod g+w /tmp
-hadoop fs -chmod g+w /user/hive/warehouse
 
 echo
 echo " ==================================="
@@ -138,18 +108,21 @@ cp -f /vagrant/resources/spark-defaults.conf /opt/spark-1.6.0-bin-hadoop2.6/conf
 
 echo
 echo " ==================================="
-echo "| SYSTEM ALIVE AND KICKING!         |"
+echo "| Preparing help scripts    ...     |"
 echo " ==================================="
+cp -f /vagrant/resources/init-hadoop.sh /usr/local/lib/hadoop-2.7.2/sbin
+cp -f /vagrant/resources/ssh-passphraseless.sh /usr/local/lib/hadoop-2.7.2/sbin
+cp -f /vagrant/resources/init-hive.sh /usr/local/lib/hadoop-2.7.2/sbin
+
 echo
-echo "If errors with Hadoop:"
-echo "  sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2"
-echo "  hdfs namenode -format"
-echo "  start-dfs.sh"
-echo "  start-yarn.sh"
-echo "If errors with Hive:"
-echo "  sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin"
-echo "  source /etc/profile"
-echo "  hadoop fs -mkdir /tmp"
-echo "  hadoop fs -mkdir -p /user/hive/warehouse"
-echo "  hadoop fs -chmod g+w /tmp"
-echo "  hadoop fs -chmod g+w /user/hive/warehouse"
+echo "${bold}SYSTEM ALIVE AND KICKING!"
+echo "${normal}"
+echo "Now to get Hadoop up and running, execute:"
+echo "${bold}  ssh-passphraseless.sh"
+echo "${normal}"
+echo "${bold}  init-hadoop.sh"
+echo "${normal}  this will format the namenode and execute start-all.sh"
+echo
+echo "To initialize Hive directories, execute:"
+echo "${bold}  init-hive.sh"
+echo "${normal}"
