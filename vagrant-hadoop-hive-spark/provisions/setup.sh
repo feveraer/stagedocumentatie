@@ -22,7 +22,7 @@ echo
 echo " ==================================="
 echo "| Downloading Hadoop 2.7.2 ...      |"
 echo " ==================================="
-wget -q http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
+wget --progress=bar:force http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
 
 echo
 echo " ==================================="
@@ -74,7 +74,7 @@ echo
 echo " ==================================="
 echo "| Downloading Hive 1.2 ...          |"
 echo " ==================================="
-wget -q ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
+wget --progress=bar:force ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
 
 echo
 echo " ==================================="
@@ -87,7 +87,7 @@ echo
 echo " ==================================="
 echo "| Downloading Spark 1.6 ...         |"
 echo " ==================================="
-wget -q http://apache.cu.be/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
+wget --progress=bar:force http://apache.cu.be/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz
 
 echo
 echo " ==================================="
