@@ -51,9 +51,7 @@ cp -f /vagrant/resources/yarn-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 cp -f /vagrant/resources/mapred-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 cp -f /vagrant/resources/hdfs-site.xml /usr/local/lib/hadoop-2.7.2/etc/hadoop
 
-export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/bin/
-export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/sbin/
-
+echo "Do nodeformat"
 hdfs namenode -format
 
 echo "Starting hadoop"
@@ -65,40 +63,19 @@ echo "Make HDFS home directory"
 hadoop fs -mkdir -p /user/vagrant
 
 echo "Downloading Hive"
-wget ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-2.0.0/apache-hive-2.0.0-bin.tar.gz
+wget ftp://apache.belnet.be/mirrors/ftp.apache.org/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz
 
 echo "Extracting Hive"
-sudo tar -xzf apache-hive-2.0.0-bin.tar.gz -C /usr/local/lib
-sudo chown -R vagrant /usr/local/lib/apache-hive-2.0.0-bin
+sudo tar -xzf apache-hive-1.2.1-bin.tar.gz -C /usr/local/lib
+sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin
 
 echo "Setting up environment for Hive"
-echo "export HIVE_HOME=/usr/local/lib/apache-hive-2.0.0-bin" >> /home/vagrant/.bashrc
-source /home/vagrant/.bashrc
-export PATH=$PATH:$HIVE_HOME/bin
-export CLASSPATH=$CLASSPATH:/usr/local/lib/hadoop-2.7.2/lib/*:.
-export CLASSPATH=$CLASSPATH:/usr/local/lib/apache-hive-2.0.0-bin /lib/*:
-cp -f /vagrant/resources/hive-env.sh /usr/local/lib/apache-hive-2.0.0-bin/conf
-
-echo "Downloading Apache Derby"
-wget http://apache.cu.be//db/derby/db-derby-10.12.1.1/db-derby-10.12.1.1-bin.tar.gz
-echo "Extracting Apache derby"
-sudo tar -xzvf db-derby-10.12.1.1-bin.tar.gz -C /usr/local/lib
-sudo chown -R vagrant /usr/local/lib/db-derby-10.12.1.1-bin
-
-echo "Configuring Apache Derby"
-echo "export DERBY_HOME=/usr/local/lib/db-derby-10.12.1.1-bin" >> /home/vagrant/.bashrc
-source /home/vagrant/.bashrc
-export PATH=$PATH:$DERBY_HOME/bin
-export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar
-mkdir $DERBY_HOME/data
-
-echo "Configuring Metastore of Hive"
-cp -f /vagrant/resources/hive-site.xml /usr/local/lib/apache-hive-2.0.0-bin/conf
-cp -f /vagrant/resources/jpox.properties /usr/local/lib/apache-hive-2.0.0-bin/conf
+cp -f /vagrant/resources/profile /etc/profile
+source /etc/profile
 
 echo "Verifying Hive"
 hadoop fs -mkdir /tmp
-hadoop fs -mkdir /user/hive/warehouse
+hadoop fs -mkdir -p /user/hive/warehouse
 hadoop fs -chmod g+w /tmp
 hadoop fs -chmod g+w /user/hive/warehouse
 
@@ -113,3 +90,15 @@ echo "Configuration in spark-env.sh"
 cp /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh.template /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh
 
 echo "I'm alive and kicking"
+echo "If errors with Hadoop:"
+echo "  sudo chown -R vagrant /usr/local/lib/hadoop-2.7.2"
+echo "  hdfs namenode -format"
+echo "  start-dfs.sh"
+echo "  start-yarn.sh"
+echo "If errors with Hive:"
+echo "  sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin"
+echo "  source /etc/profile"
+echo "  hadoop fs -mkdir /tmp"
+echo "  hadoop fs -mkdir -p /user/hive/warehouse"
+echo "  hadoop fs -chmod g+w /tmp"
+echo "  hadoop fs -chmod g+w /user/hive/warehouse"
