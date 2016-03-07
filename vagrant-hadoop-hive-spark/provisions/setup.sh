@@ -1,8 +1,5 @@
 #!/bin/bash
 
-bold=$(tput bold)
-normal=$(tput sgr0)
-
 echo " ==================================="
 echo "| Updating the source list ...      |"
 echo " ==================================="
@@ -115,14 +112,13 @@ cp -f /vagrant/resources/ssh-passphraseless.sh /usr/local/lib/hadoop-2.7.2/sbin
 cp -f /vagrant/resources/init-hive.sh /usr/local/lib/hadoop-2.7.2/sbin
 
 echo
-echo "${bold}SYSTEM ALIVE AND KICKING!"
-echo "${normal}"
-echo "Now to get Hadoop up and running, execute:"
-echo "${bold}  ssh-passphraseless.sh"
-echo "${normal}"
-echo "${bold}  init-hadoop.sh"
-echo "${normal}  this will format the namenode and execute start-all.sh"
+echo "SYSTEM ALIVE AND KICKING!!!"
+echo
+echo "Now to get Hadoop up and running for the first time, execute:"
+echo "  ssh-passphraseless.sh"
+echo "  -> password not asked when starting hadoop"
+echo "  init-hadoop.sh"
+echo "  -> this will format the namenode and execute start-all.sh"
 echo
 echo "To initialize Hive directories, execute:"
-echo "${bold}  init-hive.sh"
-echo "${normal}"
+echo "  init-hive.sh"
