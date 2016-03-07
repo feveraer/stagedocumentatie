@@ -29,9 +29,10 @@ if [ -d /etc/profile.d ]; then
   unset i
 fi
 
-export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/bin/
-export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/sbin/
+export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/bin/:/usr/local/lib/hadoop-2.7.2/sbin/
 
 HIVE_HOME=/usr/local/lib/apache-hive-1.2.1-bin
 export HIVE_HOME
 export PATH=$PATH:$HIVE_HOME/bin
+
+export PATH=$PATH:/opt/spark-1.6.0-bin-hadoop2.6/bin/

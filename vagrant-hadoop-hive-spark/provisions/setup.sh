@@ -14,6 +14,10 @@ sudo apt-get install -y default-jdk
 # sudo addgroup hadoop
 # sudo adduser --ingroup hadoop hadoop
 
+echo "Setting up profile"
+cp -f /vagrant/resources/profile /etc/profile
+source /etc/profile
+
 echo "Download and extract Hadoop"
 wget http://apache.cu.be/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz
 sudo tar -xzvf hadoop-2.7.2.tar.gz -C /usr/local/lib/
@@ -69,10 +73,6 @@ echo "Extracting Hive"
 sudo tar -xzf apache-hive-1.2.1-bin.tar.gz -C /usr/local/lib
 sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin
 
-echo "Setting up environment for Hive"
-cp -f /vagrant/resources/profile /etc/profile
-source /etc/profile
-
 echo "Verifying Hive"
 hadoop fs -mkdir /tmp
 hadoop fs -mkdir -p /user/hive/warehouse
@@ -86,8 +86,9 @@ echo "Extracting Spark"
 sudo tar -xf spark-1.6.0-bin-hadoop2.6.tgz -C /opt
 sudo chown -R vagrant /opt/spark-1.6.0-bin-hadoop2.6
 
-echo "Configuration in spark-env.sh"
-cp /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh.template /opt/spark-1.6.0-bin-hadoop2.6/conf/spark-env.sh
+echo "Load configuration Spark"
+cp -f /vagrant/resources/spark-env.sh /opt/spark-1.6.0-bin-hadoop2.6/conf
+cp -f /vagrant/resources/spark-defaults.conf /opt/spark-1.6.0-bin-hadoop2.6/conf
 
 echo "I'm alive and kicking"
 echo "If errors with Hadoop:"

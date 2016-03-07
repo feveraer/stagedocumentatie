@@ -1,5 +1,6 @@
 #!/bin/bash
 
-SPARK_JAVA_OPTS=-Dspark.driver.port=53411
+# SPARK_JAVA_OPTS=-Dspark.driver.port=53411
 HADOOP_CONF_DIR=$HADOOP_INSTALL/etc/hadoop
-SPARK_MASTER_IP=localhost
+SPARK_MASTER_IP=127.0.0.1
+SPARK_LOCAL_IP=127.0.0.1
