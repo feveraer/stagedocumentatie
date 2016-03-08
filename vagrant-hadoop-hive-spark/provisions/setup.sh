@@ -82,6 +82,7 @@ echo "| Extracting Hive ...               |"
 echo " ==================================="
 sudo tar -xzf apache-hive-1.2.1-bin.tar.gz -C /usr/local/lib
 sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin
+cp -f /vagrant/resources/hive-default.xml /usr/local/lib/apache-hive-1.2.1-bin/conf
 
 echo
 echo " ==================================="
