@@ -30,6 +30,16 @@ cp -r /vagrant/resources/csv/types /home/vagrant/qbus_import/csv
 
 echo
 echo " ==================================="
+echo "| Removing headers from csv         |"
+echo " ==================================="
+sed -i 1d /home/vagrant/qbus_import/csv/controllers/Controllers.csv
+sed -i 1d /home/vagrant/qbus_import/csv/outputdownloadedlogs/OutputDownloadedLogs.csv
+sed -i 1d /home/vagrant/qbus_import/csv/outputlogs/OutputLogs.csv
+sed -i 1d /home/vagrant/qbus_import/csv/outputs/Outputs.csv
+sed -i 1d /home/vagrant/qbus_import/csv/types/Types.csv
+
+echo
+echo " ==================================="
 echo "| Copying csv files to Hadoop       |"
 echo " ==================================="
 
