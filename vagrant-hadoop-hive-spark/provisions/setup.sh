@@ -102,6 +102,7 @@ echo "| Configuring Spark ...             |"
 echo " ==================================="
 cp -f /vagrant/resources/spark-env.sh /opt/spark-1.6.0-bin-hadoop2.6/conf
 cp -f /vagrant/resources/spark-defaults.conf /opt/spark-1.6.0-bin-hadoop2.6/conf
+cp -f /vagrant/resources/log4j.properties /opt/spark-1.6.0-bin-hadoop2.6/conf
 
 echo
 echo " ==================================="
