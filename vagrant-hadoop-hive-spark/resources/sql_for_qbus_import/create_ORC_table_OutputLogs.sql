@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS OutputLogs(
-    Id BIGINT, 
+    Id BIGINT,
     OutputId INT,
     Time TIMESTAMP,
     Status INT,

@@ -15,4 +15,4 @@ CREATE EXTERNAL TABLE IF NOT EXISTS Controllers(
   ROW FORMAT DELIMITED
   FIELDS TERMINATED BY ','
   STORED AS TEXTFILE
-  location '/folder/outputlogs';
+  location '/home/vagrant/qbus_import/csv/controllers';

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Outputs(
     LocationId BIGINT,
     OriginalName STRING,
     CustomName STRING,
-    ProgramId BIGINT
+    ProgramId BIGINT,
     Status STRING,
     CreatedAt TIMESTAMP,
     UpdatedAt TIMESTAMP,

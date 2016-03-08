@@ -9,7 +9,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS Outputs(
     LocationId BIGINT,
     OriginalName STRING,
     CustomName STRING,
-    ProgramId BIGINT
+    ProgramId BIGINT,
     Status STRING,
     CreatedAt TIMESTAMP,
     UpdatedAt TIMESTAMP,
@@ -20,4 +20,4 @@ CREATE EXTERNAL TABLE IF NOT EXISTS Outputs(
   ROW FORMAT DELIMITED
   FIELDS TERMINATED BY ','
   STORED AS TEXTFILE
-  location '/folder/outputlogs';
+  location '/home/vagrant/qbus_import/csv/outputs';
