@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo " ==================================="
-echo "| Copying SQL files to VM          |"
+echo "| Copying SQL files to VM           |"
 echo " ==================================="
 mkdir -p /home/vagrant/qbus_import
 cp /vagrant/resources/sql_for_qbus_import/create_EXT_table_Controllers.sql /home/vagrant/qbus_import
@@ -18,7 +18,7 @@ cp /vagrant/resources/sql_for_qbus_import/moving_from_EXT_to_ORC.sql /home/vagra
 
 echo
 echo " ==================================="
-echo "| Copying csv files to VM          |"
+echo "| Copying csv files to VM           |"
 echo " ==================================="
 
 mkdir -p /home/vagrant/qbus_import/csv
@@ -30,7 +30,20 @@ cp -r /vagrant/resources/csv/types /home/vagrant/qbus_import/csv
 
 echo
 echo " ==================================="
-echo "| Creating EXT tables              |"
+echo "| Copying csv files to Hadoop       |"
+echo " ==================================="
+
+hadoop fs -mkdir -p /input/csv
+
+hadoop fs -put /vagrant/resources/csv/controllers /input/csv
+hadoop fs -put /vagrant/resources/csv/outputdownloadedlogs /input/csv
+hadoop fs -put /vagrant/resources/csv/outputlogs /input/csv
+hadoop fs -put /vagrant/resources/csv/outputs /input/csv
+hadoop fs -put /vagrant/resources/csv/types /input/csv
+
+echo
+echo " ==================================="
+echo "| Creating EXT tables               |"
 echo " ==================================="
 
 hive -f /home/vagrant/qbus_import/create_EXT_table_Controllers.sql
@@ -41,7 +54,7 @@ hive -f /home/vagrant/qbus_import/create_EXT_table_Types.sql
 
 echo
 echo " ==================================="
-echo "| Creating ORC tables              |"
+echo "| Creating ORC tables               |"
 echo " ==================================="
 
 hive -f /home/vagrant/qbus_import/create_ORC_table_Controllers.sql
@@ -52,7 +65,7 @@ hive -f /home/vagrant/qbus_import/create_ORC_table_Types.sql
 
 echo
 echo " ==================================="
-echo "| Moving from EXT to ORC           |"
+echo "| Moving from EXT to ORC            |"
 echo " ==================================="
 
 hive -f /home/vagrant/qbus_import/moving_from_EXT_to_ORC.sql

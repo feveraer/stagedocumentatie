@@ -7,4 +7,4 @@ CREATE EXTERNAL TABLE IF NOT EXISTS OutputDownloadedLogs(
   ROW FORMAT DELIMITED
   FIELDS TERMINATED BY ','
   STORED AS TEXTFILE
-  location '/home/vagrant/qbus_import/csv/outputdownloadedlogs';
+  location '/input/csv/outputdownloadedlogs';
