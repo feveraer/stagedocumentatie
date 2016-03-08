@@ -6,3 +6,5 @@ fields enclosed by ''
 terminated by '´~¨`^'
 escaped by ''
 lines terminated by '\r\n';
+
+^ dubbel escapen bij split in spark

@@ -1,2 +1,3 @@
 vagrant-hadoop-hive-spark/.vagrant
 vagrant-hadoop-hive-spark/.vagrant/**
+vagrant-hadoop-hive-spark/resources/csv/**
