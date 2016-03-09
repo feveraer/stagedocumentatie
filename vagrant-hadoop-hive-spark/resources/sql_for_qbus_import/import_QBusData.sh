@@ -79,3 +79,10 @@ echo "| Moving from EXT to ORC            |"
 echo " ==================================="
 
 hive -f /home/vagrant/qbus_import/moving_from_EXT_to_ORC.sql
+
+echo
+echo " ==================================="
+echo "| Removing import files             |"
+echo " ==================================="
+
+rm -r /home/vagrant/qbus_import
