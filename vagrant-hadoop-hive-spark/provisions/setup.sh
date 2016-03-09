@@ -117,6 +117,7 @@ cp -f /vagrant/resources/sql_for_qbus_import/import_QBusData.sh /home/vagrant
 mkdir -p /home/vagrant/installers
 cp -f /vagrant/resources/python/ipython_install.sh /home/vagrant/installers
 cp -f /vagrant/resources/python/jupyter_notebook_install.sh /home/vagrant/installers
+cp -f /vagrant/resources/zeppelin/zeppelin_install.sh /home/vagrant/installers
 
 echo
 echo "SYSTEM ALIVE AND KICKING!!!"
@@ -135,6 +136,9 @@ echo "  import_QBusData.sh in /home/vagrant"
 echo "  Don't forget to paste the resources in vagrant_dir/resources/csv"
 echo
 echo "To install IPython or Jypyter notebook, execute:"
-echo "  ipython_install.sh in /home/vagrant/installers"
+echo "  ./installers/ipython_install.sh"
 echo "  or"
-echo "  jupyter_notebook_install.sh in /home/vagrant/installers"
+echo "  ./installers/jupyter_notebook_install.sh"
+echo
+echo "To install Zeppelin notebook, execute:"
+echo "  ./installers/zeppelin_install.sh"
