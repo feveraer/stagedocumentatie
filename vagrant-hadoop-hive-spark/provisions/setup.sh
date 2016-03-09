@@ -135,13 +135,13 @@ echo "To initialize Hive directories, execute:"
 echo "  init-hive.sh"
 echo
 echo "To import QBus data into Hive, execute:"
-echo "  import_QBusData.sh in /home/vagrant"
+echo "  ./import_QBusData.sh"
 echo "  Don't forget to paste the resources in vagrant_dir/resources/csv"
 echo
 echo "To install IPython or Jypyter notebook, execute:"
-echo "  ./installers/ipython_install.sh"
+echo "  source installers/ipython_install.sh"
 echo "  or"
-echo "  ./installers/jupyter_notebook_install.sh"
+echo "  source installers/jupyter_notebook_install.sh"
 echo
 echo "To install Zeppelin notebook, execute:"
-echo "  ./installers/zeppelin_install.sh"
+echo "  source installers/zeppelin_install.sh"
