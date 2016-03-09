@@ -8,5 +8,5 @@ echo "sudo pip install path.py"
 sudo pip install path.py > /dev/null
 
 echo "export IPYTHON=1"
-sudo echo "export IPYTHON=1" >> /etc/profile
+echo "export IPYTHON=1" >> /home/vagrant/.bash_profile
 export IPYTHON=1
