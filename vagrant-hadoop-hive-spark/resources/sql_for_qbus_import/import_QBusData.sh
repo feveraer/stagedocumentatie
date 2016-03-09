@@ -45,11 +45,11 @@ echo " ==================================="
 
 hadoop fs -mkdir -p /input/csv
 
-hadoop fs -put /vagrant/resources/csv/controllers /input/csv
-hadoop fs -put /vagrant/resources/csv/outputdownloadedlogs /input/csv
-hadoop fs -put /vagrant/resources/csv/outputlogs /input/csv
-hadoop fs -put /vagrant/resources/csv/outputs /input/csv
-hadoop fs -put /vagrant/resources/csv/types /input/csv
+hadoop fs -put /home/vagrant/qbus_import/csv/controllers /input/csv
+hadoop fs -put /home/vagrant/qbus_import/csv/outputdownloadedlogs /input/csv
+hadoop fs -put /home/vagrant/qbus_import/csv/outputlogs /input/csv
+hadoop fs -put /home/vagrant/qbus_import/csv/outputs /input/csv
+hadoop fs -put /home/vagrant/qbus_import/csv/types /input/csv
 
 echo
 echo " ==================================="
