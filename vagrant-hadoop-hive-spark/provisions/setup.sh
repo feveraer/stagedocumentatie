@@ -29,6 +29,7 @@ echo " ==================================="
 echo "| Extracting Hadoop ...             |"
 echo " ==================================="
 sudo tar -xzf hadoop-2.7.2.tar.gz -C /usr/local/lib/
+rm -f hadoop-2.7.2.tar.gz
 
 # echo "Create HDFS directories"
 # sudo mkdir -p /var/lib/hadoop/hdfs/namenode
@@ -81,6 +82,7 @@ echo " ==================================="
 echo "| Extracting Hive ...               |"
 echo " ==================================="
 sudo tar -xzf apache-hive-1.2.1-bin.tar.gz -C /usr/local/lib
+rm -f apache-hive-1.2.1-bin.tar.gz
 sudo chown -R vagrant /usr/local/lib/apache-hive-1.2.1-bin
 cp -f /vagrant/resources/hive-site.xml /usr/local/lib/apache-hive-1.2.1-bin/conf
 
@@ -95,6 +97,7 @@ echo " ==================================="
 echo "| Extracting Spark ...              |"
 echo " ==================================="
 sudo tar -xf spark-1.6.0-bin-hadoop2.6.tgz -C /opt
+rm -f spark-1.6.0-bin-hadoop2.6.tgz
 sudo chown -R vagrant /opt/spark-1.6.0-bin-hadoop2.6
 
 echo
