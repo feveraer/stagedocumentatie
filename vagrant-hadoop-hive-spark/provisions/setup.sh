@@ -114,6 +114,10 @@ cp -f /vagrant/resources/ssh-passphraseless.sh /usr/local/lib/hadoop-2.7.2/sbin
 cp -f /vagrant/resources/init-hive.sh /usr/local/lib/hadoop-2.7.2/sbin
 cp -f /vagrant/resources/sql_for_qbus_import/import_QBusData.sh /home/vagrant
 
+mkdir -p /home/vagrant/installers
+cp -f /vagrant/resources/python/ipython_install.sh /home/vagrant/installers
+cp -f /vagrant/resources/python/jupyter_notebook_install.sh /home/vagrant/installers
+
 echo
 echo "SYSTEM ALIVE AND KICKING!!!"
 echo
@@ -125,6 +129,12 @@ echo "  -> this will format the namenode and execute start-all.sh"
 echo
 echo "To initialize Hive directories, execute:"
 echo "  init-hive.sh"
+echo
 echo "To import QBus data into Hive, execute:"
 echo "  import_QBusData.sh in /home/vagrant"
 echo "  Don't forget to paste the resources in vagrant_dir/resources/csv"
+echo
+echo "To install IPython or Jypyter notebook, execute:"
+echo "  ipython_install.sh in /home/vagrant/installers"
+echo "  or"
+echo "  jupyter_notebook_install.sh in /home/vagrant/installers"
