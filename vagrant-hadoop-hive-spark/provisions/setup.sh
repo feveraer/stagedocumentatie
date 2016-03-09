@@ -9,7 +9,7 @@ echo
 echo " ==================================="
 echo "| Installing Java 7 ...             |"
 echo " ==================================="
-sudo apt-get -qq install -y default-jdk
+sudo apt-get install -y default-jdk > /dev/null
 
 #echo "Installing SSH"
 #sudo apt-get install -y openssh-server
