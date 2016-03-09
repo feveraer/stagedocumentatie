@@ -21,5 +21,13 @@ where t.Name = 'THERMO'
 group by l.Time, o.CustomName, o.Address, o.SubAddress, l.Value having COUNT(*) > 1
 order by o.CustomName, l.Time asc
 
+select l.Time, c.Id, o.Uid, o.CustomName, l.Value
+from Outputs as o
+join OutputLogs as l on o.id = l.OutputID
+join Types as t on o.TypeId = t.id
+join Controllers as c on o.ControllerId = c.Id
+where t.Name = 'THERMO'
+order by o.Uid, l.Time
+
 select COUNT(*)
 from OutputLogs
