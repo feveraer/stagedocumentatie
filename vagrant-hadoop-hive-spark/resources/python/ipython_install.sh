@@ -8,5 +8,5 @@ echo "sudo pip install path.py"
 sudo pip install path.py > /dev/null
 
 echo "export IPYTHON=1"
-echo "export IPYTHON=1" >> /etc/profile
+sudo echo "export IPYTHON=1" >> /etc/profile
 export IPYTHON=1
