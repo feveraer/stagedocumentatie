@@ -1,0 +1,4 @@
+1. Verwissel schijf
+2. Mount schijf
+3. Kopieer /var/mysql
+4. gebruik mysql
