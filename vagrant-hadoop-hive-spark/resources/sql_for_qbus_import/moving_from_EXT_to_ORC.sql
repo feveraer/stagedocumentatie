@@ -1,6 +1,8 @@
 INSERT OVERWRITE TABLE Controllers SELECT * FROM Controllers;
 INSERT OVERWRITE TABLE Locations SELECT * FROM Locations;
+INSERT OVERWRITE TABLE OutputDownloadedGraphHourData SELECT * FROM OutputDownloadedGraphHourData;
 INSERT OVERWRITE TABLE OutputDownloadedLogs SELECT * FROM OutputDownloadedLogs;
+INSERT OVERWRITE TABLE OutputGraphHourData SELECT * FROM OutputGraphHourData;
 INSERT OVERWRITE TABLE OutputLogs SELECT * FROM OutputLogs;
 INSERT OVERWRITE TABLE Outputs SELECT * FROM Outputs;
 INSERT OVERWRITE TABLE Types SELECT * FROM Types;
