@@ -1,4 +1,24 @@
-1. Verwissel schijf
-2. Mount schijf
-3. Kopieer /var/mysql
-4. gebruik mysql
+Sluit pc af
+  init 0
+Verwissel schijf
+  fdisk sdb
+    p(rint)
+  pvscan -> fysieke volumes
+    zien welke mounten
+  pvdisplay
+  lvscan -> logische volumes
+  lvdisplay -> meer info voor de logische volumes
+  df -kh
+Mount schijf
+  cd /mnt/
+  cd /
+  mount /dev/mapper/...
+stop sql
+  systemctl status mysql
+  systemctl stop mysql
+Kopieer mnt/var/lib/mysql/twitter_map naar /var/lib/mysql
+Permissies
+  chown -R mysql:mysql twittermap
+start sql
+    systemctl start mysql
+gebruik mysql
