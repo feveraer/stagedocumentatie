@@ -1,0 +1,877 @@
+
+mark132:
+
+create table query_132_1 as select * from collecttweetuni where upper(tweet) like "%AMERICAN%AIRLINES%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_1;
+
+Query OK, 31847 rows affected (16 min 46.03 sec)
+Records: 31847  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_1;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-01 00:24:29 | 2015-06-30 23:48:05 |    31847 |
++---------------------+---------------------+----------+
+1 row in set (0.03 sec)
+
+
+create table query_132_2 as select * from collecttweetuni where upper(tweet) like "%AMERICAN%AIRLINES%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_2;
+
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:04:16 | 2015-09-27 15:00:05 |    35356 |
++---------------------+---------------------+----------+
+1 row in set (0.06 sec)
+
+
+create table query_132_3 as select * from collecttweetuni where upper(tweet) like "%21STCENTURYFOX%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_3;
+
+Query OK, 228 rows affected (15 min 51.59 sec)
+Records: 228  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_3;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-07 20:04:14 | 2015-06-25 13:42:56 |      228 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql>
+
+create table query_132_4 as select * from collecttweetuni where upper(tweet) like "%21STCENTURYFOX%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_4;
+
+mysql> create table query_132_4 as select * from collecttweetuni where upper(tweet) like "%21STCENTURYFOX%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+Query OK, 167 rows affected (15 min 52.40 sec)
+Records: 167  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_4;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 12:51:42 | 2015-09-26 14:29:51 |      167 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+
+create table query_132_5 as select * from collecttweetuni where upper(tweet) like "%20STCENTURYFOX%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_5;
+
+Query OK, 0 rows affected (15 min 50.41 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_5;
++----------------+----------------+----------+
+| min(timestamp) | max(timestamp) | count(*) |
++----------------+----------------+----------+
+| NULL           | NULL           |        0 |
++----------------+----------------+----------+
+1 row in set (0.01 sec)
+
+
+
+
+create table query_132_6 as select * from collecttweetuni where upper(tweet) like "%20STCENTURYFOX%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_6;
+
+Query OK, 0 rows affected (15 min 51.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_6;
++----------------+----------------+----------+
+| min(timestamp) | max(timestamp) | count(*) |
++----------------+----------------+----------+
+| NULL           | NULL           |        0 |
++----------------+----------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_132_7 as select * from collecttweetuni where upper(tweet) like "%LIONSGATE%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_7;
+
+Query OK, 56386 rows affected (16 min 10.64 sec)
+Records: 56386  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_7;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-01 00:00:40 | 2015-06-30 23:54:28 |    56386 |
++---------------------+---------------------+----------+
+1 row in set (0.05 sec)
+
+
+create table query_132_8 as select * from collecttweetuni where upper(tweet) like "%LIONSGATE%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_8;
+
+Query OK, 67627 rows affected (16 min 12.68 sec)
+Records: 67627  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_8;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:26:31 | 2015-09-27 14:58:17 |    67627 |
++---------------------+---------------------+----------+
+1 row in set (0.07 sec)
+
+screate table query_132_9 as select * from collecttweetuni where upper(tweet) like "%PARAMOUNT%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_9;
+
+Query OK, 147702 rows affected (16 min 12.45 sec)
+Records: 147702  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_9;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:02:26 | 2015-09-27 14:59:50 |   147702 |
++---------------------+---------------------+----------+
+1 row in set (0.14 sec)
+
+create table query_132_10 as select * from collecttweetuni where upper(tweet) like "%VIACOM%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_10;
+
+Query OK, 37063 rows affected (15 min 42.29 sec)
+Records: 37063  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_10;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:00:12 | 2015-09-27 14:55:10 |    37063 |
++---------------------+---------------------+----------+
+1 row in set (0.04 sec)
+
+create table query_132_11 as select * from collecttweetuni where upper(tweet) like "%WARNERBROS%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_11;
+
+Query OK, 45066 rows affected (15 min 44.02 sec)
+Records: 45066  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_11;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:02:32 | 2015-09-27 14:56:37 |    45066 |
++---------------------+---------------------+----------+
+1 row in set (0.08 sec)
+
+create table query_132_12 as select * from collecttweetuni where upper(tweet) like "%NEWLINECINEMA%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_12;
+
+Query OK, 941 rows affected (16 min 20.91 sec)
+Records: 941  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_12;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 04:21:49 | 2015-09-27 01:15:56 |      941 |
++---------------------+---------------------+----------+
+1 row in set (0.01 sec)
+
+create table query_132_13 as select * from collecttweetuni where upper(tweet) like "%UNIVERSAL%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_13;
+
+Query OK, 2975460 rows affected (17 min 3.25 sec)
+Records: 2975460  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_13;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:00:05 | 2015-09-27 15:00:06 |  2975460 |
++---------------------+---------------------+----------+
+1 row in set (3.09 sec)
+
+create table query_132_14 as select * from collecttweetuni where upper(tweet) like "%COLUMBIA%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_14;
+
+Query OK, 92152 rows affected (16 min 23.91 sec)
+Records: 92152  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_14;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:01:18 | 2015-09-27 14:54:56 |    92152 |
++---------------------+---------------------+----------+
+1 row in set (0.15 sec)
+
+
+create table query_132_15 as select * from collecttweetuni where upper(tweet) like "%SONYPICTURES%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_15;
+
+Query OK, 27334 rows affected (16 min 25.47 sec)
+Records: 27334  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_15;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:06:54 | 2015-09-27 15:00:04 |    27334 |
++---------------------+---------------------+----------+
+1 row in set (0.03 sec)
+
+create table query_132_16 as select * from collecttweetuni where upper(tweet) like "%METROGOLDWYNNMAYER%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_16;
+
+Query OK, 0 rows affected (15 min 51.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_16;
++----------------+----------------+----------+
+| min(timestamp) | max(timestamp) | count(*) |
++----------------+----------------+----------+
+| NULL           | NULL           |        0 |
++----------------+----------------+----------+
+1 row in set (0.00 sec)
+
+create table query_132_17 as select * from collecttweetuni where upper(tweet) like "%DISNEY%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_17;
+
+Query OK, 10691689 rows affected (18 min 55.01 sec)
+Records: 10691689  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_132_17;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:00:01 | 2015-09-27 15:00:08 | 10691689 |
++---------------------+---------------------+----------+
+1 row in set (10.84 sec)
+
+
+
+
+
+
+market70:
+
+create table query_70_1 as select * from collecttweetuni where upper(tweet) like "%PLAYSTATION%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_1;
+
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 13:05:05 | 2015-06-30 23:55:45 |    41539 |
++---------------------+---------------------+----------+
+1 row in set (0.06 sec)
+
+create table query_70_2 as select * from collecttweetuni where upper(tweet) like "%PLAYSTATION%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_2;
+
+Query OK, 46782 rows affected (19 min 57.36 sec)
+Records: 46782  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_2;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:05:02 | 2015-09-30 23:56:53 |    46782 |
++---------------------+---------------------+----------+
+1 row in set (0.07 sec)
+
+create table query_70_3 as select * from collecttweetuni where upper(tweet) like "%MICROSOFT%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_3;
+
+Query OK, 5263605 rows affected (21 min 41.80 sec)
+Records: 5263605  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_3;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 12:52:18 | 2015-06-30 23:59:59 |  5263605 |
++---------------------+---------------------+----------+
+1 row in set (8.82 sec)
+
+create table query_70_4 as select * from collecttweetuni where upper(tweet) like "%MICROSOFT%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_4;
+
+Query OK, 6767201 rows affected (22 min 14.08 sec)
+Records: 6767201  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_4;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:00:01 | 2015-09-30 23:59:59 |  6767201 |
++---------------------+---------------------+----------+
+1 row in set (11.33 sec)
+
+create table query_70_5 as select * from collecttweetuni where upper(tweet) like "%XBOX%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_5;
+
+Query OK, 1092888 rows affected (19 min 56.61 sec)
+Records: 1092888  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_5;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 12:52:56 | 2015-06-30 23:59:58 |  1092888 |
++---------------------+---------------------+----------+
+1 row in set (1.79 sec)
+
+
+create table query_70_6 as select * from collecttweetuni where upper(tweet) like "%XBOX%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_6;
+
+Query OK, 1651244 rows affected (20 min 0.41 sec)
+Records: 1651244  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_6;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:00:09 | 2015-09-30 23:59:56 |  1651244 |
++---------------------+---------------------+----------+
+1 row in set (2.75 sec)
+
+create table query_70_7 as select * from collecttweetuni where upper(tweet) like "%NINTENDO%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_7;
+
+Query OK, 72972 rows affected (20 min 39.06 sec)
+Records: 72972  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_7;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 12:55:13 | 2015-06-30 23:59:54 |    72972 |
++---------------------+---------------------+----------+
+1 row in set (0.11 sec)
+
+create table query_70_8 as select * from collecttweetuni where upper(tweet) like "%NINTENDO%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_8;
+
+Query OK, 98513 rows affected (20 min 30.51 sec)
+Records: 98513  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_8;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:00:38 | 2015-09-30 23:51:26 |    98513 |
++---------------------+---------------------+----------+
+1 row in set (0.15 sec)
+
+
+create table query_70_9 as select * from collecttweetuni where upper(tweet) like "%MCCAFE%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_9;
+
+Query OK, 21321 rows affected (19 min 52.90 sec)
+Records: 21321  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_9;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 12:53:57 | 2015-06-30 23:57:16 |    21321 |
++---------------------+---------------------+----------+
+1 row in set (0.03 sec)
+
+create table query_70_10 as select * from collecttweetuni where upper(tweet) like "%MCCAFE%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_10;
+
+Query OK, 29293 rows affected (19 min 56.94 sec)
+Records: 29293  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_10;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:14:39 | 2015-09-30 23:47:02 |    29293 |
++---------------------+---------------------+----------+
+1 row in set (0.04 sec)
+
+create table query_70_11 as select * from collecttweetuni where upper(tweet) like "%TEAMMCDO%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_11;
+
+create table query_70_12 as select * from collecttweetuni where upper(tweet) like "%TEAMMCDO%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_12;
+
+create table query_70_13 as select * from collecttweetuni where upper(tweet) like "%KFC%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_13;
+
+Query OK, 54813 rows affected (19 min 43.53 sec)
+Records: 54813  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_13;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 12:55:54 | 2015-06-30 23:58:07 |    54813 |
++---------------------+---------------------+----------+
+1 row in set (0.08 sec)
+
+
+create table query_70_14 as select * from collecttweetuni where upper(tweet) like "%KFC%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_14;
+
+Query OK, 83371 rows affected (19 min 42.39 sec)
+Records: 83371  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_14;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 00:07:02 | 2015-09-30 23:54:51 |    83371 |
++---------------------+---------------------+----------+
+1 row in set (0.13 sec)
+
+
+create table query_70_15 as select * from collecttweetuni where upper(tweet) like "%DOUBLICIOUS%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_15;
+
+Query OK, 41 rows affected (20 min 0.76 sec)
+Records: 41  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_15;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-25 21:38:31 | 2015-06-30 07:13:24 |       41 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_70_16 as select * from collecttweetuni where upper(tweet) like "%DOUBLICIOUS%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_16;
+
+Query OK, 113 rows affected (21 min 23.80 sec)
+Records: 113  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_16;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 01:31:46 | 2015-09-30 13:44:31 |      113 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_70_17 as select * from collecttweetuni where upper(tweet) like "%CHICKENLITTLES%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_17;
+
+Query OK, 61 rows affected (20 min 7.17 sec)
+Records: 61  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_17;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-22 18:45:04 | 2015-06-30 17:18:16 |       61 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+create table query_70_18 as select * from collecttweetuni where upper(tweet) like "%CHICKENLITTLES%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_18;
+
+Query OK, 131 rows affected (20 min 7.29 sec)
+Records: 131  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_18;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 08:22:15 | 2015-09-30 09:24:32 |      131 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_70_19 as select * from collecttweetuni where upper(tweet) like "%FAMOUSBOWL%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_19;
+
+Query OK, 14 rows affected (20 min 29.47 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_19;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-27 22:30:38 | 2015-06-13 03:56:39 |       14 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_70_20 as select * from collecttweetuni where upper(tweet) like "%FAMOUSBOWL%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_20;
+
+Query OK, 139 rows affected (19 min 47.60 sec)
+Records: 139  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_20;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 23:02:49 | 2015-09-30 16:14:31 |      139 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+create table query_70_21 as select * from collecttweetuni where upper(tweet) like "%YUMBRANDS%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_21;
+
+Query OK, 1705 rows affected (20 min 3.23 sec)
+Records: 1705  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_21;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 15:41:32 | 2015-06-30 23:12:41 |     1705 |
++---------------------+---------------------+----------+
+1 row in set (0.01 sec)
+
+
+create table query_70_22 as select * from collecttweetuni where upper(tweet) like "%YUMBRANDS%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_22;
+
+Query OK, 3265 rows affected (20 min 2.79 sec)
+Records: 3265  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_22;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 03:40:03 | 2015-09-30 23:58:45 |     3265 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+
+create table query_70_23 as select * from collecttweetuni where upper(tweet) like "%BIGKING%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_23;
+
+Query OK, 463 rows affected (19 min 55.23 sec)
+Records: 463  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_23;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-21 13:14:54 | 2015-06-30 20:39:16 |      463 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_70_24 as select * from collecttweetuni where upper(tweet) like "%BIGKING%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_24;
+
+Query OK, 384 rows affected (19 min 55.29 sec)
+Records: 384  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_24;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 01:38:11 | 2015-09-30 23:36:13 |      384 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_70_25 as select * from collecttweetuni where upper(tweet) like "%WHOPPER%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_25;
+
+Query OK, 1481 rows affected (20 min 0.47 sec)
+Records: 1481  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_25;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-20 18:05:22 | 2015-06-30 23:17:49 |     1481 |
++---------------------+---------------------+----------+
+1 row in set (0.01 sec)
+
+
+create table query_70_26 as select * from collecttweetuni where upper(tweet) like "%WHOPPER%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_26;
+
+Query OK, 23781 rows affected (20 min 0.15 sec)
+Records: 23781  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_26;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-01 01:53:28 | 2015-09-30 23:50:42 |    23781 |
++---------------------+---------------------+----------+
+1 row in set (0.04 sec)
+
+
+create table query_70_27 as select * from collecttweetuni where upper(tweet) like "%QUALITYISOURRECIPE%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_27;
+
+Query OK, 5 rows affected (19 min 38.17 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_27;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-04-28 18:51:55 | 2015-06-08 02:38:56 |        5 |
++---------------------+---------------------+----------+
+1 row in set (0.00 sec)
+
+
+create table query_70_28 as select * from collecttweetuni where upper(tweet) like "%QUALITYISOURRECIPE%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_28;
+
+Query OK, 3 rows affected (19 min 34.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_70_28;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-05 02:37:19 | 2015-09-09 15:46:23 |        3 |
++---------------------+---------------------+----------+
+1 row in set (0.01 sec)
+
+
+create table query_70_29 as select * from collecttweetuni where upper(tweet) like "%BACONATOR%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_29;
+
+create table query_70_30 as select * from collecttweetuni where upper(tweet) like "%BACONATOR%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_30;
+
+create table query_70_31 as select * from collecttweetuni where upper(tweet) like "%FRAPUCCINO%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_31;
+
+create table query_70_32 as select * from collecttweetuni where upper(tweet) like "%FRAPUCCINO%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_32;
+
+create table query_70_33 as select * from collecttweetuni where upper(tweet) like "%STARBUCKS%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_33;
+
+create table query_70_34 as select * from collecttweetuni where upper(tweet) like "%STARBUCKS%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_34;
+
+create table query_70_35 as select * from collecttweetuni where upper(tweet) like "%DDPERKS%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_35;
+
+create table query_70_36 as select * from collecttweetuni where upper(tweet) like "%DDPERKS%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_36;
+
+create table query_70_37 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_37;
+
+create table query_70_38 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_38;
+
+create table query_70_39 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_39;
+
+create table query_70_40 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_40;
+
+create table query_70_41 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_41;
+
+create table query_70_42 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_42;
+
+create table query_70_43 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_43;
+
+create table query_70_44 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_44;
+
+create table query_70_45 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_45;
+
+create table query_70_46 as select * from collecttweetuni where upper(tweet) like "%%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_70_46;
+
+
+
+mark118:
+
+create table query_118_1 as select * from collecttweetuni where upper(tweet) like "%PS4%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_1;
+
++----------------+----------------+----------+
+| min(timestamp) | max(timestamp) | count(*) |
++----------------+----------------+----------+
+| NULL           | NULL           |        0 |
++----------------+----------------+----------+
+1 row in set (0.11 sec)
+
+
+create table query_118_2 as select * from collecttweetuni where upper(tweet) like "%PS4%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_2;
+
+Query OK, 284394 rows affected (39 min 26.05 sec)
+Records: 284394  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_2;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-29 17:49:41 | 2015-09-30 23:59:57 |   284394 |
++---------------------+---------------------+----------+
+1 row in set (0.43 sec)
+
+create table query_118_3 as select * from collecttweetuni where upper(tweet) like "%XONE%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_3;
+
+Query OK, 37387 rows affected (38 min 18.36 sec)
+Records: 37387  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_3;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-29 17:49:41 | 2015-09-30 23:52:24 |    37387 |
++---------------------+---------------------+----------+
+1 row in set (0.07 sec)
+
+
+create table query_118_4 as select * from collecttweetuni where upper(tweet) like "%XBOX%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_4;
+
+Query OK, 266130 rows affected (39 min 35.53 sec)
+Records: 266130  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_4;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-29 17:49:07 | 2015-09-30 23:59:54 |   266130 |
++---------------------+---------------------+----------+
+1 row in set (0.35 sec)
+
+
+create table query_118_5 as select * from collecttweetuni where upper(tweet) like "%XBONE%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_5;
+
+Query OK, 2841 rows affected (41 min 8.11 sec)
+Records: 2841  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_5;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-29 18:00:43 | 2015-09-30 23:49:01 |     2841 |
++---------------------+---------------------+----------+
+1 row in set (0.04 sec)
+
+create table query_118_6 as select * from collecttweetuni where upper(tweet) like "%WII%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_6;
+
+Query OK, 163470 rows affected (38 min 29.00 sec)
+Records: 163470  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_6;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-29 17:49:18 | 2015-09-30 23:59:27 |   163470 |
++---------------------+---------------------+----------+
+1 row in set (0.23 sec)
+
+create table query_118_7 as select * from collecttweetuni where upper(tweet) like "%MCDO%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_7;
+
+Query OK, 170248 rows affected (38 min 41.53 sec)
+Records: 170248  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_7;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-29 17:50:24 | 2015-09-30 23:59:49 |   170248 |
++---------------------+---------------------+----------+
+1 row in set (0.23 sec)
+
+
+create table query_118_8 as select * from collecttweetuni where upper(tweet) like "%HAPPYMEAL%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_8;
+
+Query OK, 510 rows affected (38 min 24.95 sec)
+Records: 510  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_8;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-30 00:39:35 | 2015-09-30 18:34:17 |      510 |
++---------------------+---------------------+----------+
+1 row in set (0.03 sec)
+
+
+create table query_118_9 as select * from collecttweetuni where upper(tweet) like "%IAMLOVINGIT%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_9;
+
+Query OK, 2 rows affected (37 min 1.52 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_9;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-08-31 07:37:04 | 2015-09-24 20:09:33 |        2 |
++---------------------+---------------------+----------+
+1 row in set (0.04 sec)
+
+
+create table query_118_10 as select * from collecttweetuni where upper(tweet) like "%BIGMAC%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_10;
+
+Query OK, 6835 rows affected (40 min 44.46 sec)
+Records: 6835  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_10;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-07-29 18:04:20 | 2015-09-30 23:35:29 |     6835 |
++---------------------+---------------------+----------+
+1 row in set (0.04 sec)
+
+
+create table query_118_11 as select * from collecttweetuni where upper(tweet) like "%MCDSTORIES%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_11;
+
+Query OK, 2 rows affected (37 min 28.24 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_11;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-09-19 22:55:07 | 2015-09-22 18:11:03 |        2 |
++---------------------+---------------------+----------+
+1 row in set (0.03 sec)
+
+
+create table query_118_12 as select * from collecttweetuni where upper(tweet) like "%DOLLARMENU%" and `timestamp` > '2015-07-01 00:00:00' and `timestamp` < '2015-10-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_118_12;
+
+Query OK, 22 rows affected (37 min 39.80 sec)
+Records: 22  Duplicates: 0  Warnings: 0
+
+mysql> select min(timestamp),max(timestamp),count(*) from query_118_12;
++---------------------+---------------------+----------+
+| min(timestamp)      | max(timestamp)      | count(*) |
++---------------------+---------------------+----------+
+| 2015-08-02 06:23:19 | 2015-09-29 00:46:24 |       22 |
++---------------------+---------------------+----------+
+1 row in set (0.04 sec)
+
+
+
+market38:
+create table query_38_1 as select * from collecttweetuni where upper(tweet) like "%AMERICAN%AIRLINES%" and `timestamp` > '2015-04-01 00:00:00' and `timestamp` < '2015-07-01 00:00:00';
+select min(timestamp),max(timestamp),count(*) from query_132_1;
+
