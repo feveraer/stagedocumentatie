@@ -1,0 +1,8 @@
+select "ID", "UserID",  "UserName", "Tweet", "Twittertime", "FavoriteCount", "TweetID", "InReplyToTweetID", "IsoLanguageCode", "Latitude", "Longitude", "RetweetCount", "isRetweet", "isFavorited", "stockticker" 
+union
+select * from collecttweet.tableName
+into outfile '/home/twitter/csv/UniqueName.csv'
+fields enclosed by ''
+terminated by '´~¨`^'
+escaped by ''
+lines terminated by '\r\n';
