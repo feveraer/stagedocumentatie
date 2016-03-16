@@ -98,6 +98,10 @@ declare -a keys=(
   'tjx'
   'kohls'
   'dollargeneral'
+  # Record labels
+  'universalmusicgroup' 'umg'
+  'sonymusic' 'columbiamusic' 'columbiarecords' 'sonybmg' 'sonyatv'
+  'warnermusic' 'wmg'
   );
 
 for i in "${keys[@]}"
