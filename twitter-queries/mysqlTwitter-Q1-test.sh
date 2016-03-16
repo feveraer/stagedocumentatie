@@ -50,6 +50,15 @@ declare -a keys=(
   '53bank' 'fiththird'
   'regionsbank'
   'charlesschwab'
+  # Digital cameras
+  'nikon' 'teamnikon'
+  'canon' 'teamcanon'
+  'sony' 'teamsony'
+  'panasonic' 'teampanasonic'
+  'samsung' 'teamsamsung'
+  'fujifilm'
+  'olympus'
+  'ricoh'
   );
 
 for i in "${keys[@]}"
