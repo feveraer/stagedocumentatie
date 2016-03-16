@@ -39,10 +39,10 @@ do
   for i in "${keys[@]}"
   do
     echo "${i}" >> /home/twitter/query_results/${i}.txt
-    echo "select min(timestamp),max(timestamp),count(*) from ${tb} where upper(tweet) like '%${i}%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-07-01 00:00:00' into outfile '/home/twitter/query_results/${i}_count.txt'" >> /home/twitter/query_results/${i}.txt
+    echo "select min(timestamp),max(timestamp),count(*) from ${tb} where lower(tweet) like '%${i}%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-07-01 00:00:00'" >> /home/twitter/query_results/${i}.txt
     sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select min(timestamp),max(timestamp),count(*) from ${tb} where upper(tweet) like '%${i}%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-07-01 00:00:00' into outfile '/home/twitter/query_results/${i}_count.txt'"
     cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt
-    echo -e "\n" >> /home/twitter/query_results/${i}.txt
+    echo >> /home/twitter/query_results/${i}.txt
     rm -f /home/twitter/query_results/${i}_count.txt
     cat /home/twitter/query_results/${i}.txt >> /home/twitter/query_results/result_Q1.txt
     rm -f /home/twitter/query_results/${i}.txt
