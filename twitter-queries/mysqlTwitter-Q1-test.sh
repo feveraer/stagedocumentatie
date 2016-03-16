@@ -111,6 +111,15 @@ declare -a keys=(
   'philips66'
   'anadarkopetroleum'
   'apache'
+  # (Smart)phones
+  'samsung' 'galaxys' 'teamsamsung' 'teamgalaxy'
+  'iphone' 'apple' 'teamiphone' 'teamapple'
+  'nokia' 'microsoft' 'windowsphone' 'lumia' 'teamnokia'
+  'lg' 'teamlg'
+  'lenovo'
+  'huawei'
+  'xiaomi' 'miphone'
+  'zte'
   );
 
 for i in "${keys[@]}"
