@@ -59,13 +59,24 @@ declare -a keys=(
   'fujifilm'
   'olympus'
   'ricoh'
-  #Sneakers
+  # Sneakers
   'nike' 'teamnike' 'gonike' 'nikejordan' 'teamjordan' 'converse' 'teamconverse' 'jordans' 'jordansneakers' 'jordanshoe' 'allstars'
   'adidas' 'teamadidas' 'reebok' 'teamreebok' 'reeboks'
   'asics' 'teamasics'
   'skechers' 'teamskechers'
   'underarmour' 'teamunderarmour' 'underarmourshoe' 'underarmoursneaker'
   'puma' 'teampuma' 'pumashoes' 'pumasneakers'
+  # Airline companies
+  'americanairlines'
+  'deltaairlines' 'deltaair'
+  'unitedairlines' 'unitedair'
+  'southwestairlines'
+  'jetblueairways' 'jetblue'
+  'alaskairlines'
+  'spiritairlines'
+  'hawaiianairlines'
+  'allegiantair'
+  'virginamerica'
   );
 
 for i in "${keys[@]}"
