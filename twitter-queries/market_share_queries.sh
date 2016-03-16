@@ -21,8 +21,13 @@ done
 # http://stackoverflow.com/questions/8880603/loop-through-array-of-strings-in-bash-script
 # http://www.thegeekstuff.com/2010/06/bash-array-tutorial/
 
-MYSQL_USER="root"
-MYSQL_PASSWORD="Ugent2016"
+MYSQL_USER=""
+MYSQL_PASSWORD=""
+
+echo "MySQL user"
+read MYSQL_USER
+echo "Enter password"
+read MYSQL_PASSWORD
 
 declare -a keys=(
   'ps'
@@ -39,7 +44,7 @@ do
     cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt
     echo -e "\n" >> /home/twitter/query_results/${i}.txt
     rm -f /home/twitter/query_results/${i}_count.txt
-    cat cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt >> cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/result.txt
-    rm -f cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt
+    cat /home/twitter/query_results/${i}.txt >> /home/twitter/query_results/result_Q1.txt
+    rm -f /home/twitter/query_results/${i}.txt
   done
 done
