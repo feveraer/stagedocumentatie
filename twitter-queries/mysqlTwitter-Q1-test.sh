@@ -1,4 +1,4 @@
-#bin/bash
+#!/bin/bash
 
 # http://stackoverflow.com/questions/8880603/loop-through-array-of-strings-in-bash-script
 # http://www.thegeekstuff.com/2010/06/bash-array-tutorial/

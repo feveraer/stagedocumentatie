@@ -1,4 +1,4 @@
-# bash/bin
+#!/bash/bin
 
 DATABASE_NAME="collecttweet"
 MYSQL_USER="root"
