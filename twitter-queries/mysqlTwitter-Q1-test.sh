@@ -1,5 +1,8 @@
 #bin/bash
 
+# http://stackoverflow.com/questions/8880603/loop-through-array-of-strings-in-bash-script
+# http://www.thegeekstuff.com/2010/06/bash-array-tutorial/
+
 tb="collecttweetuni"
 MYSQL_USER="root"
 MYSQL_PASSWORD="Ugent2016"
@@ -12,7 +15,8 @@ declare -a keys=(
   'teamnintendo' 'gonintendo' 'wii' 'wiiu'
   # Fast food restaurants
   'mcdonalds' 'mcdo' 'happymeal' 'imlovinit' 'bigmac' 'mcdstories' 'dollarmenu' 'mccafe' 'teammcdo'
-  'kfc' 'kentuckyfriedchicken' 'howdoyoukfc' 'doublicious' 'chickenlittles' 'famousbowl' 'teamkfc,yumbrands'
+  'kfc' 'kentuckyfriedchicken' 'howdoyoukfc' 'doublicious' 'chickenlittles' 'famousbowl' 'teamkfc' 'yumbrands'
+  
   );
 
 for i in "${keys[@]}"
