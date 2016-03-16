@@ -7,7 +7,7 @@ usage() {
   echo -e "\nUsage: $0 -d <database_name> \n"
 }
 
-if [ $# -lt 1  ]
+if [ $# -le 1  ]
 then
   usage
   exit 1
@@ -33,9 +33,8 @@ done
 # http://www.thegeekstuff.com/2010/06/bash-array-tutorial/
 
 read -pr "MySQL username: " MYSQL_USER
-read -prs "MySQL password: " MYSQL_PASSWORD
-echo $MYSQL_USER
-echo $MYSQL_PASSWORD
+read -s -pr "MySQL password: " MYSQL_PASSWORD
+echo
 
 declare -a keys=(
   'ps'
