@@ -2,6 +2,17 @@
 
 DATABASE_NAME=""
 
+usage() {
+  echo "This script needs to know the database name to be queried."
+  echo -e "\nUsage: $0 -d <database_name> \n"
+}
+
+if [ $# -le 1  ]
+then
+  usage
+  exit 1
+fi
+
 while getopts ":d:" opt; do
   case $opt in
     d)
@@ -18,8 +29,9 @@ while getopts ":d:" opt; do
   esac
 done
 
-MYSQL_USER="root"
-MYSQL_PASSWORD="Ugent2016"
+read -pr "MySQL username: " MYSQL_USER
+read -s -pr "MySQL password: " MYSQL_PASSWORD
+echo
 
 TIME_COLUMN="Twittertime"
 
