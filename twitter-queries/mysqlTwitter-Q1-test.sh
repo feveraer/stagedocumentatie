@@ -120,6 +120,13 @@ declare -a keys=(
   'huawei'
   'xiaomi' 'miphone'
   'zte'
+  # tablets
+  'apple' 'ipad' 'teamipad' 'teamapple'
+  'samsung" "galaxytab" "tabpro' 'teamgalaxy" "teamsamsung'
+  'asus' 'fonepad' 'transformerpad' 'vivotab' 'memopad'
+  'lenovo' 'thinkpad'
+  'lg' 'gpad'
+  'huawei' 'mediapad'
   );
 
 for i in "${keys[@]}"
