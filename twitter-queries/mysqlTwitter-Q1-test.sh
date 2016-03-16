@@ -102,6 +102,15 @@ declare -a keys=(
   'universalmusicgroup' 'umg'
   'sonymusic' 'columbiamusic' 'columbiarecords' 'sonybmg' 'sonyatv'
   'warnermusic' 'wmg'
+  # Oil and gas companies
+  'exxon'
+  'chevron'
+  'conocophilips'
+  'occidentalpetroleum'
+  'eogresources'
+  'philips66'
+  'anadarkopetroleum'
+  'apache'
   );
 
 for i in "${keys[@]}"
