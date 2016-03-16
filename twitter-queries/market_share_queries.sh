@@ -32,13 +32,14 @@ done
 # http://stackoverflow.com/questions/8880603/loop-through-array-of-strings-in-bash-script
 # http://www.thegeekstuff.com/2010/06/bash-array-tutorial/
 
-read -pr "MySQL username: " MYSQL_USER
-read -s -pr "MySQL password: " MYSQL_PASSWORD
+echo
+read -r -p "MySQL username: " MYSQL_USER
+read -s -r -p "MySQL password: " MYSQL_PASSWORD
 echo
 
 declare -a keys=(
   # Consoles
-  'teamplaystation' 'goplaystation' 'teamsony' 'gosony' 'playstation' 'ps4' 'sonyplaystation'
+  'teamsony' 'gosony' 'playstation' 'ps4'
   'teammicrosoft''gomicrosoft' 'xbox' 'xone' 'xbone'
   'teamnintendo' 'gonintendo' 'wii'
   # Fast food restaurants
