@@ -7,7 +7,7 @@ usage() {
   echo -e "\nUsage: $0 -d <database_name> \n"
 }
 
-if [ $# -lt 1  ]
+if [ $# -le 1  ]
 then
   usage
   exit 1
@@ -31,8 +31,8 @@ done
 
 echo -e "${DATABASE_NAME}\n"
 
-read -r -p "MySQL username: " MYSQL_USER
-read -r -p "MySQL password: " MYSQL_PASSWORD
+read -pr "MySQL username: " MYSQL_USER
+read -s -pr "MySQL password: " MYSQL_PASSWORD
+echo
 echo $MYSQL_USER
 echo $MYSQL_PASSWORD
-

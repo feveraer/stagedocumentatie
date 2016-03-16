@@ -2,6 +2,17 @@
 
 DATABASE_NAME=""
 
+usage() {
+  echo "This script needs to know the database name to be queried."
+  echo -e "\nUsage: $0 -d <database_name> \n"
+}
+
+if [ $# -lt 1  ]
+then
+  usage
+  exit 1
+fi
+
 while getopts ":d:" opt; do
   case $opt in
     d)
@@ -21,13 +32,10 @@ done
 # http://stackoverflow.com/questions/8880603/loop-through-array-of-strings-in-bash-script
 # http://www.thegeekstuff.com/2010/06/bash-array-tutorial/
 
-MYSQL_USER=""
-MYSQL_PASSWORD=""
-
-echo "MySQL user"
-read MYSQL_USER
-echo "Enter password"
-read MYSQL_PASSWORD
+read -pr "MySQL username: " MYSQL_USER
+read -prs "MySQL password: " MYSQL_PASSWORD
+echo $MYSQL_USER
+echo $MYSQL_PASSWORD
 
 declare -a keys=(
   'ps'
