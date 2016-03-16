@@ -77,6 +77,27 @@ declare -a keys=(
   'hawaiianairlines'
   'allegiantair'
   'virginamerica'
+  # Retailers
+  'walmart'
+  'kroger'
+  'costco'
+  'target'
+  'thehomedepot'
+  'walgreens'
+  'cvscaremark' 'cvs' 'caremark'
+  'lowes'
+  'amazon' 'amazon.com'
+  'mcdonalds'
+  'bestbuy'
+  'publix'
+  'macys'
+  'applestore' 'itunes'
+  'sears'
+  'aholdusa'
+  'riteaid'
+  'tjx'
+  'kohls'
+  'dollargeneral'
   );
 
 for i in "${keys[@]}"
