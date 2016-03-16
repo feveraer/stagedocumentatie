@@ -143,6 +143,14 @@ declare -a keys=(
   'jaguar' 'landrover' 'teamjaguar' 'teamlandrover'
   'mercedes' 'benz' 'teammercedes' 'teambenz'
   'audi' 'teamaudi'
+  # Film studios
+  '21stcenturyfox' '20thcenturyfox'
+  'lionsgate'
+  'paramount' 'viacom'
+  'warnerbros' 'newlinecinema'
+  'universal' 'nbcuniversal'
+  'sonycolumbia' 'columbiapictures' 'sonypictures' 'metrogoldwynnmayer'
+  'disney' 'waltdisney'
   );
 
 for i in "${keys[@]}"
