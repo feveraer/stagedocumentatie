@@ -1,38 +1,150 @@
 #!/bin/bash
 
-DATABASE_NAME=""
+declare -a keys=(
+  # Consoles
+  'teamplaystation' 'goplaystation' 'teamsony' 'gosony' 'playstation' 'ps4' 'sonyplaystation'
+  'teammicrosoft''gomicrosoft' 'xbox' 'xone' 'xbone'
+  'teamnintendo' 'gonintendo' 'wii'
+  # Fast food restaurants
+  'mcdo' 'happymeal' 'imlovinit' 'bigmac' 'mcdstories' 'dollarmenu' 'mccafe'
+  'kfc' 'kentuckyfriedchicken' 'doublicious' 'chickenlittles' 'famousbowl' 'yumbrands'
+  'burgerking' 'whopper' 'bigking'
+  'wendys' 'qualityisourrecipe' 'baconator'
+  'starbucks' 'frapuccino' 'fizzio'
+  'tacobell' 'tbell'
+  'dunkind' 'ddperks' 'dunkaccino'
+  'pizzahut'
+  'panera'
+  'dominos' 'pizzapics'
+  'chipotle' 'burritobowl'
+  # Social networks
+  'facebook'
+  'youtube'
+  'googleplus'
+  'twitter' 'tweet'
+  'linkedin'
+  'instagram'
+  'pinterest'
+  'tumblr'
+  'reddit'
+  # Banks
+  'bankofamerica'
+  'wellsfargo'
+  'jpmorgan'
+  'citibank'
+  'usbank'
+  'pncbank'
+  'capitalone'
+  'tdbank'
+  'bbtbank'
+  'suntrustbank'
+  'bnymellon'
+  '53bank' 'fiththird'
+  'regionsbank'
+  'charlesschwab'
+  # Digital cameras
+  'nikon'
+  'canon'
+  'sony'
+  'panasonic'
+  'samsung'
+  'fujifilm'
+  'olympus'
+  'ricoh'
+  # Sneakers
+  'nike' 'teamjordan' 'converse' 'teamconverse' 'jordansneakers' 'jordanshoe' 'allstars'
+  'adidas' 'reebok'
+  'asics'
+  'skechers'
+  'underarmour'
+  'puma'
+  # Airline companies
+  'americanairlines'
+  'deltaair'
+  'unitedair'
+  'southwestairlines'
+  'jetblue'
+  'alaskairlines'
+  'spiritairlines'
+  'hawaiianairlines'
+  'allegiantair'
+  'virginamerica'
+  # Retailers
+  'walmart'
+  'kroger'
+  'costco'
+  'target'
+  'thehomedepot'
+  'walgreens'
+  'caremark'
+  'lowes'
+  'amazon'
+  'mcdonalds'
+  'bestbuy'
+  'publix'
+  'macys'
+  'applestore' 'itunes'
+  'sears'
+  'aholdusa'
+  'riteaid'
+  'tjx'
+  'kohls'
+  'dollargeneral'
+  # Record labels
+  'universalmusicgroup'
+  'sonymusic' 'columbiamusic' 'columbiarecords' 'sonybmg' 'sonyatv'
+  'warnermusic'
+  # Oil and gas companies
+  'exxon'
+  'chevron'
+  'conocophilips'
+  'occidentalpetroleum'
+  'eogresources'
+  'philips66'
+  'anadarkopetroleum'
+  'apache'
+  # (Smart)phones
+  'samsung' 'galaxys'
+  'iphone' 'apple'
+  'nokia' 'microsoft' 'windowsphone' 'lumia'
+  'teamlg'
+  'lenovo'
+  'huawei'
+  'xiaomi' 'miphone'
+  'zte'
+  # Tablets
+  'apple' 'ipad'
+  'samsung' 'galaxytab' 'tabpro' 'teamgalaxy'
+  'asus' 'fonepad' 'transformerpad' 'vivotab' 'memopad'
+  'lenovo' 'thinkpad'
+  'gpad'
+  'huawei' 'mediapad'
+  # Cars
+  'generalmotors' 'chevrolet' 'buick' 'gmc' 'cadillac' 'opel' 'vauxhall' 'chevy'
+  'ford' 'mustang'
+  'toyota'
+  'chrysler' 'lancia' 'dodge' 'ramtrucks'
+  'honda'
+  'nissan'
+  'hyundai'
+  'kia'
+  'subaru'
+  'bmw'
+  'volkswagen'
+  'mazda'
+  'jaguar' 'landrover'
+  'mercedes' 'benz'
+  'audi'
+  # Film studios
+  '21stcenturyfox' '20thcenturyfox'
+  'lionsgate'
+  'paramount' 'viacom'
+  'warnerbros' 'newlinecinema'
+  'universal' 'nbcuniversal'
+  'sonycolumbia' 'columbiapictures' 'sonypictures' 'metrogoldwynnmayer'
+  'disney'
+  );
 
-usage() {
-  echo "This script needs to know the database name to be queried."
-  echo -e "\nUsage: $0 -d <database_name> \n"
-}
+echo ${#keys[@]}
 
-if [ $# -le 1  ]
-then
-  usage
-  exit 1
-fi
-
-while getopts ":d:" opt; do
-  case $opt in
-    d)
-      DATABASE_NAME="${OPTARG}"
-      ;;
-    \?)
-      echo "invalid option: -$OPTARG" >&2
-      exit 1
-      ;;
-    :)
-      echo "option -$OPTARG requires an argument" >&2
-      exit 1
-      ;;
-  esac
-done
-
-echo -e "${DATABASE_NAME}\n"
-
-read -pr "MySQL username: " MYSQL_USER
-read -s -pr "MySQL password: " MYSQL_PASSWORD
-echo
-echo $MYSQL_USER
-echo $MYSQL_PASSWORD
+echo "Length of array is: ${tlen}"
