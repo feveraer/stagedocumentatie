@@ -120,13 +120,29 @@ declare -a keys=(
   'huawei'
   'xiaomi' 'miphone'
   'zte'
-  # tablets
+  # Tablets
   'apple' 'ipad' 'teamipad' 'teamapple'
   'samsung" "galaxytab" "tabpro' 'teamgalaxy" "teamsamsung'
   'asus' 'fonepad' 'transformerpad' 'vivotab' 'memopad'
   'lenovo' 'thinkpad'
   'lg' 'gpad'
   'huawei' 'mediapad'
+  # Cars
+  'generalmotors' 'chevrolet' 'buick' 'gmc' 'cadillac' 'opel' 'vauxhall' 'chevy' 'teamchevy'
+  'ford' 'mustang' 'teamford'
+  'toyota' 'teamtoyota'
+  'chrysler' 'lancia' 'dodge' 'ramtrucks' 'teamchrysler'
+  'honda' 'teamhonda'
+  'nissan' 'teamnissan'
+  'hyundai' 'teamhyundai'
+  'kia' 'teamkia'
+  'subaru' 'teamsubaru'
+  'bmw' 'teambmw'
+  'volkswagen' 'teamvolkswagen'
+  'mazda' 'teammazda'
+  'jaguar' 'landrover' 'teamjaguar' 'teamlandrover'
+  'mercedes' 'benz' 'teammercedes' 'teambenz'
+  'audi' 'teamaudi'
   );
 
 for i in "${keys[@]}"
