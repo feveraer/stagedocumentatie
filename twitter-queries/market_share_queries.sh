@@ -44,5 +44,7 @@ do
     cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt
     echo "\n" >> /home/twitter/query_results/${i}.txt
     rm -f /home/twitter/query_results/${i}_count.txt
+    cat cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt >> cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/result.txt
+    rm -f cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt
   done
 done
