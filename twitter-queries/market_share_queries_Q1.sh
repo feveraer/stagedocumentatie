@@ -40,7 +40,7 @@ echo
 declare -a keys=(
   # Consoles
   'teamsony' 'gosony' 'playstation' 'ps4'
-  'teammicrosoft''gomicrosoft' 'xbox' 'xone' 'xbone'
+  'teammicrosoft' 'gomicrosoft' 'xbox' 'xone' 'xbone'
   'teamnintendo' 'gonintendo' 'wii'
   # Fast food restaurants
   'mcdo' 'happymeal' 'imlovinit' 'bigmac' 'mcdstories' 'dollarmenu' 'mccafe'

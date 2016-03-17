@@ -29,16 +29,11 @@ while getopts ":d:" opt; do
   esac
 done
 
-read -pr "MySQL username: " MYSQL_USER
-read -s -pr "MySQL password: " MYSQL_PASSWORD
 echo
-
-TIME_COLUMN="Twittertime"
-
-# echo "MySQL user"
-# read MYSQL_USER
-# echo "Enter password"
-# read MYSQL_PASSWORD
+read -r -p "MySQL username: " MYSQL_USER
+read -s -r -p "MySQL password: " MYSQL_PASSWORD
+read -r -p "Time column name: " TIME_COLUMN
+echo
 
 for tb in $(mysql -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -sN -e "SHOW TABLES")
 do
