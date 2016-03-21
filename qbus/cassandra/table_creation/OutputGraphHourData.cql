@@ -3,7 +3,7 @@ CREATE KEYSPACE IF NOT EXITS Qbus WITH replication = {'class':'SimpleStrategy', 
 USE Qbus;
 
 CREATE TABLE IF NOT EXISTS OutputGraphHourData(
-    OutputID BIGINT,
+    OutputID BIGINT PRIMARY KEY,
     Time TIMESTAMP,
     StatusProperty INT,
     Value STRING

@@ -3,7 +3,7 @@ CREATE KEYSPACE IF NOT EXITS Qbus WITH replication = {'class':'SimpleStrategy', 
 USE Qbus;
 
 CREATE TABLE IF NOT EXISTS OutputLogs(
-    ID BIGINT,
+    ID BIGINT PRIMARY KEY,
     OutputId INT,
     Time TIMESTAMP,
     Status INT,
