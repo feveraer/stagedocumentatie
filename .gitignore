@@ -1,4 +1,4 @@
 *.vagrant
 *.vagrant/**
-vagrant-hadoop-hive-spark/resources/csv
-vagrant-hadoop-hive-spark/resources/csv/**
+*/csv
+*/csv/**
