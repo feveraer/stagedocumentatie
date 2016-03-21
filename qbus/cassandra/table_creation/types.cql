@@ -1,4 +1,4 @@
-CREATE TABLE Types(
-  ID int PRIMARY KEY,
-  name text
-)
+CREATE TABLE IF NOT EXISTS Types(
+  ID BIGINT PRIMARY KEY,
+  Name TEXT
+);
