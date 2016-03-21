@@ -32,6 +32,7 @@ done
 echo
 read -r -p "MySQL username: " MYSQL_USER
 read -s -r -p "MySQL password: " MYSQL_PASSWORD
+echo
 read -r -p "Time column name: " TIME_COLUMN
 echo
 
