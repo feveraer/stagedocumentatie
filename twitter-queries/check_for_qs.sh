@@ -40,19 +40,19 @@ for tb in $(mysql -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -sN -
 do
   echo "${tb}" >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
   echo "select min(${TIME_COLUMN}),max(${TIME_COLUMN}),count(*) from ${tb} where and ${TIME_COLUMN} > '2015-01-01 00:00:00' and ${TIME_COLUMN} < '2015-04-01 00:00:00'" >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
-  sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select count(*) from ${tb} where ${TIME_COLUMN} > '2015-01-01 00:00:00' and ${TIME_COLUMN} < '2015-04-01 00:00:00' into outfile '/home/twitter/query_results/${tb}_count.txt'"
+  sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select min(${TIME_COLUMN}),max(${TIME_COLUMN}),count(*) from ${tb} where ${TIME_COLUMN} > '2015-01-01 00:00:00' and ${TIME_COLUMN} < '2015-04-01 00:00:00' into outfile '/home/twitter/query_results/${tb}_count.txt'"
   cat /home/twitter/query_results/${tb}_count.txt >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
   echo >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
   rm -f /home/twitter/query_results/${tb}_count.txt
 
   echo "select min(${TIME_COLUMN}),max(${TIME_COLUMN}),count(*) from ${tb} where and ${TIME_COLUMN} > '2015-04-01 00:00:00' and ${TIME_COLUMN} < '2015-07-01 00:00:00'" >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
-  sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select count(*) from ${tb} where ${TIME_COLUMN} > '2015-04-01 00:00:00' and ${TIME_COLUMN} < '2015-07-01 00:00:00' into outfile '/home/twitter/query_results/${tb}_count.txt'"
+  sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select min(${TIME_COLUMN}),max(${TIME_COLUMN}),count(*) from ${tb} where ${TIME_COLUMN} > '2015-04-01 00:00:00' and ${TIME_COLUMN} < '2015-07-01 00:00:00' into outfile '/home/twitter/query_results/${tb}_count.txt'"
   cat /home/twitter/query_results/${tb}_count.txt >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
   echo >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
   rm -f /home/twitter/query_results/${tb}_count.txt
 
   echo "select min(${TIME_COLUMN}),max(${TIME_COLUMN}),count(*) from ${tb} where and ${TIME_COLUMN} > '2015-07-01 00:00:00' and ${TIME_COLUMN} < '2015-10-01 00:00:00'" >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
-  sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select count(*) from ${tb} where ${TIME_COLUMN} > '2015-07-01 00:00:00' and ${TIME_COLUMN} < '2015-10-01 00:00:00' into outfile '/home/twitter/query_results/${tb}_count.txt'"
+  sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select min(${TIME_COLUMN}),max(${TIME_COLUMN}),count(*) from ${tb} where ${TIME_COLUMN} > '2015-07-01 00:00:00' and ${TIME_COLUMN} < '2015-10-01 00:00:00' into outfile '/home/twitter/query_results/${tb}_count.txt'"
   cat /home/twitter/query_results/${tb}_count.txt >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
   echo >> /home/twitter/query_results/${DATABASE_NAME}_Qs.txt
   rm -f /home/twitter/query_results/${tb}_count.txt
