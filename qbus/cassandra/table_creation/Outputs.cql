@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS Outputs(
+    Id BIGINT,
+    Uid TEXT,
+    Active BOOLEAN,
+    Address INT,
+    SubAdress INT,
+    ControllerId BIGINT,
+    TypeId BIGINT,
+    LocationId BIGINT,
+    OriginalName TEXT,
+    CustomName TEXT,
+    ProgramId BIGINT,
+    Status TEXT,
+    CreatedAt TIMESTAMP,
+    UpdatedAt TIMESTAMP,
+    CustomIcon INT,
+    ReadOnly BOOLEAN,
+    VirtualOutput BOOLEAN,
+    Multiplier FLOAT
+);
