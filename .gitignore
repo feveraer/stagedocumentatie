@@ -1,6 +1,4 @@
-vagrant-hadoop-hive-spark/.vagrant
-vagrant-hadoop-hive-spark/.vagrant/**
+*.vagrant
+*.vagrant/**
 vagrant-hadoop-hive-spark/resources/csv
 vagrant-hadoop-hive-spark/resources/csv/**
-vagrant-ambari/.vagrant
-vagrant-ambari/.vagrant/**
