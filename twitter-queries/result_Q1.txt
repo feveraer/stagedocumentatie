@@ -1,0 +1,835 @@
+teamsony
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%teamsony%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 23:31:02	2015-02-21 13:13:06	68
+
+gosony
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%gosony%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-07 03:26:25	2015-02-22 18:19:47	11
+
+playstation
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%playstation%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:05	2015-02-26 15:02:09	647782
+
+ps4
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%ps4%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:05	2015-02-26 15:02:00	445660
+
+teammicrosoft
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%teammicrosoft%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-14 10:32:07	2015-02-02 17:04:35	17
+
+gomicrosoft
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%gomicrosoft%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-14 22:27:02	2015-02-26 00:06:15	6
+
+xbox
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%xbox%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:09	748764
+
+xone
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%xone%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:27	2015-02-26 15:00:29	75182
+
+xbone
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%xbone%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:14	2015-02-26 14:50:35	3835
+
+teamnintendo
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%teamnintendo%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 06:07:22	2015-01-22 01:32:34	4
+
+gonintendo
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%gonintendo%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:49:57	2015-02-26 14:53:19	2659
+
+wii
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%wii%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:09	452675
+
+mcdo
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mcdo%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:03	2015-02-26 15:02:06	2012228
+
+happymeal
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%happymeal%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 04:33:31	2015-02-26 13:53:35	1370
+
+imlovinit
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%imlovinit%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:11:36	2015-02-26 12:41:28	1927
+
+bigmac
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%bigmac%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:42	2015-02-26 14:58:16	24547
+
+mcdstories
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mcdstories%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 18:05:06	2015-02-22 17:59:24	47
+
+dollarmenu
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%dollarmenu%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 07:43:47	2015-02-25 17:12:59	104
+
+mccafe
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mccafe%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:03:29	2015-02-26 14:54:01	2092
+
+kfc
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%kfc%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:04	2015-02-26 15:02:04	1277698
+
+kentuckyfriedchicken
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%kentuckyfriedchicken%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 08:19:21	2015-02-26 12:32:41	83
+
+doublicious
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%doublicious%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-04 08:11:01	2015-02-25 05:29:02	31
+
+chickenlittles
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%chickenlittles%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-03 04:38:00	2015-02-23 00:08:41	10
+
+famousbowl
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%famousbowl%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 06:11:59	2015-02-24 21:36:21	23
+
+yumbrands
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%yumbrands%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 17:01:12	2015-02-26 14:51:06	5174
+
+burgerking
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%burgerking%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:24:11	2015-02-26 14:53:57	6241
+
+whopper
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%whopper%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:29:56	2015-02-26 05:22:26	1996
+
+bigking
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%bigking%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-04 18:47:27	2015-02-25 13:26:18	30
+
+wendys
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%wendys%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:24:11	2015-02-26 14:55:51	8345
+
+qualityisourrecipe
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%qualityisourrecipe%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+\N	\N	0
+
+baconator
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%baconator%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 03:10:52	2015-02-26 02:29:44	182
+
+starbucks
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%starbucks%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:02:41	2015-02-26 15:01:24	103742
+
+frapuccino
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%frapuccino%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 04:07:40	2015-02-26 05:53:54	148
+
+fizzio
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%fizzio%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-12 22:20:37	2015-02-22 05:16:34	11
+
+tacobell
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%tacobell%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:23	2015-02-26 15:02:05	208299
+
+tbell
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%tbell%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:49:04	2015-02-26 14:50:57	7001
+
+dunkind
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%dunkind%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 01:29:57	2015-02-26 12:21:56	1804
+
+ddperks
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%ddperks%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-12 15:19:43	2015-02-20 11:41:40	6
+
+dunkaccino
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%dunkaccino%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-02-03 17:31:57	2015-02-06 17:46:52	6
+
+pizzahut
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%pizzahut%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:11	2015-02-26 15:01:50	139634
+
+panera
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%panera%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:04:25	2015-02-26 14:36:31	6310
+
+dominos
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%dominos%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:44:09	2015-02-26 15:01:46	42058
+
+pizzapics
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%pizzapics%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-03 04:31:24	2015-02-06 09:00:08	6
+
+chipotle
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%chipotle%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:29	2015-02-26 14:49:03	22746
+
+burritobowl
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%burritobowl%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 23:34:10	2015-02-25 21:21:19	8
+
+facebook
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%facebook%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:06	2015-02-26 15:02:09	733037
+
+youtube
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%youtube%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:05	2015-02-26 15:02:03	1459676
+
+googleplus
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%googleplus%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:17	2015-02-26 14:50:01	16192
+
+twitter
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%twitter%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:08	2015-02-26 15:02:12	2088900
+
+tweet
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%tweet%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:03	2726855
+
+linkedin
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%linkedin%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:05:58	2015-02-26 14:58:30	80364
+
+instagram
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%instagram%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:16	2015-02-26 15:02:05	583958
+
+pinterest
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%pinterest%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:19:36	2015-02-26 14:57:58	54361
+
+tumblr
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%tumblr%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:15	2015-02-26 15:00:48	181466
+
+reddit
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%reddit%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:03:25	2015-02-26 15:01:02	50098
+
+bankofamerica
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%bankofamerica%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 07:40:02	2015-02-25 19:18:20	450
+
+wellsfargo
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%wellsfargo%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 12:17:57	2015-02-26 07:09:01	1171
+
+jpmorgan
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%jpmorgan%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:23:25	2015-02-26 14:56:59	6250
+
+citibank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%citibank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:13:42	2015-02-26 13:00:18	861
+
+usbank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%usbank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 18:47:24	2015-02-23 22:06:47	165
+
+pncbank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%pncbank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 03:48:34	2015-02-26 03:46:03	100
+
+capitalone
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%capitalone%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:07	2015-02-26 14:57:26	11349
+
+tdbank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%tdbank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 21:51:36	2015-02-26 02:31:56	186
+
+bbtbank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%bbtbank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+\N	\N	0
+
+suntrustbank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%suntrustbank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+\N	\N	0
+
+bnymellon
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%bnymellon%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 20:58:35	2015-02-24 18:14:08	31
+
+53bank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%53bank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-28 19:46:29	2015-01-28 19:46:29	1
+
+fiththird
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%fiththird%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+\N	\N	0
+
+regionsbank
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%regionsbank%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-12 21:41:53	2015-01-12 21:41:53	1
+
+charlesschwab
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%charlesschwab%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 19:09:59	2015-02-19 13:52:31	33
+
+nikon
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%nikon%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:08	2015-02-26 15:02:02	88687
+
+canon
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%canon%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:11	2015-02-26 15:02:02	105414
+
+sony
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%sony%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:11	4274125
+
+panasonic
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%panasonic%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:07	654489
+
+samsung
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%samsung%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:12	6491800
+
+fujifilm
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%fujifilm%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:29	2015-02-26 14:58:01	12696
+
+olympus
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%olympus%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:25	2015-02-26 14:58:01	33938
+
+ricoh
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%ricoh%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:26	2015-02-26 14:35:43	5317
+
+nike
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%nike%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:07	2015-02-26 15:02:03	145814
+
+teamjordan
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%teamjordan%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 04:09:43	2015-02-25 11:40:48	65
+
+converse
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%converse%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:03:41	2015-02-26 14:54:01	17906
+
+teamconverse
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%teamconverse%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-25 09:57:32	2015-01-25 09:57:32	1
+
+jordansneakers
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%jordansneakers%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-09 13:59:31	2015-02-17 23:41:42	2
+
+jordanshoe
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%jordanshoe%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 11:10:33	2015-02-06 02:30:15	5
+
+allstars
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%allstars%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:03:21	2015-02-26 14:49:24	6438
+
+adidas
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%adidas%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:06:47	2015-02-26 14:59:11	94276
+
+reebok
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%reebok%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:05:43	2015-02-26 14:56:28	13604
+
+asics
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%asics%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:17	2015-02-26 14:57:16	33084
+
+skechers
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%skechers%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:25:04	2015-02-26 14:01:47	1352
+
+underarmour
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%underarmour%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 01:06:46	2015-02-26 13:56:37	1609
+
+puma
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%puma%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:15	2015-02-26 15:00:38	25929
+
+americanairlines
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%americanairlines%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:10:39	2015-02-26 14:42:43	8662
+
+deltaair
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%deltaair%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:56:19	2015-02-26 14:49:48	2669
+
+unitedair
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%unitedair%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:09	2015-02-26 14:57:38	10606
+
+southwestairlines
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%southwestairlines%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:30:27	2015-02-26 14:30:26	1784
+
+jetblue
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%jetblue%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:28	2015-02-26 15:00:31	92520
+
+alaskairlines
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%alaskairlines%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-30 03:52:05	2015-01-30 03:53:32	2
+
+spiritairlines
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%spiritairlines%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:52	2015-02-26 14:50:47	6338
+
+hawaiianairlines
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%hawaiianairlines%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 16:52:35	2015-02-26 09:49:45	320
+
+allegiantair
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%allegiantair%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:49:25	2015-02-26 11:51:45	181
+
+virginamerica
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%virginamerica%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:13:26	2015-02-26 14:59:23	20073
+
+walmart
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%walmart%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:12	1479833
+
+kroger
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%kroger%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 14:59:55	144331
+
+costco
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%costco%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:12	2015-02-26 15:01:05	228165
+
+target
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%target%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:12	3674552
+
+thehomedepot
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%thehomedepot%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 04:32:41	2015-02-26 13:18:34	629
+
+walgreens
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%walgreens%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:08:47	2015-02-26 14:51:18	17196
+
+caremark
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%caremark%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:14:33	2015-02-26 13:55:06	1227
+
+lowes
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%lowes%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:19	2015-02-26 15:01:36	93160
+
+amazon
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%amazon%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:11	8012969
+
+mcdonalds
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mcdonalds%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:03	2015-02-26 15:02:06	1731738
+
+bestbuy
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%bestbuy%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:03	2015-02-26 15:02:11	97338
+
+publix
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%publix%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:15	2015-02-26 15:02:02	116601
+
+macys
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%macys%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:09	2015-02-26 15:01:37	145037
+
+applestore
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%applestore%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:47	2015-02-26 14:58:16	45291
+
+itunes
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%itunes%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:12	13643716
+
+sears
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%sears%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:14	2015-02-26 15:02:07	201554
+
+aholdusa
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%aholdusa%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-06 21:50:54	2015-02-24 23:56:32	19
+
+riteaid
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%riteaid%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:04:09	2015-02-26 14:33:59	6305
+
+tjx
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%tjx%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:23	2015-02-26 15:01:00	43435
+
+kohls
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%kohls%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:01:37	130242
+
+dollargeneral
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%dollargeneral%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:39	2015-02-26 11:59:23	6085
+
+universalmusicgroup
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%universalmusicgroup%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 01:05:28	2015-02-26 09:46:28	436
+
+sonymusic
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%sonymusic%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:42	2015-02-26 14:52:59	73218
+
+columbiamusic
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%columbiamusic%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+\N	\N	0
+
+columbiarecords
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%columbiarecords%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:12:55	2015-02-26 15:01:58	16297
+
+sonybmg
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%sonybmg%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 01:05:28	2015-02-25 09:23:13	123
+
+sonyatv
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%sonyatv%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 06:20:36	2015-02-26 14:05:33	439
+
+warnermusic
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%warnermusic%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:08:17	2015-02-26 14:58:08	8399
+
+exxon
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%exxon%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:26	2015-02-26 15:00:05	66758
+
+chevron
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%chevron%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:14	2015-02-26 15:02:10	241926
+
+conocophilips
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%conocophilips%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 11:15:56	2015-02-23 04:21:26	83
+
+occidentalpetroleum
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%occidentalpetroleum%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 23:28:08	2015-02-12 15:07:38	12
+
+eogresources
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%eogresources%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-10 23:04:09	2015-02-24 15:18:30	6
+
+philips66
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%philips66%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-13 21:54:37	2015-02-21 18:25:30	7
+
+anadarkopetroleum
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%anadarkopetroleum%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-02-04 18:04:34	2015-02-16 22:00:47	2
+
+apache
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%apache%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:17	2015-02-26 15:01:25	214707
+
+samsung
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%samsung%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:12	6491800
+
+galaxys
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%galaxys%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:02:25	2015-02-26 15:01:56	222297
+
+iphone
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%iphone%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:12	31132237
+
+apple
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%apple%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:12	11245110
+
+nokia
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%nokia%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:08	2015-02-26 15:02:11	1156249
+
+microsoft
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%microsoft%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:10	3741179
+
+windowsphone
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%windowsphone%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:20	2015-02-26 14:59:43	73797
+
+lumia
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%lumia%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:03	2015-02-26 15:02:05	917949
+
+teamlg
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%teamlg%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-03 12:23:44	2015-02-20 19:39:29	37
+
+lenovo
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%lenovo%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:48	2015-02-26 15:02:09	817524
+
+huawei
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%huawei%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:04	2015-02-26 15:01:54	321037
+
+xiaomi
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%xiaomi%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:08	2015-02-26 15:01:17	781539
+
+miphone
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%miphone%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:05:00	2015-02-26 14:41:33	3163
+
+zte
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%zte%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:05	2015-02-26 15:01:57	207984
+
+apple
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%apple%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:12	11245110
+
+ipad
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%ipad%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:12	14572283
+
+samsung
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%samsung%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:12	6491800
+
+galaxytab
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%galaxytab%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:02:43	2015-02-26 15:01:12	59926
+
+tabpro
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%tabpro%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:16:51	2015-02-26 15:00:49	7612
+
+teamgalaxy
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%teamgalaxy%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 17:16:56	2015-02-25 10:56:43	110
+
+asus
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%asus%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:11	898473
+
+fonepad
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%fonepad%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:22:01	2015-02-26 14:40:14	13871
+
+transformerpad
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%transformerpad%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 16:39:40	2015-02-23 14:35:21	23
+
+vivotab
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%vivotab%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:34:41	2015-02-26 14:56:38	5679
+
+memopad
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%memopad%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:42	2015-02-26 12:16:31	3151
+
+lenovo
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%lenovo%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:48	2015-02-26 15:02:09	817524
+
+thinkpad
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%thinkpad%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:58	2015-02-26 15:01:20	103783
+
+gpad
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%gpad%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:31:33	2015-02-26 14:58:27	5109
+
+huawei
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%huawei%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:04	2015-02-26 15:01:54	321037
+
+mediapad
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mediapad%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:02:36	2015-02-26 14:57:44	5804
+
+generalmotors
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%generalmotors%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:27	2015-02-26 14:56:31	2583
+
+chevrolet
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%chevrolet%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:11	588302
+
+buick
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%buick%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:01	121602
+
+gmc
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%gmc%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:03	2015-02-26 15:02:00	227407
+
+cadillac
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%cadillac%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:07	2015-02-26 15:01:23	243916
+
+opel
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%opel%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:04	2015-02-26 15:02:08	169898
+
+vauxhall
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%vauxhall%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:38	2015-02-26 15:00:29	48861
+
+chevy
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%chevy%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:52	2015-02-26 14:59:20	132172
+
+ford
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%ford%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:07	2837524
+
+mustang
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mustang%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:04	2015-02-26 15:02:05	596533
+
+toyota
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%toyota%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:07	1272620
+
+chrysler
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%chrysler%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:08	2015-02-26 15:02:05	167074
+
+lancia
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%lancia%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:24	2015-02-26 15:02:01	86927
+
+dodge
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%dodge%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:04	2015-02-26 15:02:07	795803
+
+ramtrucks
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%ramtrucks%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:37:41	2015-02-26 13:33:31	11067
+
+honda
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%honda%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:09	1750381
+
+nissan
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%nissan%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:03	2015-02-26 15:02:01	871769
+
+hyundai
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%hyundai%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:04	2015-02-26 15:02:11	347406
+
+kia
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%kia%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:11	2182962
+
+subaru
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%subaru%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:20	2015-02-26 15:00:42	244904
+
+bmw
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%bmw%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:03	2015-02-26 15:02:09	1566727
+
+volkswagen
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%volkswagen%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:03	2015-02-26 15:01:54	440609
+
+mazda
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mazda%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:07	2015-02-26 15:02:08	236897
+
+jaguar
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%jaguar%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:09	2015-02-26 15:01:45	399670
+
+landrover
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%landrover%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:06:56	2015-02-26 15:01:29	53229
+
+mercedes
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%mercedes%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:11	1508806
+
+benz
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%benz%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:02	2015-02-26 15:02:07	775661
+
+audi
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%audi%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:09	2015-02-26 15:02:10	1985805
+
+21stcenturyfox
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%21stcenturyfox%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 20:41:50	2015-02-26 07:55:48	106
+
+20thcenturyfox
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%20thcenturyfox%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:44:25	2015-02-26 14:56:31	32322
+
+lionsgate
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%lionsgate%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:02:58	2015-02-26 14:55:03	40767
+
+paramount
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%paramount%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:20	2015-02-26 15:01:42	144042
+
+viacom
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%viacom%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:01:22	2015-02-26 14:36:13	32935
+
+warnerbros
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%warnerbros%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:05:32	2015-02-26 15:00:59	53955
+
+newlinecinema
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%newlinecinema%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-02 16:40:25	2015-02-26 10:53:25	265
+
+universal
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%universal%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:04	2015-02-26 15:02:10	1746602
+
+nbcuniversal
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%nbcuniversal%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 01:19:31	2015-02-26 14:30:37	13732
+
+sonycolumbia
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%sonycolumbia%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-02-08 02:03:17	2015-02-24 18:35:47	2
+
+columbiapictures
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%columbiapictures%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 01:09:53	2015-02-26 03:08:44	128
+
+sonypictures
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%sonypictures%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:44	2015-02-26 15:00:28	28993
+
+metrogoldwynnmayer
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%metrogoldwynnmayer%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+\N	\N	0
+
+disney
+select min(timestamp),max(timestamp),count(*) from collecttweetuni where lower(tweet) like '%disney%' and timestamp > '2015-01-01 00:00:00' and timestamp < '2015-04-01 00:00:00'
+2015-01-01 00:00:01	2015-02-26 15:02:11	7340496
