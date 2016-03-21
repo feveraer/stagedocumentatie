@@ -1,3 +1,8 @@
+CREATE KEYSPACE IF NOT EXISTS Qbus 
+WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
+
+USE Qbus;
+
 CREATE TABLE IF NOT EXISTS Controllers(
   Id BIGINT PRIMARY KEY,
   SerialNumber TEXT,
