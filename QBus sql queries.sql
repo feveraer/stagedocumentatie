@@ -40,17 +40,17 @@ join A_QbusCloud.dbo.Location l on o.locationid = l.id
 left join A_QbusCloud.dbo.OutputLogs ol on o.id = ol.outputid
 join A_QbusCloud.dbo.Types t on o.typeid = t.id
 
-select ol.time time, ol.value value, l.userid, o.id, l.name
+select ol.time time, ol.value value, l.userid, o.id, l.id locationid, l.name
 from OutputLogs ol
 join Outputs o on ol.OutputID = o.id
 join Location l on o.locationid = l.id
 join Types t on o.typeid = t.id
-where l.Userid = '53' and t.Name = 'THERMO'
+where l.Userid = '1200' and t.Name = 'THERMO'
 union
-select oghd.time, oghd.value, l.userid, o.id, l.name 
+select oghd.time, oghd.value, l.userid, o.id, l.id locationid, l.name 
 from OutputGraphHourData oghd
 join Outputs o on oghd.outputid = o.id
 join Location l on o.locationid = l.id
 join Types t on o.typeid = t.id
-where l.Userid = '53'
-order by time desc, name
+where l.Userid = '1200'
+order by o.id;
