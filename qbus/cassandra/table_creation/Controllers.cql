@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS Controllers(
   IPAdress TEXT,
   ReceivingRate DECIMAL,
   Timezone TEXT
-)
+);
