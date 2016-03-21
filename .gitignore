@@ -1,4 +1,4 @@
-*.vagrant
-*.vagrant/**
-*/csv
-*/csv/**
+**/*.vagrant
+**/*.vagrant/**
+**/csv
+**/csv/**
