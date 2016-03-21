@@ -1,5 +1,5 @@
 USE Qbus;
 
-COPY types
+COPY Types
 FROM '/vagrant/resources/csv/Types.csv'
-WITH DELIMITER ='´~¨`^';
+WITH HEADER = true;
