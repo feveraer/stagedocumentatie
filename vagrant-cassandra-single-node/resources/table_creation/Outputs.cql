@@ -11,8 +11,6 @@ CREATE TABLE IF NOT EXISTS Outputs(
     ControllerId BIGINT,
     TypeId BIGINT,
     LocationId BIGINT,
-    OriginalName TEXT,
-    CustomName TEXT,
     ProgramId BIGINT,
     Status TEXT,
     CreatedAt TIMESTAMP,
