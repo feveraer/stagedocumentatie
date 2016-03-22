@@ -5,6 +5,6 @@ USE Qbus;
 CREATE TABLE IF NOT EXISTS OutputGraphHourData(
     OutputID BIGINT PRIMARY KEY,
     Time TIMESTAMP,
-    StatusProperty INT,
+    Status INT,
     Value TEXT
 );
