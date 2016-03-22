@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Outputs(
     Uid TEXT,
     Active BOOLEAN,
     Address INT,
-    SubAdress INT,
+    SubAddress INT,
     ControllerId BIGINT,
     TypeId BIGINT,
     LocationId BIGINT,

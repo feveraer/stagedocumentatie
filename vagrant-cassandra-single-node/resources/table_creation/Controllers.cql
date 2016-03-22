@@ -9,12 +9,12 @@ CREATE TABLE IF NOT EXISTS Controllers(
   ApiKey TEXT,
   VerificationKey TEXT,
   Name TEXT,
-  MacAdress TEXT,
+  MacAddress TEXT,
   FirmwareVersion TEXT,
   RegisteredAt TIMESTAMP,
-  LastAcces TIMESTAMP,
+  LastAccess TIMESTAMP,
   Activated BOOLEAN,
-  IPAdress TEXT,
+  IPAddress TEXT,
   ReceivingRate DECIMAL,
   Timezone TEXT
 );
