@@ -1,5 +1,6 @@
 USE Qbus;
 
-COPY Types
+COPY Types(id, name)
 FROM '/vagrant/resources/csv/Types.csv'
-WITH HEADER = true;
+WITH DELIMITER = ';' AND HEADER = true
+AND NULL = 'NULL';

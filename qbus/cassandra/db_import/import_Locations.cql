@@ -1,5 +1,6 @@
 USE Qbus;
 
-COPY Locations
+COPY Locations(id, name, userid, originalid, controllerid, parentid)
 FROM '/vagrant/resources/csv/Locations.csv'
-WITH HEADER = true;
+WITH DELIMITER = ';' AND HEADER = true
+AND NULL = 'NULL';

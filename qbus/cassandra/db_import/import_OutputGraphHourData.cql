@@ -1,5 +1,6 @@
 USE Qbus;
 
-COPY OutputGraphHourData
+COPY OutputGraphHourData(outputid, time, statusproperty, value)
 FROM '/vagrant/resources/csv/OutputGraphHourData.csv'
-WITH HEADER = true;
+WITH DELIMITER = ';' AND HEADER = true
+AND NULL = 'NULL';
