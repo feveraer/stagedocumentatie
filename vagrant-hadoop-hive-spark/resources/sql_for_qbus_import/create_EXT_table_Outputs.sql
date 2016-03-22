@@ -7,8 +7,6 @@ CREATE EXTERNAL TABLE IF NOT EXISTS Outputs(
     ControllerId BIGINT,
     TypeId BIGINT,
     LocationId BIGINT,
-    OriginalName STRING,
-    CustomName STRING,
     ProgramId BIGINT,
     Status STRING,
     CreatedAt TIMESTAMP,
