@@ -15,11 +15,11 @@ for /f "tokens=*" %%a in (table_names.txt) do (
 echo "All columns have been exported to csv."
 
 :: INFO ABOUT THE sqlcmd statement
-:: -S:  Defines that the database is located on the localhost
-:: -d:  Defines the database name
-:: -E:  Defines a trusted connection, this means you don't have to use ""-U username -P password" to make connection
-:: -s:  Defines the delimiter
-:: -W:  Removes unnecessary spaces
-:: -Q:  Defines the inline query
+:: -S .:  Defines that the database is located on the localhost
+:: -d:    Defines the database name
+:: -E:    Defines a trusted connection, this means you don't have to use ""-U username -P password" to make connection
+:: -s:    Defines the delimiter
+:: -W:    Removes unnecessary spaces
+:: -Q:    Defines the inline query
 
 :: findstr /V /C:"-" /B removes strings like "--,-----,--------,--------".
