@@ -7,7 +7,6 @@ import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
 
-
 object ScalaApp {
 
   def main(args: Array[String]) {
@@ -20,8 +19,21 @@ object ScalaApp {
     val sqlContext = new SQLContext(sc)
 
     val qbusReader = new QbusReader(sqlContext)
-    val df = qbusReader.read(QbusReader.locations)
 
-    val selectedData = df.select("Id", "Name").foreach(println)
+    val outputLogsDF = qbusReader.read(QbusReader.outputLogs)
+    val outputGraphHourDataDF = qbusReader.read(QbusReader.outputGraphHourData)
+    val outputsDF = qbusReader.read(QbusReader.outputs)
+    val locationsDF = qbusReader.read(QbusReader.locations)
+    val typesDF = qbusReader.read(QbusReader.types)
+
+    val setTempsDF = sqlContext.sql("select ol.Time, ol.Value, locationsDF.Userid, locationsDF.Name as LocationName "
+      + "from outputLogsDF ol "
+      + "join outputsDF o on ol.OutputID = o.Id "
+      + "join locationsDF l on o.LocationId = l.Id "
+      + "join typesDF t on o.TypeId = t.Id "
+      + "where t.Name = 'THERMO'"
+    )
+
+    setTempsDF.foreach(println)
   }
 }
