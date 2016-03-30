@@ -10,3 +10,6 @@ scala-app/**/*.class
 **/*.iml
 **/*.ipr
 **/*.iws
+
+# netbeans-apps
+**/target/**
