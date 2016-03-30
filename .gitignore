@@ -12,3 +12,4 @@ scala-app/**/*.class
 **/*.iws
 
 # netbeans-apps
+**/target/**
