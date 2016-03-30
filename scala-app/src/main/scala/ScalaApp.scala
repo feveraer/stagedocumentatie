@@ -20,17 +20,17 @@ object ScalaApp {
 
     val qbusReader = new QbusReader(sqlContext)
 
-    val outputLogsDF = qbusReader.read(QbusReader.outputLogs)
-    val outputGraphHourDataDF = qbusReader.read(QbusReader.outputGraphHourData)
-    val outputsDF = qbusReader.read(QbusReader.outputs)
-    val locationsDF = qbusReader.read(QbusReader.locations)
-    val typesDF = qbusReader.read(QbusReader.types)
+    val outputLogsDF = qbusReader.read(QbusReader.outputLogs).registerTempTable("OutputLogs")
+    val outputGraphHourDataDF = qbusReader.read(QbusReader.outputGraphHourData).registerTempTable("OutputGraphHourData")
+    val outputsDF = qbusReader.read(QbusReader.outputs).registerTempTable("Outputs")
+    val locationsDF = qbusReader.read(QbusReader.locations).registerTempTable("Locations")
+    val typesDF = qbusReader.read(QbusReader.types).registerTempTable("Types")
 
-    val setTempsDF = sqlContext.sql("select ol.Time, ol.Value, locationsDF.Userid, locationsDF.Name as LocationName "
-      + "from outputLogsDF ol "
-      + "join outputsDF o on ol.OutputID = o.Id "
-      + "join locationsDF l on o.LocationId = l.Id "
-      + "join typesDF t on o.TypeId = t.Id "
+    val setTempsDF = sqlContext.sql("select ol.Time, ol.Value, l.Userid, l.Name as LocationName "
+      + "from OutputLogs ol "
+      + "join Outputs o on ol.OutputID = o.Id "
+      + "join Locations l on o.LocationId = l.Id "
+      + "join Types t on o.TypeId = t.Id "
       + "where t.Name = 'THERMO'"
     )
 
