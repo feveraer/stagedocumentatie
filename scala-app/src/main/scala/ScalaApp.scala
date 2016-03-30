@@ -20,11 +20,17 @@ object ScalaApp {
 
     val qbusReader = new QbusReader(sqlContext)
 
-    val outputLogsDF = qbusReader.read(QbusReader.outputLogs).registerTempTable("OutputLogs")
-    val outputGraphHourDataDF = qbusReader.read(QbusReader.outputGraphHourData).registerTempTable("OutputGraphHourData")
-    val outputsDF = qbusReader.read(QbusReader.outputs).registerTempTable("Outputs")
-    val locationsDF = qbusReader.read(QbusReader.locations).registerTempTable("Locations")
-    val typesDF = qbusReader.read(QbusReader.types).registerTempTable("Types")
+    val outputLogsDF = qbusReader.read(QbusReader.outputLogs)
+    val outputGraphHourDataDF = qbusReader.read(QbusReader.outputGraphHourData)
+    val outputsDF = qbusReader.read(QbusReader.outputs)
+    val locationsDF = qbusReader.read(QbusReader.locations)
+    val typesDF = qbusReader.read(QbusReader.types)
+
+    outputLogsDF.registerTempTable("OutputLogs")
+    outputGraphHourDataDF.registerTempTable("OutputGraphHourData")
+    outputsDF.registerTempTable("Outputs")
+    locationsDF.registerTempTable("Locations")
+    typesDF.registerTempTable("Types")
 
     val setTempsDF = sqlContext.sql("select ol.Time, ol.Value, l.Userid, l.Name as LocationName "
       + "from OutputLogs ol "
@@ -34,6 +40,8 @@ object ScalaApp {
       + "where t.Name = 'THERMO'"
     )
 
-    setTempsDF.foreach(println)
+    setTempsDF.printSchema()
+
+    setTempsDF.take(100).foreach(println)
   }
 }
