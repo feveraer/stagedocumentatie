@@ -29,4 +29,4 @@ if [ -d /etc/profile.d ]; then
   unset i
 fi
 
-export PATH=$PATH:/usr/local/lib/hadoop-2.7.2/bin/:/usr/local/lib/hadoop-2.7.2/sbin/
+export PATH=$PATH:/opt/kafka_2.11-0.9.0.0/bin

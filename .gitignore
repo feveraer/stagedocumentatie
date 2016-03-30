@@ -2,3 +2,11 @@
 **/*.vagrant/**
 **/csv
 **/csv/**
+
+# scala-app
+scala-app/**/target
+scala-app/**/*.class
+**/.idea/**
+**/*.iml
+**/*.ipr
+**/*.iws
