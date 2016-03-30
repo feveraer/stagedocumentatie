@@ -5,6 +5,8 @@
  */
 package com.mycompany.kafka;
 
+import java.io.IOException;
+
 /**
  *
  * @author vagrant
@@ -12,6 +14,6 @@ package com.mycompany.kafka;
 public class ProducerRun {
     public static void main(String[] args) {
         KafkaProducerManager producer = new KafkaProducerManager();
-        producer.start();
+        producer.startTextSender();
     }
 }
