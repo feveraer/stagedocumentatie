@@ -9,6 +9,8 @@
 **/*.iml
 **/*.ipr
 **/*.iws
+**/target/
+**/project/
 
 # scala-app
 scala-app/**/target
