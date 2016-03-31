@@ -3,13 +3,23 @@
 **/csv
 **/csv/**
 
-# scala-app
-scala-app/**/target
-scala-app/**/*.class
+#IntelliJ
+**/.idea
 **/.idea/**
 **/*.iml
 **/*.ipr
 **/*.iws
+**/target/
+**/project/
+
+# scala-app
+scala-app/**/target
+scala-app/**/*.class
+
 
 # netbeans-apps
 **/target/**
+
+# kafka-sparkstreaming-test-application
+kafka-sparkstreaming-test-application/project/
+kafka-sparkstreaming-test-application/target/

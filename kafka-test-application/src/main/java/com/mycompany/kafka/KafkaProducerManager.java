@@ -5,7 +5,13 @@
  */
 package com.mycompany.kafka;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -35,11 +41,35 @@ public class KafkaProducerManager {
         producer = new KafkaProducer<>(props);
     }
 
-    public void start(){
-        System.out.println("Start Producer");
-        for(int i = 0; i < 100; i++){
+    public void startCounter(){
+        System.out.println("Start Producer Counter");
+        for(int i = 0; i < 10000; i++){
             producer.send(new ProducerRecord<>("test", Integer.toString(i),"Package " + i));
             System.out.println("Producer: Send: " + i);
+        }
+        
+        System.out.println("Closing producer");
+        producer.close();
+    }
+    
+    public void startTextSender(){
+        String path_to_file = "/home/vagrant/NetBeansProjects/Kafka/src/main/java/file.txt";
+        int count = 0;
+        try {
+            for (String line : Files.readAllLines(Paths.get(path_to_file), StandardCharsets.UTF_8)) {
+                count++;
+                if(count%5 == 0){
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(KafkaProducerManager.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                producer.send(new ProducerRecord<>("test", Integer.toString(count), line));
+                System.out.println(line);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(KafkaProducerManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         System.out.println("Closing producer");
