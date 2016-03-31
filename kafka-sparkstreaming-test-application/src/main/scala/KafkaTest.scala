@@ -3,7 +3,7 @@
   */
 
 import kafka.serializer.StringDecoder
-
+import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.kafka._
 import org.apache.spark.SparkConf
@@ -15,6 +15,8 @@ object KafkaTest {
     // Create context with 2 second batch interval
     val sparkConf = new SparkConf().setMaster("local[2]").setAppName("DirectKafkaWordCount")
     val ssc = new StreamingContext(sparkConf, Seconds(2))
+
+    LogManager.getRootLogger.setLevel(Level.OFF)
 
     // Create direct kafka stream with brokers and topics
     val topicsSet = Set("test")
