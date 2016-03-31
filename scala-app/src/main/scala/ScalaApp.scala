@@ -40,8 +40,10 @@ object ScalaApp {
       + "where t.Name = 'THERMO'"
     )
 
-    setTempsDF.printSchema()
+    //setTempsDF.printSchema()
+    //setTempsDF.take(100).foreach(println)
 
-    setTempsDF.take(100).foreach(println)
+    val graphBuilder = new GraphBuilder()
+    graphBuilder.test()
   }
 }
