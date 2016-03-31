@@ -86,13 +86,13 @@ object QbusReader {
 
 class QbusReader(private val sqlContext: SQLContext) {
 
-  def read(file: String): DataFrame = {
+  def read(file: String, schema: StructType): DataFrame = {
     val df = sqlContext.read
       .format("com.databricks.spark.csv")
       .option("delimiter", ";")
       .option("quote", null)
       .option("header", "true") // Use first line of all files as header
-      .option("inferSchema", "true") // Automatically infer data types
+      .schema(schema)
       .load(QbusReader.baseDir + file)
     df
   }
