@@ -9,7 +9,7 @@ object QbusReader {
   // on Windows:
   // val baseDir = "d:\\Qbus\\"
   // on Linux:
-  val baseDir = "/media/frederic/Data1/Qbus/"
+  val baseDir = "/home/frederic/ASUS_D_Drive/Qbus/"
 
   val locations = "Locations.csv"
   val locationsSchema = StructType(Array(

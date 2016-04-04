@@ -2,6 +2,7 @@
   * Created by Frederic on 30/03/2016.
   */
 
+import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
@@ -17,6 +18,9 @@ object ScalaApp {
     val conf = new SparkConf().setAppName("Simple Application").setMaster("local[2]")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
+
+    // Turn of logging
+    LogManager.getRootLogger.setLevel(Level.OFF)
 
     val qbusReader = new QbusReader(sqlContext)
 
@@ -40,10 +44,21 @@ object ScalaApp {
       + "where t.Name = 'THERMO'"
     )
 
-    //setTempsDF.printSchema()
-    //setTempsDF.take(100).foreach(println)
+    val measuredTempsDF = sqlContext.sql("select oghd.Time, oghd.Value, l.Userid, l.Name as LocationName "
+      + "from OutputGraphHourData oghd "
+      + "join Outputs o on oghd.OutputID = o.Id "
+      + "join Locations l on o.LocationId = l.Id "
+      + "join Types t on o.TypeId = t.Id "
+      + "where t.Name = 'THERMO'"
+    )
 
-    val graphBuilder = new GraphBuilder()
-    graphBuilder.test()
+    setTempsDF.printSchema()
+    setTempsDF.take(10).foreach(println)
+
+    measuredTempsDF.printSchema()
+    measuredTempsDF.take(10).foreach(println)
+
+    //val graphBuilder = new GraphBuilder()
+    //graphBuilder.test()
   }
 }
