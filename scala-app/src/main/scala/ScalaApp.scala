@@ -2,11 +2,15 @@
   * Created by Frederic on 30/03/2016.
   */
 
+import java.sql.Timestamp
+
 import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
+import breeze.linalg._
+import breeze.plot._
 
 object ScalaApp {
 
@@ -49,16 +53,32 @@ object ScalaApp {
       + "join Outputs o on oghd.OutputID = o.Id "
       + "join Locations l on o.LocationId = l.Id "
       + "join Types t on o.TypeId = t.Id "
-      + "where t.Name = 'THERMO'"
+      + "where t.Name = 'THERMO' and oghd.Time > '2016-02-22'"
     )
 
-    setTempsDF.printSchema()
-    setTempsDF.take(10).foreach(println)
+    //setTempsDF.printSchema()
+    //setTempsDF.take(10).foreach(println)
 
-    measuredTempsDF.printSchema()
-    measuredTempsDF.take(10).foreach(println)
+    //measuredTempsDF.printSchema()
+    //measuredTempsDF.take(10).foreach(println)
 
     //val graphBuilder = new GraphBuilder()
     //graphBuilder.test()
+
+    val f = Figure()
+    val p = f.subplot(0)
+    val x1 = measuredTempsDF
+    val x2 = setTempsDF
+
+    // Breeze works with DenseVectors
+    // Mapped the desired column of a DataFrame to an array wrapped in a DenseVector
+    val v1 = new DenseVector(x1.select("Time").rdd.map(t => t(0).asInstanceOf[Timestamp]).collect())
+    val v2 = new DenseVector(x1.select("Value").rdd.map(t => t(0).asInstanceOf[String]).collect())
+
+    p += plot(v1, v2)
+
+    p.xlabel = "Time"
+    p.ylabel = "Value"
+    f.saveas("qbus_measured_vs_set.png")
   }
 }
