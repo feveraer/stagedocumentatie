@@ -20,11 +20,11 @@ object ScalaApp {
 
     val qbusReader = new QbusReader(sqlContext)
 
-    val outputLogsDF = qbusReader.read(QbusReader.outputLogs)
-    val outputGraphHourDataDF = qbusReader.read(QbusReader.outputGraphHourData)
-    val outputsDF = qbusReader.read(QbusReader.outputs)
-    val locationsDF = qbusReader.read(QbusReader.locations)
-    val typesDF = qbusReader.read(QbusReader.types)
+    val outputLogsDF = qbusReader.read(QbusReader.outputLogs, QbusReader.outputLogsSchema)
+    val outputGraphHourDataDF = qbusReader.read(QbusReader.outputGraphHourData, QbusReader.outputGraphHourDataSchema)
+    val outputsDF = qbusReader.read(QbusReader.outputs, QbusReader.outputsSchema)
+    val locationsDF = qbusReader.read(QbusReader.locations, QbusReader.locationsSchema)
+    val typesDF = qbusReader.read(QbusReader.types, QbusReader.typesSchema)
 
     outputLogsDF.registerTempTable("OutputLogs")
     outputGraphHourDataDF.registerTempTable("OutputGraphHourData")
@@ -40,8 +40,10 @@ object ScalaApp {
       + "where t.Name = 'THERMO'"
     )
 
-    setTempsDF.printSchema()
+    //setTempsDF.printSchema()
+    //setTempsDF.take(100).foreach(println)
 
-    setTempsDF.take(100).foreach(println)
+    val graphBuilder = new GraphBuilder()
+    graphBuilder.test()
   }
 }
