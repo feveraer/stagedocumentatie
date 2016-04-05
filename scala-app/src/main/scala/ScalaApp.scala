@@ -8,6 +8,9 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
+import com.quantifind.charts.{Highcharts, highcharts}
+import com.quantifind.charts.highcharts.Highchart._
+import com.quantifind.charts.highcharts._
 
 object ScalaApp {
 
@@ -59,8 +62,7 @@ object ScalaApp {
     //measuredTempsDF.printSchema()
     //measuredTempsDF.take(10).foreach(println)
 
-    //val graphBuilder = new GraphBuilder()
-    //graphBuilder.test()
-
+    val chart = Highchart(Seq(Series(Seq(Data(1, 2)))), chart = Chart(zoomType = Zoom.xy), yAxis = None)
+    Highcharts.plot(chart)
   }
 }
