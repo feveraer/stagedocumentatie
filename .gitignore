@@ -23,3 +23,5 @@ scala-app/**/*.class
 # kafka-sparkstreaming-test-application
 kafka-sparkstreaming-test-application/project/
 kafka-sparkstreaming-test-application/target/
+
+**/resources/*.csv
