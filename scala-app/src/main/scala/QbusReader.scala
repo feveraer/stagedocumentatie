@@ -1,6 +1,8 @@
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{DataFrame, SQLContext}
 
+import scala.reflect.ClassTag
+
 /**
   * Created by Frederic on 30/03/2016.
   */
@@ -95,5 +97,14 @@ class QbusReader(private val sqlContext: SQLContext) {
       .schema(schema)
       .load(QbusReader.baseDir + file)
     df
+  }
+
+  def convertTemperatureValues(values: Seq[String]): Seq[Double] = {
+    values.map(v => v.replace(',', '.'))
+          .map(v => v.toDouble)
+  }
+
+  def getSeqFromDF[T:ClassTag](df: DataFrame, column: String): Seq[T] = {
+    df.select(column).rdd.map(x => x(0).asInstanceOf[T]).collect().toSeq
   }
 }

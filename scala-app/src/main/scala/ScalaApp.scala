@@ -1,6 +1,7 @@
 /**
   * Created by Frederic on 30/03/2016.
   */
+
 import java.sql.Timestamp
 
 import org.apache.log4j.{Level, LogManager}
@@ -62,7 +63,16 @@ object ScalaApp {
     //measuredTempsDF.printSchema()
     //measuredTempsDF.take(10).foreach(println)
 
-    val chart = Highchart(Seq(Series(Seq(Data(1, 2)))), chart = Chart(zoomType = Zoom.xy), yAxis = None)
-    Highcharts.plot(chart)
+    //val chart = Highchart(Seq(Series(Seq(Data(1, 2)))), chart = Chart(zoomType = Zoom.xy), yAxis = None)
+    //Highcharts.plot(chart)
+
+    val measuredTempsTimes = qbusReader.getSeqFromDF[Timestamp](measuredTempsDF, "Time")
+    val measuredTempsValues = qbusReader.getSeqFromDF[String](measuredTempsDF, "Value")
+    val setTempsTimes = qbusReader.getSeqFromDF[Timestamp](setTempsDF, "Time")
+    val setTempsValues = qbusReader.getSeqFromDF[String](setTempsDF, "Value")
+
+    Highcharts.line(
+      qbusReader.convertTemperatureValues(measuredTempsValues)
+    )
   }
 }
