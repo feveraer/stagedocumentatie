@@ -77,17 +77,17 @@ object ScalaApp {
       .map(v => v.toDouble)
 
     val chart = Highchart(Seq(
-      measuredTempsTimes.zip(measuredTempsValues),
-      setTempsTimes.zip(setTempsValues)
+      measuredTempsTimes.zip(measuredTempsValues).take(50),
+      setTempsTimes.zip(setTempsValues).take(50)
     ),
       chart = Chart(zoomType = Zoom.x),
       xAxis = Some(
         Array(
-          Axis(labels = Some(AxisLabel(rotation = Some(-45))),
+          Axis(labels = Some(AxisLabel(rotation = Some(30))),
             dateTimeLabelFormats = Some(DateTimeFormats()),
             axisType=Some(AxisType.datetime)
           ),
-          Axis(labels = Some(AxisLabel(rotation = Some(45))),
+          Axis(labels = Some(AxisLabel(rotation = Some(30))),
             dateTimeLabelFormats = Some(DateTimeFormats()),
             axisType=Some(AxisType.datetime)
           )
