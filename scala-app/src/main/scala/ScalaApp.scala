@@ -64,24 +64,21 @@ object ScalaApp {
     //measuredTempsDF.printSchema()
     //measuredTempsDF.take(10).foreach(println)
 
-    //val chart = Highchart(Seq(Series(Seq(Data(1, 2)))), chart = Chart(zoomType = Zoom.xy), yAxis = None)
-    //Highcharts.plot(chart)
-
     val measuredTempsTimes = qbusReader.getSeqFromDF[Timestamp](measuredTempsDF, "Time")
+      .map(t => t.getTime)
     val measuredTempsValues = qbusReader.getSeqFromDF[String](measuredTempsDF, "Value")
+      .map(v => v.replace(",", "."))
+      .map(v => v.toDouble)
+
     val setTempsTimes = qbusReader.getSeqFromDF[Timestamp](setTempsDF, "Time")
+      .map(t => t.getTime)
     val setTempsValues = qbusReader.getSeqFromDF[String](setTempsDF, "Value")
+      .map(v => v.replace(",", "."))
+      .map(v => v.toDouble)
 
-    //line(
-    //  qbusReader.convertTemperatureValues(measuredTempsValues)
-    //)
-
-    val now = System.currentTimeMillis
-    val ts1 = List.tabulate(60)(s => (now+s*1000, scala.util.Random.nextDouble * 10))
-    val ts2 = List.tabulate(60)(s => (60*1000+now+s*1000, 5 + scala.util.Random.nextDouble * 10))
     val chart = Highchart(Seq(
-      ts1,
-      ts2
+      measuredTempsTimes.zip(measuredTempsValues),
+      setTempsTimes.zip(setTempsValues)
     ),
       chart = Chart(zoomType = Zoom.x),
       xAxis = Some(
@@ -100,4 +97,5 @@ object ScalaApp {
     )
     plot(chart)
   }
+
 }
