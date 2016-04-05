@@ -11,6 +11,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
 import com.quantifind.charts.{Highcharts, highcharts}
 import com.quantifind.charts.highcharts.Highchart._
+import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts._
 
 object ScalaApp {
@@ -71,8 +72,32 @@ object ScalaApp {
     val setTempsTimes = qbusReader.getSeqFromDF[Timestamp](setTempsDF, "Time")
     val setTempsValues = qbusReader.getSeqFromDF[String](setTempsDF, "Value")
 
-    Highcharts.line(
-      qbusReader.convertTemperatureValues(measuredTempsValues)
+    //line(
+    //  qbusReader.convertTemperatureValues(measuredTempsValues)
+    //)
+
+    val now = System.currentTimeMillis
+    val ts1 = List.tabulate(60)(s => (now+s*1000, scala.util.Random.nextDouble * 10))
+    val ts2 = List.tabulate(60)(s => (60*1000+now+s*1000, 5 + scala.util.Random.nextDouble * 10))
+    val chart = Highchart(Seq(
+      ts1,
+      ts2
+    ),
+      chart = Chart(zoomType = Zoom.x),
+      xAxis = Some(
+        Array(
+          Axis(labels = Some(AxisLabel(rotation = Some(-45))),
+            dateTimeLabelFormats = Some(DateTimeFormats()),
+            axisType=Some(AxisType.datetime)
+          ),
+          Axis(labels = Some(AxisLabel(rotation = Some(45))),
+            dateTimeLabelFormats = Some(DateTimeFormats()),
+            axisType=Some(AxisType.datetime)
+          )
+        )
+      ),
+      yAxis = None
     )
+    plot(chart)
   }
 }
