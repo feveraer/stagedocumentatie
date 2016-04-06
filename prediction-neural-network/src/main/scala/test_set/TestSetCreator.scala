@@ -1,6 +1,6 @@
 package test_set
 
-import java.io.{BufferedWriter, File, FileWriter, PrintWriter}
+import java.io.{BufferedWriter, File, FileWriter}
 
 import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.sql.{DataFrame, SQLContext}
