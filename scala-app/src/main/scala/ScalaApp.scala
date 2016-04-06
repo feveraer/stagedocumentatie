@@ -9,8 +9,6 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
-import com.quantifind.charts.{Highcharts, highcharts}
-import com.quantifind.charts.highcharts.Highchart._
 import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts._
 
@@ -92,26 +90,15 @@ object ScalaApp {
       .map(v => v.replace(",", "."))
       .map(v => v.toDouble)
 
-    val chart = Highchart(Seq(
-      measuredTempsTimes.zip(measuredTempsValues).take(50),
-      setTempsTimes.zip(setTempsValues).take(50)
-    ),
-      chart = Chart(zoomType = Zoom.x),
-      xAxis = Some(
-        Array(
-          Axis(labels = Some(AxisLabel(rotation = Some(30))),
-            dateTimeLabelFormats = Some(DateTimeFormats()),
-            axisType=Some(AxisType.datetime)
-          ),
-          Axis(labels = Some(AxisLabel(rotation = Some(30))),
-            dateTimeLabelFormats = Some(DateTimeFormats()),
-            axisType=Some(AxisType.datetime)
-          )
-        )
-      ),
-      yAxis = "Temperature in °C"
-    )
-    plot(chart)
+    line(measuredTempsTimes.zip(measuredTempsValues))
+    hold()
+    line(setTempsTimes.zip(setTempsValues))
+    stack()
+    title("Measured vs Set Temperatures")
+    xAxisType(AxisType.datetime)
+    xAxis("Time")
+    yAxis("Temperature in °C")
+    legend(List("Measured", "Set"))
   }
 
 }
