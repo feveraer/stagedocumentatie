@@ -11,18 +11,16 @@ object QbusReader {
   // on Linux:
   val baseDir = "/home/frederic/ASUS_D_Drive/Qbus/"
 
-  val locations = "Locations.csv"
-  val locationsSchema = StructType(Array(
+  val locations = ("Locations.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("Name", StringType),
     StructField("Userid", StringType),
     StructField("OriginalID", StringType),
     StructField("ControllerID", StringType),
     StructField("ParentID", StringType)
-  ))
+  )))
 
-  val controllers = "Controllers.csv"
-  val controllersSchema = StructType(Array(
+  val controllers = ("Controllers.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("SerialNumber", StringType),
     StructField("ApiKey", StringType),
@@ -36,27 +34,24 @@ object QbusReader {
     StructField("IPAddress", StringType),
     StructField("ReceivingRate", DoubleType),
     StructField("Timezone", StringType)
-  ))
+  )))
 
-  val outputGraphHourData = "OutputGraphHourData.csv"
-  val outputGraphHourDataSchema = StructType(Array(
+  val outputGraphHourData = ("OutputGraphHourData.csv", StructType(Array(
     StructField("OutputID", StringType),
     StructField("Time", TimestampType),
     StructField("StatusProperty", IntegerType),
     StructField("Value", StringType)
-  ))
+  )))
 
-  val outputLogs = "OutputLogs.csv"
-  val outputLogsSchema = StructType(Array(
+  val outputLogs = ("OutputLogs.csv", StructType(Array(
     StructField("ID", StringType),
     StructField("OutputID", StringType),
     StructField("Time", TimestampType),
     StructField("StatusProperty", IntegerType),
     StructField("Value", StringType)
-  ))
+  )))
 
-  val outputs = "Outputs.csv"
-  val outputsSchema = StructType(Array(
+  val outputs = ("Outputs.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("Uid", StringType),
     StructField("Active", IntegerType),
@@ -75,25 +70,24 @@ object QbusReader {
     StructField("ReadOnly", StringType),
     StructField("VirtualOutput", StringType),
     StructField("Multiplier", StringType)
-  ))
+  )))
 
-  val types = "Types.csv"
-  val typesSchema = StructType(Array(
+  val types = ("Types.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("Name", StringType)
-  ))
+  )))
 }
 
 class QbusReader(private val sqlContext: SQLContext) {
 
-  def read(file: String, schema: StructType): DataFrame = {
+  def read(source: (String, StructType)): DataFrame = {
     val df = sqlContext.read
       .format("com.databricks.spark.csv")
       .option("delimiter", ";")
       .option("quote", null)
       .option("header", "true") // Use first line of all files as header
-      .schema(schema)
-      .load(QbusReader.baseDir + file)
+      .schema(source._2)
+      .load(QbusReader.baseDir + source._1)
     df
   }
 }
