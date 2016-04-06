@@ -11,6 +11,8 @@ import com.quantifind.charts.highcharts._
   */
 class CLI(sqlContext: SQLContext) {
 
+  private var userIDsCache: Array[Any] = null
+
   def run() {
     var stop = false
     var chooseOtherUserID = false
@@ -36,16 +38,21 @@ class CLI(sqlContext: SQLContext) {
   }
 
   private def showAllUserIDs() {
-    val usersDF = sqlContext.sql(
-      "select distinct Userid "
-        + "from SetTemps"
-    )
+    if (userIDsCache == null) {
+      val usersDF = sqlContext.sql(
+        "select distinct Userid "
+          + "from SetTemps"
+      )
 
-    val allUserIDs = usersDF.rdd.map(x => x(0) + ", ").collect()
-    val lastIndex = allUserIDs.length - 1
-    allUserIDs.update(lastIndex, allUserIDs(lastIndex).replace(", ", ""))
-
-    allUserIDs.foreach(print)
+      userIDsCache = usersDF.rdd.map(x => x(0)).collect()
+    }
+    for(i <- userIDsCache.indices) {
+      if ((i+1) % 10 == 0) {
+        println(userIDsCache(i) + ",")
+      } else {
+        print(userIDsCache(i) + ", ")
+      }
+    }
     println()
   }
 
