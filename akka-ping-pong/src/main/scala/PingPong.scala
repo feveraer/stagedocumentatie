@@ -50,4 +50,5 @@ object PingPongTest extends App {
   val ping = system.actorOf(Props(new Ping(pong)), name = "ping")
   // start them going
   ping ! StartMessage
+  system.terminate()
 }
