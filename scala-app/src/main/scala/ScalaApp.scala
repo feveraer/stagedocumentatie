@@ -21,7 +21,7 @@ object ScalaApp {
     // http://qnalist.com/questions/4994960/run-spark-unit-test-on-windows-7
     // System.setProperty("hadoop.home.dir", "d:\\winutil\\")
 
-    val conf = new SparkConf().setAppName("Simple Application").setMaster("local[2]")
+    val conf = new SparkConf().setAppName("Simple Application").setMaster("local[4]")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
@@ -50,29 +50,45 @@ object ScalaApp {
       + "where t.Name = 'THERMO'"
     )
 
+    setTempsDF.registerTempTable("SetTemps")
+
     val measuredTempsDF = sqlContext.sql("select oghd.Time, oghd.Value, l.Userid, l.Name as LocationName "
       + "from OutputGraphHourData oghd "
       + "join Outputs o on oghd.OutputID = o.Id "
       + "join Locations l on o.LocationId = l.Id "
       + "join Types t on o.TypeId = t.Id "
-      + "where t.Name = 'THERMO' and oghd.Time > '2016-02-22'"
+      + "where t.Name = 'THERMO'"
     )
 
-    //setTempsDF.printSchema()
-    //setTempsDF.take(10).foreach(println)
+    measuredTempsDF.registerTempTable("MeasuredTemps")
 
-    //measuredTempsDF.printSchema()
-    //measuredTempsDF.take(10).foreach(println)
+    val measuredTempsForUserAndLocationDF = sqlContext.sql(
+      "select Time, Value "
+        + "from MeasuredTemps "
+        + "where Userid = 53 "
+        + "and LocationName = 'Badkamer' "
+        + "and Time > '2016-02-22' "
+        + "order by Time"
+    )
 
-    val measuredTempsTimes = qbusReader.getSeqFromDF[Timestamp](measuredTempsDF, "Time")
+    val setTempsForUserAndLocationDF = sqlContext.sql(
+      "select Time, Value "
+        + "from SetTemps "
+        + "where Userid = 53 "
+        + "and LocationName = 'Badkamer' "
+        + "and Time > '2016-02-22' "
+        + "order by Time"
+    )
+
+    val measuredTempsTimes = qbusReader.getSeqFromDF[Timestamp](measuredTempsForUserAndLocationDF, "Time")
       .map(t => t.getTime)
-    val measuredTempsValues = qbusReader.getSeqFromDF[String](measuredTempsDF, "Value")
+    val measuredTempsValues = qbusReader.getSeqFromDF[String](measuredTempsForUserAndLocationDF, "Value")
       .map(v => v.replace(",", "."))
       .map(v => v.toDouble)
 
-    val setTempsTimes = qbusReader.getSeqFromDF[Timestamp](setTempsDF, "Time")
+    val setTempsTimes = qbusReader.getSeqFromDF[Timestamp](setTempsForUserAndLocationDF, "Time")
       .map(t => t.getTime)
-    val setTempsValues = qbusReader.getSeqFromDF[String](setTempsDF, "Value")
+    val setTempsValues = qbusReader.getSeqFromDF[String](setTempsForUserAndLocationDF, "Value")
       .map(v => v.replace(",", "."))
       .map(v => v.toDouble)
 
@@ -93,7 +109,7 @@ object ScalaApp {
           )
         )
       ),
-      yAxis = None
+      yAxis = "Temperature in °C"
     )
     plot(chart)
   }
