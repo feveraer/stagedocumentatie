@@ -1,16 +1,11 @@
 /**
   * Created by Frederic on 30/03/2016.
   */
-
-import java.sql.Timestamp
-
 import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.SQLContext
-import com.quantifind.charts.Highcharts._
-import com.quantifind.charts.highcharts._
+import org.apache.spark.sql.{DataFrame, SQLContext}
 
 object ScalaApp {
 
@@ -26,6 +21,13 @@ object ScalaApp {
     // Turn of logging
     LogManager.getRootLogger.setLevel(Level.OFF)
 
+    setupQbusDataFrames(sqlContext)
+
+    val cli = new CLI(sqlContext)
+    cli.run()
+  }
+
+  def setupQbusDataFrames(sqlContext: SQLContext) {
     val qbusReader = new QbusReader(sqlContext)
 
     val outputLogsDF = qbusReader.read(QbusReader.outputLogs)
@@ -59,46 +61,6 @@ object ScalaApp {
     )
 
     measuredTempsDF.registerTempTable("MeasuredTemps")
-
-    val measuredTempsForUserAndLocationDF = sqlContext.sql(
-      "select Time, Value "
-        + "from MeasuredTemps "
-        + "where Userid = 53 "
-        + "and LocationName = 'Badkamer' "
-        + "and Time > '2016-02-22' "
-        + "order by Time"
-    )
-
-    val setTempsForUserAndLocationDF = sqlContext.sql(
-      "select Time, Value "
-        + "from SetTemps "
-        + "where Userid = 53 "
-        + "and LocationName = 'Badkamer' "
-        + "and Time > '2016-02-22' "
-        + "order by Time"
-    )
-
-    val measuredTempsTimes = Utils.getSeqFromDF[Timestamp](measuredTempsForUserAndLocationDF, "Time")
-      .map(t => t.getTime)
-    val measuredTempsValues = Utils.getSeqFromDF[String](measuredTempsForUserAndLocationDF, "Value")
-      .map(v => v.replace(",", "."))
-      .map(v => v.toDouble)
-
-    val setTempsTimes = Utils.getSeqFromDF[Timestamp](setTempsForUserAndLocationDF, "Time")
-      .map(t => t.getTime)
-    val setTempsValues = Utils.getSeqFromDF[String](setTempsForUserAndLocationDF, "Value")
-      .map(v => v.replace(",", "."))
-      .map(v => v.toDouble)
-
-    line(measuredTempsTimes.zip(measuredTempsValues))
-    hold()
-    line(setTempsTimes.zip(setTempsValues))
-    stack()
-    title("Measured vs Set Temperatures")
-    xAxisType(AxisType.datetime)
-    xAxis("Time")
-    yAxis("Temperature in °C")
-    legend(List("Measured", "Set"))
   }
 
 }
