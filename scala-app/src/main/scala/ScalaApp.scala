@@ -9,8 +9,6 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
-import com.quantifind.charts.{Highcharts, highcharts}
-import com.quantifind.charts.highcharts.Highchart._
 import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts._
 
@@ -21,7 +19,7 @@ object ScalaApp {
     // http://qnalist.com/questions/4994960/run-spark-unit-test-on-windows-7
     // System.setProperty("hadoop.home.dir", "d:\\winutil\\")
 
-    val conf = new SparkConf().setAppName("Simple Application").setMaster("local[2]")
+    val conf = new SparkConf().setAppName("Simple Application").setMaster("local[4]")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
@@ -50,52 +48,57 @@ object ScalaApp {
       + "where t.Name = 'THERMO'"
     )
 
+    setTempsDF.registerTempTable("SetTemps")
+
     val measuredTempsDF = sqlContext.sql("select oghd.Time, oghd.Value, l.Userid, l.Name as LocationName "
       + "from OutputGraphHourData oghd "
       + "join Outputs o on oghd.OutputID = o.Id "
       + "join Locations l on o.LocationId = l.Id "
       + "join Types t on o.TypeId = t.Id "
-      + "where t.Name = 'THERMO' and oghd.Time > '2016-02-22'"
+      + "where t.Name = 'THERMO'"
     )
 
-    //setTempsDF.printSchema()
-    //setTempsDF.take(10).foreach(println)
+    measuredTempsDF.registerTempTable("MeasuredTemps")
 
-    //measuredTempsDF.printSchema()
-    //measuredTempsDF.take(10).foreach(println)
+    val measuredTempsForUserAndLocationDF = sqlContext.sql(
+      "select Time, Value "
+        + "from MeasuredTemps "
+        + "where Userid = 53 "
+        + "and LocationName = 'Badkamer' "
+        + "and Time > '2016-02-22' "
+        + "order by Time"
+    )
 
-    val measuredTempsTimes = qbusReader.getSeqFromDF[Timestamp](measuredTempsDF, "Time")
+    val setTempsForUserAndLocationDF = sqlContext.sql(
+      "select Time, Value "
+        + "from SetTemps "
+        + "where Userid = 53 "
+        + "and LocationName = 'Badkamer' "
+        + "and Time > '2016-02-22' "
+        + "order by Time"
+    )
+
+    val measuredTempsTimes = Utils.getSeqFromDF[Timestamp](measuredTempsForUserAndLocationDF, "Time")
       .map(t => t.getTime)
-    val measuredTempsValues = qbusReader.getSeqFromDF[String](measuredTempsDF, "Value")
+    val measuredTempsValues = Utils.getSeqFromDF[String](measuredTempsForUserAndLocationDF, "Value")
       .map(v => v.replace(",", "."))
       .map(v => v.toDouble)
 
-    val setTempsTimes = qbusReader.getSeqFromDF[Timestamp](setTempsDF, "Time")
+    val setTempsTimes = Utils.getSeqFromDF[Timestamp](setTempsForUserAndLocationDF, "Time")
       .map(t => t.getTime)
-    val setTempsValues = qbusReader.getSeqFromDF[String](setTempsDF, "Value")
+    val setTempsValues = Utils.getSeqFromDF[String](setTempsForUserAndLocationDF, "Value")
       .map(v => v.replace(",", "."))
       .map(v => v.toDouble)
 
-    val chart = Highchart(Seq(
-      measuredTempsTimes.zip(measuredTempsValues).take(50),
-      setTempsTimes.zip(setTempsValues).take(50)
-    ),
-      chart = Chart(zoomType = Zoom.x),
-      xAxis = Some(
-        Array(
-          Axis(labels = Some(AxisLabel(rotation = Some(30))),
-            dateTimeLabelFormats = Some(DateTimeFormats()),
-            axisType=Some(AxisType.datetime)
-          ),
-          Axis(labels = Some(AxisLabel(rotation = Some(30))),
-            dateTimeLabelFormats = Some(DateTimeFormats()),
-            axisType=Some(AxisType.datetime)
-          )
-        )
-      ),
-      yAxis = None
-    )
-    plot(chart)
+    line(measuredTempsTimes.zip(measuredTempsValues))
+    hold()
+    line(setTempsTimes.zip(setTempsValues))
+    stack()
+    title("Measured vs Set Temperatures")
+    xAxisType(AxisType.datetime)
+    xAxis("Time")
+    yAxis("Temperature in °C")
+    legend(List("Measured", "Set"))
   }
 
 }
