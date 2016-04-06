@@ -12,13 +12,27 @@ import com.quantifind.charts.highcharts._
 class CLI(sqlContext: SQLContext) {
 
   def run() {
-    showAllUserIDs()
-    val userID = selectUserID()
-    showAllLocations(userID)
-    val location = selectLocation()
+    var stop = false
+    var chooseOtherUserID = false
+    var userID: Int = 0
 
-    val dfs = buildDataFrames(userID, location)
-    drawPlot(dfs)
+    do {
+      showAllUserIDs()
+      do {
+        userID = selectUserID()
+        showAllLocations(userID)
+
+        val input = StdIn.readLine("What to do? continue(1), choose other user id(2): ").toInt
+        chooseOtherUserID = input == 2
+      } while (chooseOtherUserID)
+
+      val location = selectLocation()
+      val dfs = buildDataFrames(userID, location)
+      drawPlot(dfs)
+      val input = StdIn.readLine("Stop? (y or n): ")
+      stopWispServer
+      stop = input == "y"
+    } while (!stop)
   }
 
   private def showAllUserIDs() {
@@ -27,7 +41,12 @@ class CLI(sqlContext: SQLContext) {
         + "from SetTemps"
     )
 
-    usersDF.rdd.map(x => x(0)).foreach(x => print(x + ", "))
+    val allUserIDs = usersDF.rdd.map(x => x(0) + ", ").collect()
+    val lastIndex = allUserIDs.length - 1
+    allUserIDs.update(lastIndex, allUserIDs(lastIndex).replace(", ", ""))
+
+    allUserIDs.foreach(print)
+    println()
   }
 
   private def selectUserID(): Int = {
