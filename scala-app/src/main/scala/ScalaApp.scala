@@ -78,15 +78,15 @@ object ScalaApp {
         + "order by Time"
     )
 
-    val measuredTempsTimes = qbusReader.getSeqFromDF[Timestamp](measuredTempsForUserAndLocationDF, "Time")
+    val measuredTempsTimes = Utils.getSeqFromDF[Timestamp](measuredTempsForUserAndLocationDF, "Time")
       .map(t => t.getTime)
-    val measuredTempsValues = qbusReader.getSeqFromDF[String](measuredTempsForUserAndLocationDF, "Value")
+    val measuredTempsValues = Utils.getSeqFromDF[String](measuredTempsForUserAndLocationDF, "Value")
       .map(v => v.replace(",", "."))
       .map(v => v.toDouble)
 
-    val setTempsTimes = qbusReader.getSeqFromDF[Timestamp](setTempsForUserAndLocationDF, "Time")
+    val setTempsTimes = Utils.getSeqFromDF[Timestamp](setTempsForUserAndLocationDF, "Time")
       .map(t => t.getTime)
-    val setTempsValues = qbusReader.getSeqFromDF[String](setTempsForUserAndLocationDF, "Value")
+    val setTempsValues = Utils.getSeqFromDF[String](setTempsForUserAndLocationDF, "Value")
       .map(v => v.replace(",", "."))
       .map(v => v.toDouble)
 
