@@ -51,6 +51,7 @@ object ScalaApp {
     )
 
     setTempsDF.registerTempTable("SetTemps")
+    setTempsDF.cache()
 
     val measuredTempsDF = sqlContext.sql("select oghd.Time, oghd.Value, l.Userid, l.Name as LocationName "
       + "from OutputGraphHourData oghd "
@@ -61,6 +62,7 @@ object ScalaApp {
     )
 
     measuredTempsDF.registerTempTable("MeasuredTemps")
+    measuredTempsDF.cache()
   }
 
 }
