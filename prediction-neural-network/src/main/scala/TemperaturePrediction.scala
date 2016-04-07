@@ -10,7 +10,11 @@ class TemperaturePrediction {
 
 
   def trainNetwork(x: DenseMatrix[Double], y: DenseMatrix[Double]): Unit ={
-    ANN.train(x,y)
+    ANN.trainNetwork(x,y)
+  }
+
+  def trainNetworkFurther(x: DenseMatrix[Double], y: DenseMatrix[Double], pathToSyn0: String, pathToSyn1: String): Unit ={
+    ANN.trainNetworkFurther(x,y, pathToSyn0, pathToSyn1)
   }
 
   def predict(x: DenseMatrix[Double]): DenseMatrix[Double] ={

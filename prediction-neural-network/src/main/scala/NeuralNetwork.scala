@@ -44,7 +44,7 @@ class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
     * @param pathToSyn0 path to file that contains synapse 0
     * @param pathToSyn1 path to file that contains synapse 1
     */
-  def trainNetWorkFurther(x: DenseMatrix[Double], y: DenseMatrix[Double], pathToSyn0: String, pathToSyn1: String): Unit = {
+  def trainNetworkFurther(x: DenseMatrix[Double], y: DenseMatrix[Double], pathToSyn0: String, pathToSyn1: String): Unit = {
     /**
       * Initialize weight matrix
       */

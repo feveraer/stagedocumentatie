@@ -90,4 +90,9 @@ object NeuralNetworkDemo {
     println("Temperature prediction")
     println(denormPrediction1)
   }
+
+  val array = Array(20.0, 30.0)
+  val matrix = DenseMatrix(array)
+
+  val prediction
 }
