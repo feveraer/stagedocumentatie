@@ -32,7 +32,10 @@ class CLI(sqlContext: SQLContext) {
       val dfs = buildDataFrames(userID, location)
       drawPlot(dfs)
       val input = StdIn.readLine("Stop? (y or n): ")
+      // stop Wisp server and delete local .html file
       stopWispServer
+      // server maintains history, so make sure the plot is deleted
+      deleteAll
       stop = input == "y"
     } while (!stop)
   }
