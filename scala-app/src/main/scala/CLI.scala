@@ -25,8 +25,19 @@ class CLI(sqlContext: SQLContext) {
         showAllLocations(userID)
         println()
         // provide option to choose user id again if there isn't a desired location
-        val input = StdIn.readLine("What to do? continue(1), choose other user id(2): ").toInt
-        chooseOtherUserID = input == 2
+        var correctInput = false
+        do {
+          var input: Int = 0
+          try {
+            input = StdIn.readLine("What to do? continue(1), choose a different user(2): ").toInt
+            chooseOtherUserID = input == 2
+            correctInput = true
+          } catch {
+            case ex: NumberFormatException => {
+              System.err.println("Enter 1 to continue, 2 to choose a different user!")
+            }
+          }
+        } while (!correctInput)
       } while (chooseOtherUserID)
 
       val location = selectLocation()
