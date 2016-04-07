@@ -1,4 +1,5 @@
 import breeze.linalg.DenseMatrix
+import import_package.MatrixImporter
 
 /**
   * Created by Lorenz on 5/04/2016.
@@ -49,36 +50,43 @@ object NeuralNetworkDemo {
       * Temperature prediction
       */
 
-    val x1 = DenseMatrix(
-      (16.0, 16.0, 16.0),
-      (21.0, 21.0, 21.0),
-      (16.0, 18.0, 21.0),
-      (21.0, 18.0, 16.0)
-    )
+//    val x1 = DenseMatrix(
+//      (16.0, 16.0, 16.0),
+//      (21.0, 21.0, 21.0),
+//      (16.0, 18.0, 21.0),
+//      (21.0, 18.0, 16.0)
+//    )
 
-    val y1 = DenseMatrix(
-      (18.0),
-      (18.0),
-      (21.0),
-      (16.0)
-    )
+    val x1 = MatrixImporter.createMatrixFromFile("src/valuesSet.txt")
 
-    val input1 = DenseMatrix(
-      (16.0, 18.0, 21.0)
-    )
+//    val y1 = DenseMatrix(
+//      (18.0),
+//      (18.0),
+//      (21.0),
+//      (16.0)
+//    )
+
+    val y1 = MatrixImporter.createMatrixFromFile("src/ExpectedSet.txt")
+
+    val input1 = MatrixImporter.createMatrixFromFile("src/input")
 
     val tempPred = new TemperaturePrediction
 
+    println("Start normalizing")
     val normX = tempPred.normalizeData(x1)
-    println(normX)
     val normY = tempPred.normalizeData(y1)
     val normInput = tempPred.normalizeData(input1)
 
+    println("Start training")
     tempPred.trainNetwork(normX,normY)
 
+    println("Calculate Prediction")
     val prediction1 = tempPred.predict(normInput)
+
+    println("Denormalize")
     val denormPrediction1 = tempPred.denormalizeData(prediction1)
 
+    println
     println("Temperature prediction")
     println(denormPrediction1)
   }

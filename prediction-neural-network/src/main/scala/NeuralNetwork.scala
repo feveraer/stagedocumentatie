@@ -7,7 +7,7 @@ import function_helpers.ActivationFunction
   * Created by Lorenz on 5/04/2016.
   */
 class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
-  private val TRAINING_ITERATIONS = 10000
+  private val TRAINING_ITERATIONS = 1000
 
   /**
     * Synapse 0 and synapse 1 in the network
@@ -27,18 +27,31 @@ class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
     * @param x : the input set mapped as a value between 0 and 1
     * @param y : the expected output set mapped as a value between 0 and 1
     */
-  def train(x: DenseMatrix[Double], y: DenseMatrix[Double]): Unit = {
+  def trainNetwork(x: DenseMatrix[Double], y: DenseMatrix[Double]): Unit = {
     /**
       * Initialize the weight matrices
       */
     syn0 = DenseMatrix.rand(x.cols, x.rows)
     syn1 = DenseMatrix.rand(y.rows, y.cols)
 
-    /**
-      * Train the network
-      */
-    for (i <- 0 to TRAINING_ITERATIONS) {
+    train(x, y)
+  }
 
+  def trainNetWorkFurther(x: DenseMatrix[Double], y: DenseMatrix[Double], pathToSyn0: String, pathToSyn1: String): Unit = {
+    /**
+      * Initialize weight matrix
+      */
+    loadSynapses(pathToSyn0, pathToSyn1)
+    train(x, y)
+  }
+
+  /**
+    * Train the network
+    */
+  def train(x: DenseMatrix[Double], y: DenseMatrix[Double]): Unit = {
+    for (i <- 0 to TRAINING_ITERATIONS) {
+      //      if(i%20 == 0)
+      println("Training nr: " + i)
       // Feed forward
       val l0 = x
       val l1 = ActivationFunction.nonLin(l0 * syn0)
@@ -88,12 +101,12 @@ class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
     breeze.linalg.csvwrite(new File("src/syn1"), syn1)
   }
 
-  def loadSynapses(): Unit ={
+  def loadSynapses(): Unit = {
     syn0 = breeze.linalg.csvread(new File(pathToSyn0))
     syn1 = breeze.linalg.csvread(new File(pathToSyn1))
   }
 
-  def loadSynapses(pathToSyn0: String, pathToSyn1: String): Unit ={
+  def loadSynapses(pathToSyn0: String, pathToSyn1: String): Unit = {
     syn0 = breeze.linalg.csvread(new File(pathToSyn0))
     syn1 = breeze.linalg.csvread(new File(pathToSyn1))
   }
