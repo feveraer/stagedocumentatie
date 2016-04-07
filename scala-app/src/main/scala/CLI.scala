@@ -23,14 +23,17 @@ class CLI(sqlContext: SQLContext) {
       do {
         userID = selectUserID()
         showAllLocations(userID)
-
+        println()
+        // provide option to choose user id again if there isn't a desired location
         val input = StdIn.readLine("What to do? continue(1), choose other user id(2): ").toInt
         chooseOtherUserID = input == 2
       } while (chooseOtherUserID)
 
       val location = selectLocation()
-      val dfs = buildDataFrames(userID, location)
-      drawPlot(dfs)
+      val measuredDF = buildDataFrame(userID, location, "MeasuredTemps")
+      val setDF = buildDataFrame(userID, location, "SetTemps")
+      drawPlot(measuredDF, setDF)
+      println()
       val input = StdIn.readLine("Stop? (y or n): ")
       // stop Wisp server and delete local .html file
       stopWispServer
@@ -49,6 +52,8 @@ class CLI(sqlContext: SQLContext) {
 
       userIDsCache = usersDF.rdd.map(x => x(0)).collect()
     }
+    println("AVAILABLE USER IDS:")
+    println("===============================")
     for(i <- userIDsCache.indices) {
       if ((i+1) % 10 == 0) {
         println(userIDsCache(i) + ",")
@@ -70,6 +75,9 @@ class CLI(sqlContext: SQLContext) {
         + "where Userid = " + userID
     )
 
+    println()
+    println("AVAILABLE LOCATIONS:")
+    println("===============================")
     locationsDF.rdd.map(x => x(0)).foreach(println)
   }
 
@@ -77,44 +85,33 @@ class CLI(sqlContext: SQLContext) {
     StdIn.readLine("Enter a location: ")
   }
 
-  private def buildDataFrames(userID: Int, location: String): Array[DataFrame] = {
-    val measuredTempsForUserAndLocationDF = sqlContext.sql(
+  private def buildDataFrame(userID: Int, location: String, rootDF: String): DataFrame = {
+    val tempsForUserAndLocationDF = sqlContext.sql(
       "select Time, Value "
-        + "from MeasuredTemps "
+        + "from " + rootDF + " "
         + "where Userid = " + userID + " "
         + "and LocationName = '" + location + "' "
         + "and Time > '2016-02-22' "
         + "order by Time"
     )
 
-    val setTempsForUserAndLocationDF = sqlContext.sql(
-      "select Time, Value "
-        + "from SetTemps "
-        + "where Userid = " + userID + " "
-        + "and LocationName = '" + location +"' "
-        + "and Time > '2016-02-22' "
-        + "order by Time"
-    )
-
-    Array(measuredTempsForUserAndLocationDF, setTempsForUserAndLocationDF)
+    tempsForUserAndLocationDF
   }
 
-  private def drawPlot(dfs: Array[DataFrame]) {
-    val measuredTempsTimes = Utils.getSeqFromDF[Timestamp](dfs(0), "Time")
-      .map(t => t.getTime)
-    val measuredTempsValues = Utils.getSeqFromDF[String](dfs(0), "Value")
-      .map(v => v.replace(",", "."))
-      .map(v => v.toDouble)
+  private def drawPlot(dfs: DataFrame*) {
+    var temps: Vector[(Seq[Long], Seq[Double])] = Vector.empty
+    dfs.foreach(df => {
+      val tempsTimes = Utils.getSeqFromDF[Timestamp](df, "Time")
+        .map(t => t.getTime)
+      val tempsValues = Utils.getSeqFromDF[String](df, "Value")
+        .map(v => v.replace(",", "."))
+        .map(v => v.toDouble)
+      temps = temps :+ (tempsTimes, tempsValues)
+    })
 
-    val setTempsTimes = Utils.getSeqFromDF[Timestamp](dfs(1), "Time")
-      .map(t => t.getTime)
-    val setTempsValues = Utils.getSeqFromDF[String](dfs(1), "Value")
-      .map(v => v.replace(",", "."))
-      .map(v => v.toDouble)
-
-    line(measuredTempsTimes.zip(measuredTempsValues))
+    line(temps(0)._1.zip(temps(1)._2))
     hold()
-    line(setTempsTimes.zip(setTempsValues))
+    line(temps(1)._1.zip(temps(1)._2))
     stack()
     title("Measured vs Set Temperatures")
     xAxisType(AxisType.datetime)
