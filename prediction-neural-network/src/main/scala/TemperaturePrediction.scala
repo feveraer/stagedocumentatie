@@ -4,7 +4,7 @@ import breeze.linalg.DenseMatrix
   * Created by Lorenz on 5/04/2016.
   */
 class TemperaturePrediction {
-  private val MIN_TEMPERATURE = -50
+  private val MIN_TEMPERATURE = -100
   private val MAX_TEMPERATURE = 150
 
   private var ann: NeuralNetwork = new NeuralNetwork()
@@ -33,6 +33,10 @@ class TemperaturePrediction {
     x mapValues {
       _ * (MAX_TEMPERATURE - MIN_TEMPERATURE) + MIN_TEMPERATURE
     }
+  }
+
+  def exportSynapses(): Unit ={
+    ann.exportSynapses()
   }
 
 }

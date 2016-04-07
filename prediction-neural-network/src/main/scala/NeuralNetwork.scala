@@ -7,7 +7,7 @@ import function_helpers.ActivationFunction
   * Created by Lorenz on 5/04/2016.
   */
 class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
-  private val TRAINING_ITERATIONS = 1000
+  private val TRAINING_ITERATIONS = 3000
 
   /**
     * Synapse 0 and synapse 1 in the network
@@ -104,8 +104,8 @@ class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
       throw new RuntimeException("No synapses provided")
     }
 
-    breeze.linalg.csvwrite(new File("src/syn0"), syn0)
-    breeze.linalg.csvwrite(new File("src/syn1"), syn1)
+    breeze.linalg.csvwrite(new File("src/syn0-test"), syn0)
+    breeze.linalg.csvwrite(new File("src/syn1-test"), syn1)
   }
 
   def loadSynapses(): Unit = {

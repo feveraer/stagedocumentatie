@@ -38,7 +38,7 @@ object NeuralNetworkDemo {
     println("prediction: " + ann.predict(input))
     println
 
-    val ann2 = new NeuralNetwork("src/syn0", "src/syn1")
+    val ann2 = new NeuralNetwork("src/main/resources/synapsesTest/syn0-test", "src/main/resources/synapsesTest/syn1-test")
     ann2.loadSynapses()
     println("Prediction for:")
     println(input)
@@ -51,10 +51,26 @@ object NeuralNetworkDemo {
       */
     // training
     val x1 = MatrixImporter.createMatrixFromFile("src/main/resources/valuesSet.txt")
-
     val y1 = MatrixImporter.createMatrixFromFile("src/main/resources/ExpectedSet.txt")
-
     val input1 = MatrixImporter.createMatrixFromFile("src/main/resources/input")
+
+//    val x1 = DenseMatrix(
+//      (16.0, 16.0, 16.0),
+//      (21.0, 21.0, 21.0),
+//      (16.0, 18.0, 21.0),
+//      (21.0, 18.0, 16.0)
+//    )
+//
+//    val y1 = DenseMatrix(
+//      (18.0),
+//      (18.0),
+//      (21.0),
+//      (16.0)
+//    )
+//
+//    val input1 = DenseMatrix(
+//      (16.0, 18.0, 21.0)
+//    )
 
     val tempPred = new TemperaturePrediction
 
@@ -65,6 +81,9 @@ object NeuralNetworkDemo {
 
     println("Start training")
     tempPred.trainNetwork(normX, normY)
+
+    println("Export Synapses")
+    tempPred.exportSynapses()
 
     println("Calculate Prediction")
     val prediction1 = tempPred.predict(normInput)
