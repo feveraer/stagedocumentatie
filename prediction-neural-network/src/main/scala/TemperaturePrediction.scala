@@ -8,7 +8,6 @@ class TemperaturePrediction {
   private val MIN_TEMPERATURE = -50
   private val MAX_TEMPERATURE = 150
 
-
   def trainNetwork(x: DenseMatrix[Double], y: DenseMatrix[Double]): Unit ={
     ANN.trainNetwork(x,y)
   }

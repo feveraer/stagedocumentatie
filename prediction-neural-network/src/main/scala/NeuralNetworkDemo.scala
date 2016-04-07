@@ -49,26 +49,12 @@ object NeuralNetworkDemo {
     /**
       * Temperature prediction
       */
+    // training
+    val x1 = MatrixImporter.createMatrixFromFile("src/main/resources/valuesSet.txt")
 
-//    val x1 = DenseMatrix(
-//      (16.0, 16.0, 16.0),
-//      (21.0, 21.0, 21.0),
-//      (16.0, 18.0, 21.0),
-//      (21.0, 18.0, 16.0)
-//    )
+    val y1 = MatrixImporter.createMatrixFromFile("src/main/resources/ExpectedSet.txt")
 
-    val x1 = MatrixImporter.createMatrixFromFile("src/valuesSet.txt")
-
-//    val y1 = DenseMatrix(
-//      (18.0),
-//      (18.0),
-//      (21.0),
-//      (16.0)
-//    )
-
-    val y1 = MatrixImporter.createMatrixFromFile("src/ExpectedSet.txt")
-
-    val input1 = MatrixImporter.createMatrixFromFile("src/input")
+    val input1 = MatrixImporter.createMatrixFromFile("src/main/resources/input")
 
     val tempPred = new TemperaturePrediction
 

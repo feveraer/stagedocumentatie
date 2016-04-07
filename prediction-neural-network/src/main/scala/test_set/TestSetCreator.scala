@@ -70,10 +70,10 @@ class TestSetCreator {
     val distinctUsers = distinctUsersRow.map(x => x.getString(0))
 
     // create the outputfiles en de writers here so they can be accessed in the foreach loops below
-    val fileValuesSet = new File("src/SampleSet.txt")
+    val fileValuesSet = new File("src/main/resources/samplesExport/SampleSet.txt")
     val bwValuesSet = new BufferedWriter(new FileWriter(fileValuesSet, true))
 
-    val fileExpectedSet = new File("src/ExpectedSet.txt")
+    val fileExpectedSet = new File("src/main/resources/samplesExport/ExpectedSet.txt")
     val bwExpectedSet = new BufferedWriter(new FileWriter(fileExpectedSet, true))
 
     // Loop through all users
