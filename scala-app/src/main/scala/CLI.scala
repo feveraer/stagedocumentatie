@@ -18,14 +18,26 @@ class CLI(sqlContext: SQLContext) {
     var chooseOtherUserID = false
     var userID: Int = 0
 
+    // outer loop for application until user kills it
     do {
       showAllUserIDs()
+      // loop so user can change the user id after viewing the locations
       do {
-        userID = selectUserID()
+        var correctInput = false
+        // loop until user provides valid number
+        do {
+          try {
+            userID = selectUserID()
+            correctInput = true
+          } catch {
+            case ex: NumberFormatException => {
+              System.err.println("Not a valid user id.")
+            }
+          }
+        } while (!correctInput)
         showAllLocations(userID)
         println()
         // provide option to choose user id again if there isn't a desired location
-        var correctInput = false
         do {
           var input: Int = 0
           try {
@@ -34,7 +46,7 @@ class CLI(sqlContext: SQLContext) {
             correctInput = true
           } catch {
             case ex: NumberFormatException => {
-              System.err.println("Enter 1 to continue, 2 to choose a different user!")
+              System.err.println("Enter 1 to continue, 2 to choose a different user.")
             }
           }
         } while (!correctInput)
