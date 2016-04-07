@@ -13,7 +13,7 @@ object QbusReader {
   // on Windows:
   // val baseDir = "d:\\Qbus\\"
   // on Linux:
-  val baseDir = "src/main/resources/"
+  val baseDir = "src/main/resources/csv/"
 
   val locations = "Locations.csv"
   val locationsSchema = StructType(Array(
