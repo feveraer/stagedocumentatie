@@ -37,31 +37,38 @@ class CLI(sqlContext: SQLContext) {
         } while (!correctInput)
         showAllLocations(userID)
         println()
-        // provide option to choose user id again if there isn't a desired location
+        // provide option to choose user id again if there isn't a desired location,
+        // or if there is no temperature data available for a specific user and location
         do {
-          var input: Int = 0
-          try {
-            input = StdIn.readLine("What to do? continue(1), choose a different user(2): ").toInt
-            chooseOtherUserID = input == 2
-            correctInput = true
-          } catch {
-            case ex: NumberFormatException => {
-              System.err.println("Enter 1 to continue, 2 to choose a different user.")
+          do {
+            var input: Int = 0
+            try {
+              input = StdIn.readLine("Options: confirm selection (1), choose a different user (2): ").toInt
+              chooseOtherUserID = input == 2
+              correctInput = true
+            } catch {
+              case ex: NumberFormatException => {
+                System.err.println("Enter 1 to continue, 2 to choose a different user.")
+              }
             }
-          }
-        } while (!correctInput)
-      } while (chooseOtherUserID)
+          } while (!correctInput)
+        } while (chooseOtherUserID)
 
-      val location = selectLocation()
-      val measuredDF = buildDataFrame(userID, location, "MeasuredTemps")
-      val setDF = buildDataFrame(userID, location, "SetTemps")
-      drawPlot(measuredDF, setDF)
-      println()
-      stop = StdIn.readLine("Stop application? (y or n): ")
-      // stop Wisp server and delete local .html file
-      stopWispServer
-      // server maintains history, so make sure the plot is deleted
-      deleteAll
+        val location = selectLocation()
+        val measuredDF = buildDataFrame(userID, location, "MeasuredTemps")
+        if (measuredDF.count() == 0) {
+          System.err.println("No data found. Either the location name was misspelled or there is no temperature data at all.")
+        } else {
+          val setDF = buildDataFrame(userID, location, "SetTemps")
+          drawPlot(measuredDF, setDF)
+          println()
+          stop = StdIn.readLine("Stop application? (y or n): ")
+          // stop Wisp server and delete local .html file
+          stopWispServer
+          // server maintains history, so make sure the plot is deleted
+          deleteAll
+        }
+      } while (chooseOtherUserID)
     } while (!stop.startsWith("y"))
   }
 
