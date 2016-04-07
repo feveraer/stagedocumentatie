@@ -21,9 +21,9 @@ Durability
 
 4 may Spark streaming
 
-18 may storage strategies
+18 may Storage strategies
 
-1 june analysing data with spark
+1 june Analysing data with spark
 
 www.datastax.com/resources/webinars
 
