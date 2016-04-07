@@ -37,6 +37,13 @@ class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
     train(x, y)
   }
 
+  /**
+    *
+    * @param x the input set mapped as a value between 0 and 1
+    * @param y the expected output set mapped as a value between 0 and 1the expected output set mapped as a value between 0 and 1
+    * @param pathToSyn0 path to file that contains synapse 0
+    * @param pathToSyn1 path to file that contains synapse 1
+    */
   def trainNetWorkFurther(x: DenseMatrix[Double], y: DenseMatrix[Double], pathToSyn0: String, pathToSyn1: String): Unit = {
     /**
       * Initialize weight matrix
@@ -48,7 +55,7 @@ class NeuralNetwork(pathToSyn0: String, pathToSyn1: String) {
   /**
     * Train the network
     */
-  def train(x: DenseMatrix[Double], y: DenseMatrix[Double]): Unit = {
+  private def train(x: DenseMatrix[Double], y: DenseMatrix[Double]): Unit = {
     for (i <- 0 to TRAINING_ITERATIONS) {
       //      if(i%20 == 0)
       println("Training nr: " + i)

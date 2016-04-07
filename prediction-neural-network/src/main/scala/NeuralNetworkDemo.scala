@@ -27,7 +27,7 @@ object NeuralNetworkDemo {
 
     val ann = new NeuralNetwork()
 
-    ann.train(x,y)
+    ann.trainNetwork(x,y)
 
     val input = DenseMatrix(
       (0.0, 0.0, 1.0)
