@@ -27,7 +27,7 @@ object NeuralNetworkDemo {
 
     val ann = new NeuralNetwork()
 
-    ann.trainNetwork(x,y)
+    ann.trainNetwork(x, y)
 
     val input = DenseMatrix(
       (0.0, 0.0, 1.0)
@@ -64,7 +64,7 @@ object NeuralNetworkDemo {
     val normInput = tempPred.normalizeData(input1)
 
     println("Start training")
-    tempPred.trainNetwork(normX,normY)
+    tempPred.trainNetwork(normX, normY)
 
     println("Calculate Prediction")
     val prediction1 = tempPred.predict(normInput)
@@ -79,6 +79,4 @@ object NeuralNetworkDemo {
 
   val array = Array(20.0, 30.0)
   val matrix = DenseMatrix(array)
-
-  val prediction
 }
