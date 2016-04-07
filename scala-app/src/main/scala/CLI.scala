@@ -11,10 +11,10 @@ import com.quantifind.charts.highcharts._
   */
 class CLI(sqlContext: SQLContext) {
 
-  private var userIDsCache: Array[Any] = null
+  private var userIDsCache: Array[Int] = Array.empty
 
   def run() {
-    var stop = false
+    var stop: String = null
     var chooseOtherUserID = false
     var userID: Int = 0
 
@@ -34,26 +34,26 @@ class CLI(sqlContext: SQLContext) {
       val setDF = buildDataFrame(userID, location, "SetTemps")
       drawPlot(measuredDF, setDF)
       println()
-      val input = StdIn.readLine("Stop? (y or n): ")
+      stop = StdIn.readLine("Stop application? (y or n): ")
       // stop Wisp server and delete local .html file
       stopWispServer
       // server maintains history, so make sure the plot is deleted
       deleteAll
-      stop = input == "y"
-    } while (!stop)
+    } while (!stop.startsWith("y"))
   }
 
   private def showAllUserIDs() {
-    if (userIDsCache == null) {
+    if (userIDsCache.isEmpty) {
       val usersDF = sqlContext.sql(
         "select distinct Userid "
           + "from SetTemps"
       )
-
-      userIDsCache = usersDF.rdd.map(x => x(0)).collect()
+      userIDsCache = usersDF.rdd.map(x => x(0).toString.toInt).collect()
+      // sort ids numerically
+      userIDsCache = userIDsCache.sorted
     }
     println("AVAILABLE USER IDS:")
-    println("===============================")
+    println("===================")
     for(i <- userIDsCache.indices) {
       if ((i+1) % 10 == 0) {
         println(userIDsCache(i) + ",")
@@ -77,7 +77,7 @@ class CLI(sqlContext: SQLContext) {
 
     println()
     println("AVAILABLE LOCATIONS:")
-    println("===============================")
+    println("====================")
     locationsDF.rdd.map(x => x(0)).foreach(println)
   }
 
