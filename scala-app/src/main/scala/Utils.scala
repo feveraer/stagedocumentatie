@@ -10,4 +10,8 @@ object Utils {
   def getSeqFromDF[T:ClassTag](df: DataFrame, column: String): Seq[T] = {
     df.select(column).rdd.map(x => x(0).asInstanceOf[T]).collect().toSeq
   }
+
+  def trimExtension(target: String): String = {
+    target.substring(0, target.lastIndexOf("."))
+  }
 }

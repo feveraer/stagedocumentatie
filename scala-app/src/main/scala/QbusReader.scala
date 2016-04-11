@@ -11,7 +11,7 @@ object QbusReader {
   // on Linux:
   val baseDir = "/home/frederic/ASUS_D_Drive/Qbus/"
 
-  val locations = ("Locations.csv", StructType(Array(
+  private val locations = ("Locations.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("Name", StringType),
     StructField("Userid", StringType),
@@ -20,7 +20,7 @@ object QbusReader {
     StructField("ParentID", StringType)
   )))
 
-  val controllers = ("Controllers.csv", StructType(Array(
+  private val controllers = ("Controllers.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("SerialNumber", StringType),
     StructField("ApiKey", StringType),
@@ -36,14 +36,14 @@ object QbusReader {
     StructField("Timezone", StringType)
   )))
 
-  val outputGraphHourData = ("OutputGraphHourData.csv", StructType(Array(
+  private val outputGraphHourData = ("OutputGraphHourData.csv", StructType(Array(
     StructField("OutputID", StringType),
     StructField("Time", TimestampType),
     StructField("StatusProperty", IntegerType),
     StructField("Value", StringType)
   )))
 
-  val outputLogs = ("OutputLogs.csv", StructType(Array(
+  private val outputLogs = ("OutputLogs.csv", StructType(Array(
     StructField("ID", StringType),
     StructField("OutputID", StringType),
     StructField("Time", TimestampType),
@@ -51,7 +51,7 @@ object QbusReader {
     StructField("Value", StringType)
   )))
 
-  val outputs = ("Outputs.csv", StructType(Array(
+  private val outputs = ("Outputs.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("Uid", StringType),
     StructField("Active", IntegerType),
@@ -72,15 +72,18 @@ object QbusReader {
     StructField("Multiplier", StringType)
   )))
 
-  val types = ("Types.csv", StructType(Array(
+  private val types = ("Types.csv", StructType(Array(
     StructField("Id", StringType),
     StructField("Name", StringType)
   )))
+
+  //val qbusData = Vector(outputLogs, outputGraphHourData, outputs, locations, types)
+  val qbusData = Vector(types)
 }
 
 class QbusReader(private val sqlContext: SQLContext) {
 
-  def read(source: (String, StructType)): DataFrame = {
+  def readCsv(source: (String, StructType)): DataFrame = {
     val df = sqlContext.read
       .format("com.databricks.spark.csv")
       .option("delimiter", ";")
@@ -90,4 +93,6 @@ class QbusReader(private val sqlContext: SQLContext) {
       .load(QbusReader.baseDir + source._1)
     df
   }
+
+
 }
