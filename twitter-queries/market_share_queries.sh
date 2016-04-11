@@ -222,17 +222,20 @@ declare -a keys=(
   'disney'
   );
 
+mkdir query_results_${DATABASE_NAME}_quarter_${QUARTER}
+chown -R mysql:mysql query_results_${DATABASE_NAME}_quarter_${QUARTER}
+
 for tb in $(mysql -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -sN -e "SHOW TABLES")
 do
   for i in "${keys[@]}"
   do
-    echo "${i}" >> /home/twitter/query_results/${i}.txt
-    echo "select min(timestamp),max(timestamp),count(*) from ${tb} where lower(tweet) like '%${i}%' and timestamp > '${BEGIN_TIME}' and timestamp < '${END_TIME}'" >> /home/twitter/query_results/${i}.txt
-    sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select min(timestamp),max(timestamp),count(*) from ${tb} where lower(tweet) like '%${i}%' and timestamp > '${BEGIN_TIME}' and timestamp < '${END_TIME}' into outfile '/home/twitter/query_results/${i}_count.txt'"
-    cat /home/twitter/query_results/${i}_count.txt >> /home/twitter/query_results/${i}.txt
-    echo >> /home/twitter/query_results/${i}.txt
-    rm -f /home/twitter/query_results/${i}_count.txt
-    cat /home/twitter/query_results/${i}.txt >> /home/twitter/query_results/result_Q1.txt
-    rm -f /home/twitter/query_results/${i}.txt
+    echo "${i}" >> /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}.txt
+    echo "select min(timestamp),max(timestamp),count(*) from ${tb} where lower(tweet) like '%${i}%' and timestamp > '${BEGIN_TIME}' and timestamp < '${END_TIME}'" >> /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}.txt
+    sudo mysql -B -u $MYSQL_USER --password=$MYSQL_PASSWORD $DATABASE_NAME -e "select min(timestamp),max(timestamp),count(*) from ${tb} where lower(tweet) like '%${i}%' and timestamp > '${BEGIN_TIME}' and timestamp < '${END_TIME}' into outfile '/home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}_count.txt'"
+    cat /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}_count.txt >> /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}.txt
+    echo >> /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}.txt
+    rm -f /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}_count.txt
+    cat /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}.txt >> /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/result_Q${QUARTER}.txt
+    rm -f /home/twitter/query_results_${DATABASE_NAME}_quarter_${QUARTER}/${i}.txt
   done
 done
