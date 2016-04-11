@@ -30,8 +30,15 @@ object CassandraConnection {
     }
   }
 
-  def executeQuery(cqlStatement: String): ResultSet = {
-    session.execute(cqlStatement)
+  def executeQuery(cqlStatement: String): Option[ResultSet] = {
+    try {
+      Option(session.execute(cqlStatement))
+    }
+    catch {
+      case e: Exception =>
+        println(e.getMessage)
+        None
+    }
   }
 
   // close connection with Cassandra cluster

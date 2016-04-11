@@ -13,8 +13,6 @@ object SSHTunnel {
   private var session: Session = null
 
   def connect(user: String, password: String): Unit = {
-    try {
-
       // create ssh connection
       val jsch = new JSch()
       session = jsch.getSession(user, host, 22)
@@ -22,20 +20,16 @@ object SSHTunnel {
 
       // Accept key file
       session.setConfig("StrictHostKeyChecking", "no")
-      println("Establishing Connection...")
+      println("Establishing SSH Connection...")
       session.connect()
 
       // port forwarding van rhost naar localhost
       val assinged_port = session.setPortForwardingL("localhost" , lport, rhost, rport)
       println("localhost:" + assinged_port + " -> " + rhost + ":" + rport)
-    }
-    catch {
-      case e: Exception => println(e)
-    }
   }
 
   def disconnect(): Unit = {
-    println("Disconnect")
+    println("Disconnect SSH")
     session.disconnect
   }
 }
