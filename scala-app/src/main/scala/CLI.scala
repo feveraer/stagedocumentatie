@@ -32,6 +32,7 @@ class CLI(sqlContext: SQLContext) {
           // loop until user provides valid number
           do {
             try {
+              correctInput = false
               userID = selectUserID()
               correctInput = true
             } catch {
@@ -85,6 +86,9 @@ class CLI(sqlContext: SQLContext) {
               }
             } while (!correctInput)
           } else {
+            // reset loop flags
+            chooseOtherLocation = false
+            chooseOtherUserID = false
             val setDF = buildDataFrame(userID, location, "SetTemps")
             drawPlot(measuredDF, setDF)
             println()
