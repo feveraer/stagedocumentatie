@@ -1,11 +1,9 @@
 import org.neuroph.core.data.DataSet;
 import org.neuroph.nnet.MultiLayerPerceptron;
-import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.nnet.learning.ResilientPropagation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Created by Lorenz on 7/04/2016.
@@ -29,8 +27,11 @@ public class NeurophJavaTest {
         TrainingSetCreator creator = new TrainingSetCreator();
         DataSet trainingSet = creator.createTrainingSet();
 
+        // Uses back propagation as learning algoritm
         System.out.println("Start learning");
-        mlp.learn(trainingSet, new ResilientPropagation());
+        mlp.learn(trainingSet);
+
+        mlp.save("mlp_temp.nnet");
 
         System.out.println("Feed input");
 
