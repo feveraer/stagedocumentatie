@@ -77,8 +77,8 @@ object QbusReader {
     StructField("Name", StringType)
   )))
 
-  //val qbusData = Vector(outputLogs, outputGraphHourData, outputs, locations, types)
-  val qbusData = Vector(types)
+  val qbusData = Vector(outputLogs, outputGraphHourData, outputs, locations, types)
+  //val qbusData = Vector(types)
 }
 
 class QbusReader(private val sqlContext: SQLContext) {
