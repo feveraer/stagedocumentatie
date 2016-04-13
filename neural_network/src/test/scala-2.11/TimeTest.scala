@@ -16,12 +16,16 @@ class TimeTest extends AssertionsForJUnit {
     val time5 = new Time(23,40)
     val time6 = new Time(22,50)
     val time7 = new Time(22,40)
+    val time8 = new Time(23,9)
+    val time9 = new Time(22,9)
 
     val diff1 = time1.difference(time2)
     val diff2 = time1.difference(time3)
     val diff3 = time4.difference(time5)
     val diff4 = time6.difference(time1)
     val diff5 = time7.difference(time1)
+    val diff6 = time1.difference(time8)
+    val diff7 = time1.difference(time9)
 
     assertEquals(0, diff1.hour)
     assertEquals(51, diff1.minute)
@@ -33,5 +37,9 @@ class TimeTest extends AssertionsForJUnit {
     assertEquals(20, diff4.minute)
     assertEquals(0, diff5.hour)
     assertEquals(30, diff5.minute)
+    assertEquals(23, diff6.hour)
+    assertEquals(59, diff6.minute)
+    assertEquals(22, diff7.hour)
+    assertEquals(59, diff7.minute)
   }
 }

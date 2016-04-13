@@ -20,6 +20,9 @@ case class Time (hour: Int, minute: Int) {
       hourDiff -= 1
       minuteDiff = 60 - (minute - time.minute)
     }
+    if(hourDiff == -1) {
+      hourDiff = 23
+    }
 
     new Time(hourDiff, minuteDiff)
   }
