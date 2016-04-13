@@ -3,12 +3,11 @@ package ann;
 import org.encog.ml.MLRegression;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.versatile.NormalizationHelper;
-import org.encog.ml.model.EncogModel;
 import org.encog.persist.EncogDirectoryPersistence;
 import org.encog.util.arrayutil.VectorWindow;
 import org.encog.util.csv.ReadCSV;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * Created by Lorenz on 13/04/2016.
@@ -16,13 +15,20 @@ import java.io.File;
 public class NeuralNetwork {
     private static final int numberOfColumns = 4;
 
-    private EncogModel model;
     private NormalizationHelper helper;
     private MLRegression bestMethod;
 
-    public void loadModel(String pathToModel, String pathToNormalizationHelper, String pathToBestModel) {
-        model = (EncogModel) EncogDirectoryPersistence.loadObject(new File(pathToModel));
-        helper = (NormalizationHelper) EncogDirectoryPersistence.loadObject(new File(pathToNormalizationHelper));
+    public void loadModel(String pathToNormalizationHelper, String pathToBestModel) {
+        try {
+            FileInputStream fin = new FileInputStream(pathToNormalizationHelper);
+            ObjectInputStream ois = new ObjectInputStream(fin);
+            helper = (NormalizationHelper) ois.readObject();
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+//        helper = new NormalizationHelper();
+//        helper.setNormStrategy(EncogConstants.NORMALIZATIION_STRATEGY);
         bestMethod = (MLRegression) EncogDirectoryPersistence.loadObject(new File(pathToBestModel));
     }
 
@@ -48,7 +54,7 @@ public class NeuralNetwork {
                 StringBuilder result = new StringBuilder();
 
                 window.copyWindow(input.getData(), 0);
-                String correct = csv.get(numberOfColumns - 1);
+                String correct = csv.get(numberOfColumns);
 
                 MLData output = bestMethod.compute(input);
 
