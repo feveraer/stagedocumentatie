@@ -5,7 +5,7 @@ import testsetann.Transformer
   */
 object TestSetExporter {
   def main(args: Array[String]) {
-    val entries = Transformer.tsvToDataEntries("src/main/resources/input_eetkamer_LaMa.TSV")
-    Transformer.DataEntryVectorToTSV(entries)
+    val entries = Transformer.getDataEntriesFromTSV("src/main/resources/input_eetkamer_LaMa.TSV")
+    Transformer.writeDataEntriesToTSV(entries)
   }
 }
