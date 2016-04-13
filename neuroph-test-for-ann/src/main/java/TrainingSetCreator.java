@@ -12,9 +12,9 @@ import java.util.List;
  */
 
 public class TrainingSetCreator {
-    private final static int MIN_TEMP = -20;
-    private final static int MAX_TEMP = 50;
-    private final static int MOD = 1;
+    private final static int MIN_TEMP = 0;
+    private final static int MAX_TEMP = 40;
+    private final static int MOD = 2;
 
     public DataSet createTrainingSet() {
         List<ArrayList<Double>> inputs = createInputs();
