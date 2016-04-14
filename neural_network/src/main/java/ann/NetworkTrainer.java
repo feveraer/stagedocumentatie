@@ -52,8 +52,12 @@ public class NetworkTrainer {
         // Define columns
         ColumnDefinition columnSetTemp = data.defineSourceColumn("SetTemp", ColumnType.continuous);
         ColumnDefinition columnMeasuredTemp = data.defineSourceColumn("MeasuredTemp", ColumnType.continuous);
+        ColumnDefinition columnYearDiff = data.defineSourceColumn("YearDiff", ColumnType.continuous);
+        ColumnDefinition columnMonthDiff = data.defineSourceColumn("MonthDiff", ColumnType.continuous);
+        ColumnDefinition columnDayDiff = data.defineSourceColumn("DayDiff", ColumnType.continuous);
         ColumnDefinition columnHourDiff = data.defineSourceColumn("HourDiff", ColumnType.continuous);
         ColumnDefinition columnMinuteDiff = data.defineSourceColumn("MinuteDiff", ColumnType.continuous);
+        ColumnDefinition columnSecondDiff = data.defineSourceColumn("SecondDiff", ColumnType.continuous);
 
         ColumnDefinition columnNextMeasured = data.defineSourceColumn("NextMeasured", ColumnType.continuous);
 
@@ -64,10 +68,11 @@ public class NetworkTrainer {
         data.defineSingleOutputOthersInput(columnNextMeasured);
         EncogModel model = new EncogModel(data);
         // Select method to use:
-        // dataset - feed forward - ???
+        // dataset - feed forward - layout network, trainingtype, trainingArgs
+        // make trainingsArgs an empty string
         model.selectMethod(data,
                 MLMethodFactory.TYPE_FEEDFORWARD,
-                "?:B->SIGMOID->42:B->?",
+                "?:B->SIGMOID->42:B->SIGMOID->?",
                 MLTrainFactory.TYPE_BACKPROP,
                 "");
 

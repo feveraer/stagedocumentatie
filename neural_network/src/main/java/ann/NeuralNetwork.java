@@ -33,31 +33,47 @@ public class NeuralNetwork {
     }
 
     public void predictFromCSV(String filename) {
+        // Iterator for csv data
+        // filname - headers - format
         ReadCSV csv = new ReadCSV(filename, true, EncogConstants.FORMAT);
 
+        // create empty arrays for later usage
+        // this will be needed to store the columns of a row in the csv
         String[] line = new String[numberOfColumns];
         double[] slice = new double[numberOfColumns];
 
+        // Create a vector to hold each time−slice , as we build them.
+        // These will be grouped together into windows
         VectorWindow window = new VectorWindow(EncogConstants.WINDOW_SIZE + 1);
         MLData input = helper.allocateInputVector(EncogConstants.WINDOW_SIZE + 1);
 
+        // Only take the first 100 to predict
         int stopAfter = 100;
 
         while (csv.next() && stopAfter > 0) {
+            // parse the csv row to an array
             for (int i = 0; i < numberOfColumns; i++) {
                 line[i] = csv.get(i);
             }
 
+            // normalize the input
+            // input array - output array - shuffle
+            // Never shuffle timeseries
             helper.normalizeInputVector(line, slice, false);
 
+            // check if window is ready
+            // enough data to build a full window
             if (window.isReady()) {
                 StringBuilder result = new StringBuilder();
 
+                // Copy the window
+                // data - start position
                 window.copyWindow(input.getData(), 0);
                 String correct = csv.get(numberOfColumns);
 
+                // predict output
                 MLData output = bestMethod.compute(input);
-
+                // denormalize prediction
                 String predicted = helper.denormalizeOutputVectorToString(output)[0];
 
                 result.append("Predicted:\t" + predicted + "\n");
@@ -66,6 +82,7 @@ public class NeuralNetwork {
                 System.out.println(result.toString());
             }
 
+            // add data to windows
             window.add(slice);
             stopAfter--;
         }
