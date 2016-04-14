@@ -27,4 +27,5 @@ kafka-sparkstreaming-test-application/target/
 # Encog models
 *.eg
 
-**/resources/*.csv
+**/resources/**/*.csv
+**/resources/**/*.tsv
