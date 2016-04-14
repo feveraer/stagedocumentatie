@@ -24,4 +24,7 @@ scala-app/**/*.class
 kafka-sparkstreaming-test-application/project/
 kafka-sparkstreaming-test-application/target/
 
+# Encog models
+*.eg
+
 **/resources/*.csv
