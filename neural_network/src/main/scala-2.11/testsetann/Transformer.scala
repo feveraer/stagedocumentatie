@@ -45,7 +45,7 @@ object Transformer {
       // time difference
       val td = de.difference(vector(i+1))
 
-      bw.write(de.setTemp + "\t" + de.measuredTemp + "\t" + td.hour + "\t" + td.minute + "\t" + vector(i+1).measuredTemp + "\n")
+      bw.write(de.setTemp + "\t" + de.measuredTemp + "\t" + td.hour + "\t" + td.minutes + "\t" + vector(i+1).measuredTemp + "\n")
       bw.flush()
     }
   }
