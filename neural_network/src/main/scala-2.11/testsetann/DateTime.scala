@@ -6,23 +6,6 @@ import java.time.{LocalDate, LocalTime}
 /**
   * Created by Lorenz on 13/04/2016.
   */
-object DateTime {
-  private val DAYS_IN_MONTH_NORMAL_YEAR = Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-  private val DAYS_IN_MONTH_LEAP_YEAR = Array(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-
-  def DAYS_IN_MONTH(year: Int, month: Int): Int = {
-    if (IS_LEAP_YEAR(year)) {
-      return DAYS_IN_MONTH_LEAP_YEAR(month - 1)
-    }
-    DAYS_IN_MONTH_NORMAL_YEAR(month - 1)
-  }
-
-  def IS_LEAP_YEAR(year: Int): Boolean = {
-    val date = LocalDate.of(year, 2, 28)
-    date.isLeapYear
-  }
-}
-
 case class DateTime(date: LocalDate, time: LocalTime) {
 
   def this(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int)
@@ -37,8 +20,6 @@ case class DateTime(date: LocalDate, time: LocalTime) {
     val time2 = time.time
 
     // Calculate differences
-    val yearDiff = date1.until(date2, ChronoUnit.YEARS).toInt
-    val monthDiff = (date1.until(date2, ChronoUnit.MONTHS) % 12).toInt
     var dayDiff = date1.until(date2, ChronoUnit.DAYS).toInt
     var hourDiff = (time1.until(time2, ChronoUnit.HOURS) % 24).toInt
     var minuteDiff = (time1.until(time2, ChronoUnit.MINUTES) % 60).toInt
@@ -59,41 +40,12 @@ case class DateTime(date: LocalDate, time: LocalTime) {
       hourDiff += 24
     }
 
-    if (dayDiff < 0) {
-      dayDiff += DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue)
-    }
-
     // Adjustment in daydiff if the time component of the 2nd object is less than the timeComponent from the 1st object
     if (time2.isBefore(time1)) {
       dayDiff -= 1
     }
 
-    // reduce the day diff to a value between 0 and 31
-    if (monthDiff > 0 || yearDiff > 0) {
-      // Create a date iterator
-      // Choose the year and month from the 1st object and the day of the 2nd one
-      var dateIter = LocalDate.of(date1.getYear, date1.getMonth, date2.getDayOfMonth)
-      var sum = 0
-
-      // Iterate over all the months between the first and second date
-      // and count the total number of days that have passed
-      while (dateIter.isBefore(date2)) {
-        val year = dateIter.getYear
-        val month = dateIter.getMonthValue
-        sum += DateTime.DAYS_IN_MONTH(year, month)
-        dateIter = dateIter.plus(1, ChronoUnit.MONTHS)
-      }
-
-      // Adjust the day diff
-      dayDiff = dayDiff - sum
-      if (dayDiff < 0) {
-        dayDiff += (DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + 1)
-      }
-    }
-
     val diff = new DateTimeDifference(
-      yearDiff,
-      monthDiff,
       dayDiff,
       hourDiff,
       minuteDiff,
@@ -104,5 +56,14 @@ case class DateTime(date: LocalDate, time: LocalTime) {
   }
 }
 
-case class DateTimeDifference(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int)
+case class DateTimeDifference(days: Int, hours: Int, minutes: Int, seconds: Int) {
+  def toMillis(): Long = {
+    var long = 0
+    long += (seconds * 1000)
+    long += (minutes * 60 * 1000)
+    long += (hours * 60 * 60 * 1000)
+    long += (days * 24 * 60 * 60 * 1000)
+    long
+  }
+}
 
