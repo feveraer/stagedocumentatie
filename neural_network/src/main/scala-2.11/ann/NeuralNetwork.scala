@@ -35,7 +35,7 @@ class NeuralNetwork {
   def predictFromCSV(filename: String) {
     // Iterator for csv data:
     // filename - headers - format
-    val csv: ReadCSV = new ReadCSV(filename, true, EncogConstantsOld.FORMAT)
+    val csv: ReadCSV = new ReadCSV(filename, true, EncogConstants.FORMAT)
 
     // Create empty arrays for later usage.
     // This will be needed to store the columns of a row in the csv.
@@ -44,8 +44,8 @@ class NeuralNetwork {
 
     // Create a vector to hold each time−slice , as we build them.
     // These will be grouped together into windows.
-    val window: VectorWindow = new VectorWindow(EncogConstantsOld.WINDOW_SIZE + 1)
-    val input: MLData = helper.allocateInputVector(EncogConstantsOld.WINDOW_SIZE + 1)
+    val window: VectorWindow = new VectorWindow(EncogConstants.WINDOW_SIZE + 1)
+    val input: MLData = helper.allocateInputVector(EncogConstants.WINDOW_SIZE + 1)
 
     // Only take the first 100 to predict.
     var stopAfter: Int = 100

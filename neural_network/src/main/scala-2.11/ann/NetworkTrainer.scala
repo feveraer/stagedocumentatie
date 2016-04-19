@@ -36,7 +36,7 @@ class NetworkTrainer(val pathToTrainingsData: String) {
     val data: VersatileMLDataSet = new VersatileMLDataSet(dataSource)
 
     // Set NormHelper to correct format
-    data.getNormHelper.setFormat(EncogConstantsOld.FORMAT)
+    data.getNormHelper.setFormat(EncogConstants.FORMAT)
 
     // Define columns
     val columnSetTemp: ColumnDefinition = data.defineSourceColumn("SetTemp", ColumnType.continuous)
