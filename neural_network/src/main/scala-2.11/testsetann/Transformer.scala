@@ -20,7 +20,7 @@ object Transformer {
     while(lines.hasNext){
       val line = lines.next()
       val parts = line.split("\t")
-      val time = new Time(parts(0).toInt, parts(1).toInt,
+      val time = new DateTime(parts(0).toInt, parts(1).toInt,
         parts(2).toInt, parts(3).toInt,parts(4).toInt, parts(5).toInt)
       val setTemp = parts(9).toInt
       val measured = parts(10).toInt
