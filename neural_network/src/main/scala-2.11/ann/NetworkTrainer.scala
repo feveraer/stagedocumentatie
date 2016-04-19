@@ -12,16 +12,16 @@ import org.encog.ml.model.EncogModel
 import org.encog.persist.EncogDirectoryPersistence
 
 class NetworkTrainer(val pathToTrainingsData: String) {
-  val trainingsData: File = new File(pathToTrainingsData)
+
+  // private attributes
+  private var helper: NormalizationHelper = null
+  private var bestMethod: MLRegression = null
+
+  private val trainingsData: File = new File(pathToTrainingsData)
 
   // Create data source
   // file, header presence, format of csv
-  dataSource = new CSVDataSource(trainingsData, true, EncogConstantsOld.FORMAT)
-
-  // private attributes
-  private var dataSource: VersatileDataSource = null
-  private var helper: NormalizationHelper = null
-  private var bestMethod: MLRegression = null
+  private val dataSource = new CSVDataSource(trainingsData, true, EncogConstants.FORMAT)
 
   def train {
 
@@ -120,7 +120,7 @@ class NetworkTrainer(val pathToTrainingsData: String) {
     }
 
     val bestMethodFile: File = new File("src/main/resources/network/encogBestMethod.eg")
-    
+
     try {
       bestMethodFile.getParentFile.mkdirs
       bestMethodFile.createNewFile
