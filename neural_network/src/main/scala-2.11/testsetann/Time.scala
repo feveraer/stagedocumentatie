@@ -1,5 +1,7 @@
 package testsetann
 
+import java.time.temporal.ChronoUnit
+import java.time.{LocalDate, LocalTime, Period}
 import java.util.{Calendar, GregorianCalendar}
 
 /**
@@ -22,9 +24,9 @@ object Time {
 
   def DAYS_IN_MONTH(year: Int, month: Int): Int = {
     if (IS_LEAP_YEAR(year)) {
-      DAYS_IN_MONTH_LEAP_YEAR(month-1)
+      DAYS_IN_MONTH_LEAP_YEAR(month - 1)
     }
-    DAYS_IN_MONTH_NORMAL_YEAR(month-1)
+    DAYS_IN_MONTH_NORMAL_YEAR(month - 1)
   }
 
   def IS_LEAP_YEAR(year: Int): Boolean = {
@@ -37,19 +39,40 @@ object Time {
 case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int) {
 
   def difference(time: Time): Time = {
-    val d1 = new GregorianCalendar(year + 1900, month, day, hour, minutes, seconds)
-    val d2 = new GregorianCalendar(time.year + 1900, time.month, time.day,
-      time.hour, time.minutes, time.seconds)
+    //    val d1 = new GregorianCalendar(year + 1900, month, day, hour, minutes, seconds)
+    //    val d2 = new GregorianCalendar(time.year + 1900, time.month, time.day,
+    //      time.hour, time.minutes, time.seconds)
 
-    val diffInMillis = d2.getTimeInMillis - d1.getTimeInMillis
+    val date1 = LocalDate.of(year, month, day)
+    val time1 = LocalTime.of(hour, minutes, seconds)
 
-    var yearDiff = 0
-    var monthDiff = 0
-    val dayDiff = (diffInMillis / Time.MILLIS_IN_DAY % Time.DAYS_IN_MONTH(year, month)).toInt
-    val hourDiff = (diffInMillis / Time.MILLIS_IN_HOUR % 24).toInt
-    val minuteDiff = (diffInMillis / Time.MILLIS_IN_MINUTE % 60).toInt
-    val secondDiff = (diffInMillis / Time.MILLIS_IN_SECOND % 60).toInt
+    val date2 = LocalDate.of(time.year, time.month, time.day)
+    val time2 = LocalTime.of(time.hour, time.minutes, time.seconds)
 
+    //    val diffInMillis = d2.getTimeInMillis - d1.getTimeInMillis
+    //
+    //    var yearDiff = 0
+    //    var monthDiff = 0
+    //    val dayDiff = (diffInMillis / Time.MILLIS_IN_DAY % Time.DAYS_IN_MONTH(year, month)).toInt
+    //    val hourDiff = (diffInMillis / Time.MILLIS_IN_HOUR % 24).toInt
+    //    val minuteDiff = (diffInMillis / Time.MILLIS_IN_MINUTE % 60).toInt
+    //    val secondDiff = (diffInMillis / Time.MILLIS_IN_SECOND % 60).toInt
+
+
+    val yearDiff = date1.until(date2, ChronoUnit.YEARS).toInt
+    val monthDiff = date1.until(date2, ChronoUnit.MONTHS).toInt
+    var dayDiff = date1.until(date2, ChronoUnit.DAYS).toInt
+    var hourDiff = (time1.until(time2, ChronoUnit.HOURS) % 24).toInt
+    val minuteDiff = (time1.until(time2, ChronoUnit.MINUTES) % 60).toInt
+    val secondDiff = (time1.until(time2, ChronoUnit.SECONDS) % 60).toInt
+
+    if (hourDiff < 0) {
+      hourDiff = 24 + hourDiff
+    }
+
+    if (time2.isBefore(time1)) {
+      dayDiff = dayDiff - 1
+    }
 
     val diff = new Time(
       yearDiff,
