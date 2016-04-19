@@ -111,19 +111,19 @@ class TimeTest extends AssertionsForJUnit {
 
     val diff5 = time8.difference(time9)
 
-    val diff6 = time10.difference(time11)
+    val diff6 = time11.difference(time10)
 
 
-//    assertEquals(solution1, diff1)
-//    assertEquals(solution1, diff2)
-//
-//    assertEquals(solution1, diff3)
+    assertEquals(solution1, diff1)
+    assertEquals(solution1, diff2)
 
-//    assertEquals(solution1, diff4)
+    assertEquals(solution1, diff3)
 
-//    assertEquals(solution1, diff5)
+    assertEquals(solution1, diff4)
 
-//    assertEquals(solution1, diff6)
+    assertEquals(solution1, diff5)
+
+    assertEquals(solution1, diff6)
   }
 
 }
