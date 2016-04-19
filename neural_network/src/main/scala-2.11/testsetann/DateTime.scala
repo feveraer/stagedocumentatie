@@ -26,7 +26,7 @@ object DateTime {
 case class DateTime(date: LocalDate, time: LocalTime) {
 
   def this(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int)
-  = this(LocalDate.of(year, month, day),LocalTime.of(hour, minutes, seconds))
+  = this(LocalDate.of(year, month, day), LocalTime.of(hour, minutes, seconds))
 
   def difference(time: DateTime): DateTimeDifference = {
     // Build dates and times of the Time objects
@@ -46,26 +46,26 @@ case class DateTime(date: LocalDate, time: LocalTime) {
 
     // make adjustments for negative differences
     if (secondDiff < 0) {
-      secondDiff = 60 + secondDiff
-      minuteDiff = minuteDiff - 1
+      secondDiff += 60
+      minuteDiff -= 1
     }
 
     if (minuteDiff < 0) {
-      minuteDiff = 60 + minuteDiff
-      hourDiff = hourDiff - 1
+      minuteDiff += 60
+      hourDiff -= 1
     }
 
     if (hourDiff < 0) {
-      hourDiff = 24 + hourDiff
+      hourDiff += 24
     }
 
     if (dayDiff < 0) {
-      dayDiff = DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + dayDiff
+      dayDiff += DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue)
     }
 
     // Adjustment in daydiff if the time component of the 2nd object is less than the timeComponent from the 1st object
     if (time2.isBefore(time1)) {
-      dayDiff = dayDiff - 1
+      dayDiff -= 1
     }
 
     // reduce the day diff to a value between 0 and 31
@@ -80,14 +80,14 @@ case class DateTime(date: LocalDate, time: LocalTime) {
       while (dateIter.isBefore(date2)) {
         val year = dateIter.getYear
         val month = dateIter.getMonthValue
-        sum = sum + DateTime.DAYS_IN_MONTH(year, month)
+        sum += DateTime.DAYS_IN_MONTH(year, month)
         dateIter = dateIter.plus(1, ChronoUnit.MONTHS)
       }
 
       // Adjust the day diff
       dayDiff = dayDiff - sum
-      if(dayDiff < 0){
-        dayDiff = DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + dayDiff + 1
+      if (dayDiff < 0) {
+        dayDiff += (DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + 1)
       }
     }
 
