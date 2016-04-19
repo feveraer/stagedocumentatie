@@ -26,14 +26,14 @@ object Time {
 case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int) {
 
   def difference(time: Time): Time = {
-    // Bouw datum en tijd
+    // Build dates and times of the Time objects
     val date1 = LocalDate.of(year, month, day)
     val time1 = LocalTime.of(hour, minutes, seconds)
 
     val date2 = LocalDate.of(time.year, time.month, time.day)
     val time2 = LocalTime.of(time.hour, time.minutes, time.seconds)
 
-    // verschillen berekenen
+    // Calculate differences
     val yearDiff = date1.until(date2, ChronoUnit.YEARS).toInt
     val monthDiff = (date1.until(date2, ChronoUnit.MONTHS) % 12).toInt
     var dayDiff = date1.until(date2, ChronoUnit.DAYS).toInt
@@ -41,6 +41,7 @@ case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, second
     var minuteDiff = (time1.until(time2, ChronoUnit.MINUTES) % 60).toInt
     var secondDiff = (time1.until(time2, ChronoUnit.SECONDS) % 60).toInt
 
+    // make adjustments for negative differences
     if (secondDiff < 0) {
       secondDiff = 60 + secondDiff
       minuteDiff = minuteDiff - 1
@@ -59,14 +60,20 @@ case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, second
       dayDiff = Time.DAYS_IN_MONTH(year, month) + dayDiff
     }
 
+    // Adjustment in daydiff if the time component of the 2nd object is less than the timeComponent from the 1st object
     if (time2.isBefore(time1)) {
       dayDiff = dayDiff - 1
     }
 
+    // reduce the day diff to a vaulue between 0 and 31
     if (monthDiff > 0 || yearDiff > 0) {
+      // Create a date iterator
+      // Choose the year and month from the 1st object and the day of the 2nd one
       var dateIter = LocalDate.of(date1.getYear, date1.getMonth, date2.getDayOfMonth)
       var sum = 0
 
+      // Iterate over all the months between the first and second date
+      // and count the total number of days that have passed
       while (dateIter.isBefore(date2)) {
         val year = dateIter.getYear
         val month = dateIter.getMonthValue
@@ -74,8 +81,8 @@ case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, second
         dateIter = dateIter.plus(1, ChronoUnit.MONTHS)
       }
 
+      // Adjust the day diff
       dayDiff = dayDiff - sum
-
       if(dayDiff < 0){
         dayDiff = Time.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + dayDiff + 1
       }
