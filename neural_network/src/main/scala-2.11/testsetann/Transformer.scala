@@ -29,7 +29,7 @@ object Transformer {
     vector
   }
 
-  // Write data entries to tsv file to be used as training data for ANN.
+  // Write data entries to tsv file to be used as training data for ANNOLD.
   // TSV structure: SetTemp - MeasuredTemp - HourDiff - MinuteDiff - NextMeasured
   def writeDataEntriesToTSV(vector: Vector[DataEntry]): Unit = {
     val file = new File("src/main/resources/TrainingsSet.tsv")
