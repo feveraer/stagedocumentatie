@@ -36,7 +36,7 @@ object Transformer {
     val bw = new BufferedWriter(new FileWriter(file, true))
 
     // header
-    bw.write("SetTemp\tMeasuredTemp\tHourDiff\tMinuteDiff\tNextMeasured\n")
+    bw.write("SetTemp\tMeasuredTemp\tYearDiff\tMonthDiff\tDayDiff\tHourDiff\tMinuteDiff\tSecondDiff\tNextMeasured\n")
 
     // Loop over all data entries but the last one since the NextMeasured column of
     // every entry predicts the next entry in line.
@@ -46,7 +46,10 @@ object Transformer {
       // time difference
       val td = de.difference(vector(i+1))
 
-      bw.write(de.setTemp + "\t" + de.measuredTemp + "\t" + td.hour + "\t" + td.minutes + "\t" + vector(i+1).measuredTemp + "\n")
+      bw.write(de.setTemp + "\t" + de.measuredTemp + "\t"
+        + td.year + "\t" + td.month + "\t" + td.day + "\t"
+        + td.hour + "\t" + td.minutes + "\t" + td.seconds + "\t"
+        + vector(i+1).measuredTemp + "\n")
       bw.flush()
     }
   }

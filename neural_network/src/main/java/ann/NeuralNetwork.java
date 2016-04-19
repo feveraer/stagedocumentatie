@@ -13,7 +13,7 @@ import java.io.*;
  * Created by Lorenz on 13/04/2016.
  */
 public class NeuralNetwork {
-    private static final int numberOfColumns = 4;
+    private static final int numberOfColumns = 8;
 
     private NormalizationHelper helper;
     private MLRegression bestMethod;
