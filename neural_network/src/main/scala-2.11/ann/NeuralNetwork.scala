@@ -49,47 +49,42 @@ class NeuralNetwork {
 
     // Only take the first 100 to predict.
     var stopAfter: Int = 100
+
     while (csv.next && stopAfter > 0) {
-      {
-        var i: Int = 0
-        // parse the csv row to an array
-        while (i < numberOfColumns) {
-          {
-            line(i) = csv.get(i)
-          }
-          {
-            i += 1
-            i - 1
-          }
-        }
-        // Normalize the input.
-        // input array - output array - shuffle
-        // Never shuffle time series.
-        helper.normalizeInputVector(line, slice, false)
 
-        // Check if window is ready and there is enough data to build a full window.
-        if (window.isReady) {
-          val result: StringBuilder = new StringBuilder
-
-          // Copy the window.
-          // data - start position
-          window.copyWindow(input.getData, 0)
-          val correct: String = csv.get(numberOfColumns)
-
-          // Predict output.
-          val output: MLData = bestMethod.compute(input)
-
-          // Denormalize prediction.
-          val predicted: String = helper.denormalizeOutputVectorToString(output)(0)
-          result.append("Predicted:\t" + predicted + "\n")
-          result.append("Correct:\t" + correct + "\n")
-          result.append("\n")
-          System.out.println(result.toString)
-        }
-        // Add data to windows.
-        window.add(slice)
-        stopAfter -= 1
+      // parse the csv row to an array
+      for (i <- 0 until numberOfColumns) {
+        line(i) = csv.get(i)
       }
+
+      // Normalize the input.
+      // input array - output array - shuffle
+      // Never shuffle time series.
+      helper.normalizeInputVector(line, slice, false)
+
+      // Check if window is ready and there is enough data to build a full window.
+      if (window.isReady) {
+        val result: StringBuilder = new StringBuilder
+
+        // Copy the window.
+        // data - start position
+        window.copyWindow(input.getData, 0)
+        val correct: String = csv.get(numberOfColumns)
+
+        // Predict output.
+        val output: MLData = bestMethod.compute(input)
+
+        // Denormalize prediction.
+        val predicted: String = helper.denormalizeOutputVectorToString(output)(0)
+        result.append("Predicted:\t" + predicted + "\n")
+        result.append("Correct:\t" + correct + "\n")
+        result.append("\n")
+        System.out.println(result.toString)
+      }
+
+      // Add data to windows.
+      window.add(slice)
+      stopAfter -= 1
     }
   }
 }
