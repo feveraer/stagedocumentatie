@@ -32,7 +32,7 @@ public class NetworkTrainer {
         File trainingsData = new File(pathToTrainingsData);
 
         // create data source (file, header presence, format of csv)
-        dataSource = new CSVDataSource(trainingsData, true, EncogConstants.FORMAT);
+        dataSource = new CSVDataSource(trainingsData, true, EncogConstantsOld.FORMAT);
     }
 
     public void train() {
@@ -47,7 +47,7 @@ public class NetworkTrainer {
         VersatileMLDataSet data = new VersatileMLDataSet(dataSource);
 
         // Set NormHelper to correct format
-        data.getNormHelper().setFormat(EncogConstants.FORMAT);
+        data.getNormHelper().setFormat(EncogConstantsOld.FORMAT);
 
         // Define columns
         ColumnDefinition columnSetTemp = data.defineSourceColumn("SetTemp", ColumnType.continuous);
@@ -87,7 +87,7 @@ public class NetworkTrainer {
         // HourDiff, MinuteDiff and NextMeasured values to predict the next NextMeasured?
         // Why do we need NextMeasured column???
         data.setLeadWindowSize(1);
-        data.setLagWindowSize(EncogConstants.WINDOW_SIZE);
+        data.setLagWindowSize(EncogConstantsOld.WINDOW_SIZE);
 
         // Hold back 20% of the data for validation.
         // Don't shuffle data for time series.

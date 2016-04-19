@@ -5,7 +5,7 @@ import org.encog.util.csv.CSVFormat;
 /**
  * Created by Lorenz on 13/04/2016.
  */
-public class EncogConstants {
+public class EncogConstantsOld {
     public static final int WINDOW_SIZE = 2;
 
     // Definieren van het dataformaat van de trainingsdata

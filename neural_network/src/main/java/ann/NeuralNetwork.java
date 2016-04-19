@@ -28,14 +28,14 @@ public class NeuralNetwork {
             e.printStackTrace();
         }
 //        helper = new NormalizationHelper();
-//        helper.setNormStrategy(EncogConstants.NORMALIZATIION_STRATEGY);
+//        helper.setNormStrategy(EncogConstantsOld.NORMALIZATIION_STRATEGY);
         bestMethod = (MLRegression) EncogDirectoryPersistence.loadObject(new File(pathToBestModel));
     }
 
     public void predictFromCSV(String filename) {
         // Iterator for csv data
         // filname - headers - format
-        ReadCSV csv = new ReadCSV(filename, true, EncogConstants.FORMAT);
+        ReadCSV csv = new ReadCSV(filename, true, EncogConstantsOld.FORMAT);
 
         // create empty arrays for later usage
         // this will be needed to store the columns of a row in the csv
@@ -44,8 +44,8 @@ public class NeuralNetwork {
 
         // Create a vector to hold each time−slice , as we build them.
         // These will be grouped together into windows
-        VectorWindow window = new VectorWindow(EncogConstants.WINDOW_SIZE + 1);
-        MLData input = helper.allocateInputVector(EncogConstants.WINDOW_SIZE + 1);
+        VectorWindow window = new VectorWindow(EncogConstantsOld.WINDOW_SIZE + 1);
+        MLData input = helper.allocateInputVector(EncogConstantsOld.WINDOW_SIZE + 1);
 
         // Only take the first 100 to predict
         int stopAfter = 100;
