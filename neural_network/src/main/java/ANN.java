@@ -14,6 +14,9 @@ public class ANN {
     }
 
     public void run() {
+        networkTrainer.train();
+        networkTrainer.exportModel();
+
         ann = new NeuralNetwork();
         ann.loadModel("src/main/resources/network/encogNormalizationHelper.eg", "src/main/resources/network/encogBestMethod.eg");
         ann.predictFromCSV("src/main/resources/TrainingsSet.tsv");
