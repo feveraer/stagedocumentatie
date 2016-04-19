@@ -52,8 +52,6 @@ public class NetworkTrainer {
         // Define columns
         ColumnDefinition columnSetTemp = data.defineSourceColumn("SetTemp", ColumnType.continuous);
         ColumnDefinition columnMeasuredTemp = data.defineSourceColumn("MeasuredTemp", ColumnType.continuous);
-        ColumnDefinition columnYearDiff = data.defineSourceColumn("YearDiff", ColumnType.continuous);
-        ColumnDefinition columnMonthDiff = data.defineSourceColumn("MonthDiff", ColumnType.continuous);
         ColumnDefinition columnDayDiff = data.defineSourceColumn("DayDiff", ColumnType.continuous);
         ColumnDefinition columnHourDiff = data.defineSourceColumn("HourDiff", ColumnType.continuous);
         ColumnDefinition columnMinuteDiff = data.defineSourceColumn("MinuteDiff", ColumnType.continuous);
