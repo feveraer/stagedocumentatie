@@ -6,7 +6,7 @@ import java.time.{LocalDate, LocalTime}
 /**
   * Created by Lorenz on 13/04/2016.
   */
-object Time {
+object DateTime {
   private val DAYS_IN_MONTH_NORMAL_YEAR = Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
   private val DAYS_IN_MONTH_LEAP_YEAR = Array(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
@@ -23,15 +23,18 @@ object Time {
   }
 }
 
-case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int) {
+case class DateTime(date: LocalDate, time: LocalTime) {
 
-  def difference(time: Time): Time = {
+  def this(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int)
+  = this(LocalDate.of(year, month, day),LocalTime.of(hour, minutes, seconds))
+
+  def difference(time: DateTime): DateTimeDifference = {
     // Build dates and times of the Time objects
-    val date1 = LocalDate.of(year, month, day)
-    val time1 = LocalTime.of(hour, minutes, seconds)
+    val date1 = this.date
+    val time1 = this.time
 
-    val date2 = LocalDate.of(time.year, time.month, time.day)
-    val time2 = LocalTime.of(time.hour, time.minutes, time.seconds)
+    val date2 = time.date
+    val time2 = time.time
 
     // Calculate differences
     val yearDiff = date1.until(date2, ChronoUnit.YEARS).toInt
@@ -57,7 +60,7 @@ case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, second
     }
 
     if (dayDiff < 0) {
-      dayDiff = Time.DAYS_IN_MONTH(year, month) + dayDiff
+      dayDiff = DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + dayDiff
     }
 
     // Adjustment in daydiff if the time component of the 2nd object is less than the timeComponent from the 1st object
@@ -65,7 +68,7 @@ case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, second
       dayDiff = dayDiff - 1
     }
 
-    // reduce the day diff to a vaulue between 0 and 31
+    // reduce the day diff to a value between 0 and 31
     if (monthDiff > 0 || yearDiff > 0) {
       // Create a date iterator
       // Choose the year and month from the 1st object and the day of the 2nd one
@@ -77,18 +80,18 @@ case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, second
       while (dateIter.isBefore(date2)) {
         val year = dateIter.getYear
         val month = dateIter.getMonthValue
-        sum = sum + Time.DAYS_IN_MONTH(year, month)
+        sum = sum + DateTime.DAYS_IN_MONTH(year, month)
         dateIter = dateIter.plus(1, ChronoUnit.MONTHS)
       }
 
       // Adjust the day diff
       dayDiff = dayDiff - sum
       if(dayDiff < 0){
-        dayDiff = Time.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + dayDiff + 1
+        dayDiff = DateTime.DAYS_IN_MONTH(date1.getYear, date1.getMonthValue) + dayDiff + 1
       }
     }
 
-    val diff = new Time(
+    val diff = new DateTimeDifference(
       yearDiff,
       monthDiff,
       dayDiff,
@@ -100,3 +103,6 @@ case class Time(year: Int, month: Int, day: Int, hour: Int, minutes: Int, second
     diff
   }
 }
+
+case class DateTimeDifference(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int)
+
