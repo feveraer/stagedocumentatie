@@ -14,7 +14,7 @@ object ProducerStarter {
   kafkaTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl06.ugent.be", 9092, 9092)
 
   def main(args: Array[String]) {
-    val producer = new KafkaPManager
+    val producer = new KafkaProducerManager
     producer.startCounter()
   }
 }
