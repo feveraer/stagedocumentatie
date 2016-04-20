@@ -62,9 +62,9 @@ class NeuralNetwork {
     val input: MLData = helper.allocateInputVector(EncogConstants.WINDOW_SIZE + 1)
 
     // Only take the first 100 to predict.
-    var stopAfter: Int = 100
+    // var stopAfter: Int = 100
 
-    while (csv.next && stopAfter > 0) {
+    while (csv.next) {
 
       // parse the csv row to an array
       for (i <- 0 until numberOfColumns) {
@@ -103,7 +103,7 @@ class NeuralNetwork {
 
       // Add data to windows.
       window.add(slice)
-      stopAfter -= 1
+      // stopAfter -= 1
     }
 
     outputVector = outputVector :+ (times, expectedValues)
