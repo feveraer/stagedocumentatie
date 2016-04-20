@@ -11,7 +11,6 @@ class KafkaProducerManager {
 
   val props = new Properties()
   props.put("bootstrap.servers", KafkaServer.KAFKA_ADDRESS)
-  props.put("metadata.broker.list", KafkaServer.KAFKA_ADDRESS)
   props.put("acks", "all")
   props.put("retries", "2")
   props.put("auto.commit.interval.ms", "1000")
