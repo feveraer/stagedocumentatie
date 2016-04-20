@@ -2,6 +2,8 @@ import ann.{NetworkTrainer, NeuralNetwork}
 import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts.AxisType
 
+import scala.io.StdIn
+
 /**
   * Created by Frederic on 19/04/2016.
   */
@@ -21,6 +23,7 @@ object ANN {
     ann.loadModel("src/main/resources/network/encogNormalizationHelper.eg", "src/main/resources/network/encogBestMethod.eg")
     data = ann.predictFromCSV("src/main/resources/TrainingsSet.tsv")
     draw
+    stopWisp
   }
 
   def draw {
@@ -29,11 +32,15 @@ object ANN {
     hold()
     // Predicted data
     line(data(1)._1.zip(data(1)._2))
-    stack()
     title("Neural network test")
     xAxisType(AxisType.datetime)
     xAxis("Time")
     yAxis("Temperature in °C")
-    legend(List("Expected", "Predicted"))
+    legend(Seq("Expected", "Predicted"))
+  }
+
+  def stopWisp {
+    StdIn.readLine("Press enter to stop Wisp: ")
+    stopWispServer
   }
 }

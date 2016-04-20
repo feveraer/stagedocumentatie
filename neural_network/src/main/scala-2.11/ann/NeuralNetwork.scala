@@ -41,7 +41,7 @@ class NeuralNetwork {
     // time series sequence
     var times: Seq[Long] = Seq.empty
     // start date for time series
-    val startDate = new Date()
+    var startDate = new Date().getTime
     // predicted sequence
     var predictedValues: Seq[Double] = Seq.empty
     // expected sequence
@@ -62,9 +62,9 @@ class NeuralNetwork {
     val input: MLData = helper.allocateInputVector(EncogConstants.WINDOW_SIZE + 1)
 
     // Only take the first 100 to predict.
-    var stopAfter: Int = 100
+    // var stopAfter: Int = 100
 
-    while (csv.next && stopAfter > 0) {
+    while (csv.next) {
 
       // parse the csv row to an array
       for (i <- 0 until numberOfColumns) {
@@ -83,9 +83,10 @@ class NeuralNetwork {
         window.copyWindow(input.getData, 0)
 
         // DateTime in ms based on time difference
-        val datetime: Long = startDate.getTime + new DateTimeDifference(
+        val datetime: Long = startDate + new DateTimeDifference(
           csv.get(2).toInt, csv.get(3).toInt, csv.get(4).toInt, csv.get(5).toInt
         ).toMillis()
+        startDate = datetime
         // Expected output.
         val correct: Double = csv.get(numberOfColumns).toDouble
 
@@ -102,7 +103,7 @@ class NeuralNetwork {
 
       // Add data to windows.
       window.add(slice)
-      stopAfter -= 1
+      // stopAfter -= 1
     }
 
     outputVector = outputVector :+ (times, expectedValues)
