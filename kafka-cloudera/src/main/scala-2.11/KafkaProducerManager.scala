@@ -10,14 +10,15 @@ import scala.collection.JavaConversions._
 class KafkaProducerManager {
 
   val scalaProps = Map(
-    "bootstrap.servers" -> KafkaServer.ADDRESS,
+    "bootstrap.servers" -> KafkaServer.KAFKA_ADDRESS,
     "acks" -> "all",
-    "retries" -> 0.toString,
-    "auto.commit.interval.ms" -> 1000.toString,
-    "linger.ms" -> 1.toString,
+    "retries" -> "2",
+    "auto.commit.interval.ms" -> "1000",
+    "linger.ms" -> "1",
     "block.on.buffer.full" -> "true",
     "key.serializer" -> "org.apache.kafka.common.serialization.StringSerializer",
-    "value.serializer" -> "org.apache.kafka.common.serialization.StringSerializer"
+    "value.serializer" -> "org.apache.kafka.common.serialization.StringSerializer",
+    "zookeeper.connect" -> KafkaServer.ZOOKEEPER_ADDRESS
   )
 
   val jMapProps = new HashMap[String, Object](scalaProps)
@@ -26,12 +27,12 @@ class KafkaProducerManager {
 
   def startCounter() {
     System.out.println("Start Producer Counter")
-    for (i <- 0 to 10) {
-      producer.send(new ProducerRecord[String, String]("test-counter-topic", Integer.toString(i), "Package " + i));
-      System.out.println("Producer: Send: " + i);
+    for (i <- 0 to 100) {
+      producer.send(new ProducerRecord[String, String]("test-counter", i.toString, "Package " + i))
+      System.out.println("Producer - Send: " + i)
     }
 
-    System.out.println("Closing producer");
-    producer.close();
+    System.out.println("Closing producer")
+    producer.close()
   }
 }

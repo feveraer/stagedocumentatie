@@ -1,6 +1,5 @@
-import java.util.{Arrays, HashMap, Properties}
+import java.util.{Arrays, HashMap}
 
-import scala.collection.JavaConverters._
 import scala.collection.JavaConversions._
 
 import org.apache.kafka.clients.consumer.{ConsumerRecords, KafkaConsumer}
@@ -10,30 +9,31 @@ import org.apache.kafka.clients.consumer.{ConsumerRecords, KafkaConsumer}
   */
 class KafkaConsumerManager {
   val scalaProps = Map(
-    "bootstrap.servers" -> KafkaServer.ADDRESS,
-    "acks" -> "all",
-    "retries" -> 0.toString,
-    "auto.commit.interval.ms" -> 1000.toString,
-    "linger.ms" -> 1.toString,
-    "block.on.buffer.full" -> "true",
-    "key.serializer" -> "org.apache.kafka.common.serialization.StringSerializer",
-    "value.serializer" -> "org.apache.kafka.common.serialization.StringSerializer"
+    "bootstrap.servers" -> KafkaServer.KAFKA_ADDRESS,
+    "group.id" -> "testGroup",
+    "enable.auto.commit" -> "true",
+    "auto.commit.interval.ms" -> "1000",
+    "linger.ms" -> "1",
+    "session.timeout.ms" -> "30000",
+    "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+    "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
+    "zookeeper.connect" -> KafkaServer.ZOOKEEPER_ADDRESS
   )
-  
+
   val jMapProps = new HashMap[String, Object](scalaProps)
 
   val consumer = new KafkaConsumer[String, String](jMapProps)
 
   def start() {
     println("Start Consumer")
-    consumer.subscribe(Arrays.asList("test-counter-topic"))
+    consumer.subscribe(Arrays.asList("test-counter"))
 
     while (true) {
       val records: ConsumerRecords[String, String] = consumer.poll(100)
 
       val iterator = records.iterator()
 
-      while(iterator.hasNext){
+      while (iterator.hasNext) {
         val record = iterator.next()
         printf("Consumer: offset = %d, key = %s, value = %s \n", record.offset(), record.key(), record.value())
       }
