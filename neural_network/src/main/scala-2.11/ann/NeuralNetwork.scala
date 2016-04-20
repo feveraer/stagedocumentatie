@@ -41,7 +41,7 @@ class NeuralNetwork {
     // time series sequence
     var times: Seq[Long] = Seq.empty
     // start date for time series
-    val startDate = new Date()
+    var startDate = new Date().getTime
     // predicted sequence
     var predictedValues: Seq[Double] = Seq.empty
     // expected sequence
@@ -83,9 +83,10 @@ class NeuralNetwork {
         window.copyWindow(input.getData, 0)
 
         // DateTime in ms based on time difference
-        val datetime: Long = startDate.getTime + new DateTimeDifference(
+        val datetime: Long = startDate + new DateTimeDifference(
           csv.get(2).toInt, csv.get(3).toInt, csv.get(4).toInt, csv.get(5).toInt
         ).toMillis()
+        startDate = datetime
         // Expected output.
         val correct: Double = csv.get(numberOfColumns).toDouble
 

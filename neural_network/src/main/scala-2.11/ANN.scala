@@ -29,11 +29,10 @@ object ANN {
     hold()
     // Predicted data
     line(data(1)._1.zip(data(1)._2))
-    stack()
     title("Neural network test")
     xAxisType(AxisType.datetime)
     xAxis("Time")
     yAxis("Temperature in °C")
-    legend(List("Expected", "Predicted"))
+    legend(Seq("Expected", "Predicted"))
   }
 }
