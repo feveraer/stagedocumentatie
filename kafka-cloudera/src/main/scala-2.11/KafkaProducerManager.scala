@@ -11,6 +11,7 @@ class KafkaProducerManager {
 
   val props = new Properties()
   props.put("bootstrap.servers", KafkaServer.KAFKA_ADDRESS)
+  props.put("metadata.broker.list", KafkaServer.KAFKA_ADDRESS)
   props.put("acks", "all")
   props.put("retries", "2")
   props.put("auto.commit.interval.ms", "1000")
@@ -24,7 +25,7 @@ class KafkaProducerManager {
 
   def startCounter() {
     System.out.println("Start Producer Counter")
-    for (i <- 0 to 100) {
+    for (i <- 1 to 100) {
       producer.send(new ProducerRecord("test-counter", i.toString, "Package " + i))
       System.out.println("Producer - Send: " + i)
     }
