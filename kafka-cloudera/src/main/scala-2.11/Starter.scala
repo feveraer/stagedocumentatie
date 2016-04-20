@@ -9,8 +9,12 @@ object ConsumerStarter {
 }
 
 object ProducerStarter {
+
+  val kafkaTunnel = new SSHTunnel
+  kafkaTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl06.ugent.be", 9092, 9092)
+
   def main(args: Array[String]) {
-    val producer = new KafkaProducerManager
+    val producer = new KafkaPManager
     producer.startCounter()
   }
 }
