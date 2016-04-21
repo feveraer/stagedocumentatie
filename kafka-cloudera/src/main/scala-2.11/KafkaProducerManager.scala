@@ -22,13 +22,13 @@ class KafkaProducerManager {
   val producer = new KafkaProducer[String, String](props)
 
   def startCounter() {
-    System.out.println("Start Producer Counter")
+    println("Start Producer Counter")
     for (i <- 1 to 100) {
       producer.send(new ProducerRecord("test-counter", i.toString, "Package " + i))
-      System.out.println("Producer - Send: " + i)
+      println("Producer - Send: " + i)
     }
 
-    System.out.println("Closing producer")
+    println("Closing producer")
     producer.close()
   }
 }
