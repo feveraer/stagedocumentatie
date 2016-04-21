@@ -111,6 +111,11 @@ class NeuralNetwork {
       stopAfter -= 1
     }
 
+    // Correct set values sequence by prepending default value to the sequence
+    // and thus moving every value one over to the right. Discard the last value.
+    setValues +:= 21.0
+    setValues = setValues.slice(0, setValues.size - 1)
+
     outputVector :+= (times, predictedValues)
     outputVector :+= (times, measuredValues)
     outputVector :+= (times, setValues)
