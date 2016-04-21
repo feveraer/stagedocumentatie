@@ -33,12 +33,8 @@ object ANN {
       trainNetwork
     }
     predict
-    try {
-      draw
-    } catch {
-      case ex: FileExistsException =>
-      // Wisp throws this inadvertently, can be safely ignored.
-    }
+    draw
+    style
     stopWisp
   }
 
@@ -69,20 +65,44 @@ object ANN {
   }
 
   def draw {
-    // Expected data
-    line(data(0)._1.zip(data(0)._2))
-    hold()
-    // Predicted data
-    line(data(1)._1.zip(data(1)._2))
-    title("Temperature prediction for " + trainingSetFileName)
-    xAxisType(AxisType.datetime)
-    xAxis("Time")
-    yAxis("Temperature in °C")
-    legend(Seq("Measured", "Predicted"))
+    try {
+      // Predicted values
+      line(data(0)._1.zip(data(0)._2))
+      hold()
+      // Measured values
+      line(data(1)._1.zip(data(1)._2))
+      hold()
+      // Set values
+      line(data(2)._1.zip(data(2)._2))
+    } catch {
+      case ex: FileExistsException =>
+      // Wisp throws this inadvertently, can be safely ignored.
+    }
+  }
+
+  def style {
+    try {
+      title("Temperature prediction for " + trainingSetFileName)
+      xAxisType(AxisType.datetime)
+      xAxis("Time")
+      yAxis("Temperature in °C")
+      legend(Seq("Predicted", "Measured", "Set"))
+    } catch {
+      case ex: FileExistsException =>
+      // Wisp throws this inadvertently, can be safely ignored.
+    }
   }
 
   def stopWisp {
-    StdIn.readLine("Press enter to stop Wisp: ")
+    println("Enter one of the following options:")
+    println("  - restyle (try a page refresh first)")
+    println("  - stop")
+    val input = StdIn.readLine("> ")
+    input match {
+      case "restyle" => style; stopWisp
+      case "stop" => stopWispServer
+      case default => stopWispServer
+    }
     stopWispServer
   }
 }
