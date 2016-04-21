@@ -54,7 +54,16 @@ object ANN {
       Constants.RESOURCES_PATH + Constants.ENCOG_NORMALIZATION_HELPER_PATH,
       Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH)
     if (!shouldTrain) {
-      trainingSetFileName = StdIn.readLine("Enter file name for training set: ")
+      var correctName = false
+      do {
+        trainingSetFileName = StdIn.readLine(
+          "Enter training set file name (located in " + Constants.RESOURCES_PATH + "): ")
+        if (Files.exists(Paths.get(Constants.RESOURCES_PATH + trainingSetFileName))) {
+          correctName = true
+        } else {
+          println("File " + Constants.RESOURCES_PATH + trainingSetFileName + " not found. Try again.")
+        }
+      } while (!correctName)
     }
     data = ann.predictFromCSV(Constants.RESOURCES_PATH + trainingSetFileName)
   }
