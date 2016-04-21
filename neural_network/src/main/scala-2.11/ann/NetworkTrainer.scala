@@ -21,7 +21,7 @@ class NetworkTrainer(val pathToTrainingsData: String) {
 
   // Create data source
   // file, header presence, format of csv
-  private val dataSource = new CSVDataSource(trainingsData, true, EncogConstants.FORMAT)
+  private val dataSource = new CSVDataSource(trainingsData, true, Constants.FORMAT)
 
   def train {
 
@@ -36,7 +36,7 @@ class NetworkTrainer(val pathToTrainingsData: String) {
     val data: VersatileMLDataSet = new VersatileMLDataSet(dataSource)
 
     // Set NormHelper to correct format
-    data.getNormHelper.setFormat(EncogConstants.FORMAT)
+    data.getNormHelper.setFormat(Constants.FORMAT)
 
     // Define columns
     val columnSetTemp: ColumnDefinition = data.defineSourceColumn("SetTemp", ColumnType.continuous)
@@ -77,7 +77,7 @@ class NetworkTrainer(val pathToTrainingsData: String) {
     // Set time series. Lead window of 1 and lag window of <WINDOW_SIZE>.
     // This means we will use the last <WINDOW_SIZE> SetTemp, MeasuredTemp,
     data.setLeadWindowSize(1)
-    data.setLagWindowSize(EncogConstants.WINDOW_SIZE)
+    data.setLagWindowSize(Constants.WINDOW_SIZE)
 
     // Hold back 20% of the data for validation.
     // Don't shuffle data for time series.
@@ -119,7 +119,7 @@ class NetworkTrainer(val pathToTrainingsData: String) {
       throw new NullPointerException("Best method is null")
     }
 
-    val bestMethodFile: File = new File("src/main/resources/network/encogBestMethod.eg")
+    val bestMethodFile: File = new File(Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH)
 
     try {
       bestMethodFile.getParentFile.mkdirs
@@ -133,7 +133,7 @@ class NetworkTrainer(val pathToTrainingsData: String) {
 
     // Export normalizationHelper
     try {
-      val fos: FileOutputStream = new FileOutputStream("src/main/resources/network/encogNormalizationHelper.eg")
+      val fos: FileOutputStream = new FileOutputStream(Constants.RESOURCES_PATH + Constants.ENCOG_NORMALIZATION_HELPER_PATH)
       val oos: ObjectOutputStream = new ObjectOutputStream(fos)
       oos.writeObject(helper)
       oos.close

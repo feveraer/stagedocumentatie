@@ -1,8 +1,11 @@
 package testsetann
 
 import java.io.{BufferedWriter, File, FileWriter}
+import java.nio.file.{Files, Paths}
 
-import scala.io.Source
+import ann.Constants
+
+import scala.io.{Source, StdIn}
 
 /**
   * Created by Lorenz on 13/04/2016.
@@ -29,10 +32,17 @@ object Transformer {
     vector
   }
 
-  // Write data entries to tsv file to be used as training data for ANNOLD.
+  // Write data entries to tsv file to be used as training data for ANN.
   // TSV structure: SetTemp - MeasuredTemp - HourDiff - MinuteDiff - NextMeasured
   def writeDataEntriesToTSV(vector: Vector[DataEntry]): Unit = {
-    val file = new File("src/main/resources/TrainingsSet.tsv")
+    var file: File = null
+    if (Files.exists(Paths.get(Constants.RESOURCES_PATH + Constants.DEFAULT_TRAINING_SET_PATH))) {
+      val fileName = StdIn.readLine(
+        Constants.DEFAULT_TRAINING_SET_PATH + " already exists. Enter new file name: ")
+      file = new File(Constants.RESOURCES_PATH + fileName)
+    } else {
+      file = new File(Constants.RESOURCES_PATH + Constants.DEFAULT_TRAINING_SET_PATH)
+    }
     val bw = new BufferedWriter(new FileWriter(file, true))
 
     // header
