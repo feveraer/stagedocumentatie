@@ -1,35 +1,31 @@
-import java.util.{Arrays, HashMap}
+import java.util.{Arrays, Properties}
 
-import scala.collection.JavaConversions._
-
-import org.apache.kafka.clients.consumer.{ConsumerRecords, KafkaConsumer}
+import org.apache.kafka.clients.consumer.KafkaConsumer
 
 /**
   * Created by Lorenz on 20/04/2016.
   */
 class KafkaConsumerManager {
-  val scalaProps = Map(
-    "bootstrap.servers" -> KafkaServer.KAFKA_ADDRESS,
-    "group.id" -> "testGroup",
-    "enable.auto.commit" -> "true",
-    "auto.commit.interval.ms" -> "1000",
-    "linger.ms" -> "1",
-    "session.timeout.ms" -> "30000",
-    "key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
-    "value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer",
-    "zookeeper.connect" -> KafkaServer.ZOOKEEPER_ADDRESS
-  )
 
-  val jMapProps = new HashMap[String, Object](scalaProps)
+  val props = new Properties()
+  props.put("bootstrap.servers", KafkaServer.KAFKA_ADDRESS)
+  props.put("group.id", "testGroup")
+  props.put("enable.auto.commit", "true")
+  props.put("auto.commit.interval.ms", "1000")
+  props.put("linger.ms", "1")
+  props.put("session.timeout.ms", "3000")
+  props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+  props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+  props.put("zookeeper.connect", KafkaServer.ZOOKEEPER_ADDRESS)
 
-  val consumer = new KafkaConsumer[String, String](jMapProps)
+  val consumer = new KafkaConsumer[String, String](props)
 
   def start() {
     println("Start Consumer")
     consumer.subscribe(Arrays.asList("test-counter"))
 
     while (true) {
-      val records: ConsumerRecords[String, String] = consumer.poll(100)
+      val records = consumer.poll(100)
 
       val iterator = records.iterator()
 
