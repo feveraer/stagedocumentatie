@@ -17,7 +17,7 @@ object ANN {
   private var data: Vector[(Seq[Long], Seq[Double])] = Vector.empty
 
   def main(args: Array[String]) {
-    if (StdIn.readLine("Train network? (y or n)").startsWith("y")) {
+    if (StdIn.readLine("Train network? (y or n): ").startsWith("y")) {
       shouldTrain = true
       var correctName = false
       do {
@@ -59,7 +59,7 @@ object ANN {
     hold()
     // Predicted data
     line(data(1)._1.zip(data(1)._2))
-    title("Neural network test")
+    title("Temperature prediction for " + trainingSetFileName)
     xAxisType(AxisType.datetime)
     xAxis("Time")
     yAxis("Temperature in °C")
