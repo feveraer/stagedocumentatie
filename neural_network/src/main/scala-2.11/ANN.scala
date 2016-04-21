@@ -3,6 +3,7 @@ import java.nio.file.{Files, Paths}
 import ann.{Constants, NetworkTrainer, NeuralNetwork}
 import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts.AxisType
+import org.apache.commons.io.FileExistsException
 
 import scala.io.StdIn
 
@@ -32,7 +33,12 @@ object ANN {
       trainNetwork
     }
     predict
-    draw
+    try {
+      draw
+    } catch {
+      case ex: FileExistsException =>
+      // Wisp throws this inadvertently, can be safely ignored.
+    }
     stopWisp
   }
 
@@ -63,7 +69,7 @@ object ANN {
     xAxisType(AxisType.datetime)
     xAxis("Time")
     yAxis("Temperature in °C")
-    legend(Seq("Expected", "Predicted"))
+    legend(Seq("Measured", "Predicted"))
   }
 
   def stopWisp {
