@@ -4,10 +4,7 @@
 object ConsumerStarter {
 
   val kafkaTunnel = new SSHTunnel
-  kafkaTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl06.ugent.be", 9092, 9092)
-
-  val zooKeeperTunnel = new SSHTunnel
-  zooKeeperTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl02.ugent.be", 2181, 2181)
+  kafkaTunnel.connectHARDCODE("root", "Ugent2012")
 
   def main(args: Array[String]) {
     val consumer = new KafkaConsumerManager
@@ -18,10 +15,7 @@ object ConsumerStarter {
 object ProducerStarter {
 
   val kafkaTunnel = new SSHTunnel
-  kafkaTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl06.ugent.be", 9092, 9092)
-
-  val zooKeeperTunnel = new SSHTunnel
-  zooKeeperTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl02.ugent.be", 2181, 2181)
+  kafkaTunnel.connectHARDCODE("root", "Ugent2012")
 
   def main(args: Array[String]) {
     val producer = new KafkaProducerManager
