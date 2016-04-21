@@ -2,6 +2,13 @@
   * Created by Lorenz on 20/04/2016.
   */
 object ConsumerStarter {
+
+  val kafkaTunnel = new SSHTunnel
+  kafkaTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl06.ugent.be", 9092, 9092)
+
+  val zooKeeperTunnel = new SSHTunnel
+  zooKeeperTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl02.ugent.be", 2181, 2181)
+
   def main(args: Array[String]) {
     val consumer = new KafkaConsumerManager
     consumer.start()
@@ -12,6 +19,9 @@ object ProducerStarter {
 
   val kafkaTunnel = new SSHTunnel
   kafkaTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl06.ugent.be", 9092, 9092)
+
+  val zooKeeperTunnel = new SSHTunnel
+  zooKeeperTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl02.ugent.be", 2181, 2181)
 
   def main(args: Array[String]) {
     val producer = new KafkaProducerManager
