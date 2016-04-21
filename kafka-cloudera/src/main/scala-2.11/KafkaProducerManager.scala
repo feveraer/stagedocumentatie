@@ -1,8 +1,6 @@
-import java.util.{HashMap, Properties}
+import java.util.Properties
 
-import org.apache.kafka.clients.producer.{KafkaProducer, Producer, ProducerRecord}
-
-import scala.collection.JavaConversions._
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 /**
   * Created by Lorenz on 19/04/2016.
