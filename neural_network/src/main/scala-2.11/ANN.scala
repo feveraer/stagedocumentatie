@@ -69,16 +69,19 @@ object ANN {
   }
 
   def draw {
-    // Expected data
+    // Predicted values
     line(data(0)._1.zip(data(0)._2))
     hold()
-    // Predicted data
+    // Measured values
     line(data(1)._1.zip(data(1)._2))
+    hold()
+    // Set values
+    line(data(2)._1.zip(data(2)._2))
     title("Temperature prediction for " + trainingSetFileName)
     xAxisType(AxisType.datetime)
     xAxis("Time")
     yAxis("Temperature in °C")
-    legend(Seq("Measured", "Predicted"))
+    legend(Seq("Predicted", "Measured", "Set"))
   }
 
   def stopWisp {

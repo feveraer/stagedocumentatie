@@ -44,8 +44,10 @@ class NeuralNetwork {
     var startDate = new Date().getTime
     // predicted sequence
     var predictedValues: Seq[Double] = Seq.empty
-    // expected sequence
-    var expectedValues: Seq[Double] = Seq.empty
+    // set sequence
+    var setValues: Seq[Double] = Seq.empty
+    // measured sequence
+    var measuredValues: Seq[Double] = Seq.empty
 
     // Iterator for csv data:
     // filename - headers - format
@@ -61,10 +63,10 @@ class NeuralNetwork {
     val window: VectorWindow = new VectorWindow(Constants.WINDOW_SIZE + 1)
     val input: MLData = helper.allocateInputVector(Constants.WINDOW_SIZE + 1)
 
-    // Only take the first 100 to predict.
-    // var stopAfter: Int = 100
+    // Only take the first x to predict
+    var stopAfter: Int = 1000
 
-    while (csv.next) {
+    while (csv.next && stopAfter > 0) {
 
       // parse the csv row to an array
       for (i <- 0 until numberOfColumns) {
@@ -87,8 +89,10 @@ class NeuralNetwork {
           csv.get(2).toInt, csv.get(3).toInt, csv.get(4).toInt, csv.get(5).toInt
         ).toMillis()
         startDate = datetime
-        // Expected output.
-        val correct: Double = csv.get(numberOfColumns).toDouble
+        // NextMeasured output.
+        val measuredValue: Double = csv.get(numberOfColumns).toDouble
+        // Set value
+        val setValue: Double = csv.get(0).toDouble
 
         // Predict output.
         val output: MLData = bestMethod.compute(input)
@@ -96,18 +100,20 @@ class NeuralNetwork {
         // Denormalize prediction.
         val predicted: Double = helper.denormalizeOutputVectorToString(output)(0).toDouble
 
-        times = times :+ datetime
-        predictedValues = predictedValues :+ predicted
-        expectedValues = expectedValues :+ correct
+        times :+= datetime
+        predictedValues :+= predicted
+        measuredValues :+= measuredValue
+        setValues :+= setValue
       }
 
       // Add data to windows.
       window.add(slice)
-      // stopAfter -= 1
+      stopAfter -= 1
     }
 
-    outputVector = outputVector :+ (times, expectedValues)
-    outputVector = outputVector :+ (times, predictedValues)
+    outputVector :+= (times, predictedValues)
+    outputVector :+= (times, measuredValues)
+    outputVector :+= (times, setValues)
     outputVector
   }
 }
