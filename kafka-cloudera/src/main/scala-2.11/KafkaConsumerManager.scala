@@ -10,7 +10,6 @@ import org.apache.kafka.clients.consumer.{ConsumerRecords, KafkaConsumer}
 class KafkaConsumerManager {
   val scalaProps = Map(
     "bootstrap.servers" -> KafkaServer.KAFKA_ADDRESS,
-    "group.id" -> "testGroup",
     "enable.auto.commit" -> "true",
     "auto.commit.interval.ms" -> "1000",
     "linger.ms" -> "1",

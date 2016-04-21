@@ -18,7 +18,8 @@ class KafkaProducerManager {
   props.put("block.on.buffer.full", "true")
   props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
   props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-  props.put("zookeeper.connect", KafkaServer.ZOOKEEPER_ADDRESS)
+//  props.put("zookeeper.connect", KafkaServer.ZOOKEEPER_ADDRESS)
+  props.put("auto.create.topics.enable", "true")
 
   val producer = new KafkaProducer[String, String](props)
 
