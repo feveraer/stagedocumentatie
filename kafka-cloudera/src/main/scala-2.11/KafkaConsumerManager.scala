@@ -9,13 +9,12 @@ class KafkaConsumerManager {
 
   val props = new Properties()
   props.put("bootstrap.servers", KafkaServer.KAFKA_ADDRESS)
-  props.put("group.id", "testGroup")
+//  props.put("group.id", "testGroup")
   props.put("enable.auto.commit", "true")
   props.put("auto.commit.interval.ms", "1000")
   props.put("linger.ms", "1")
-  props.put("session.timeout.ms", "3000")
-  props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-  props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+  props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
+  props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
   props.put("zookeeper.connect", KafkaServer.ZOOKEEPER_ADDRESS)
 
   val consumer = new KafkaConsumer[String, String](props)
