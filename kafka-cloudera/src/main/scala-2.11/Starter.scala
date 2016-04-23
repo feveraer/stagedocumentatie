@@ -1,3 +1,5 @@
+import org.apache.log4j.BasicConfigurator
+
 /**
   * Created by Lorenz on 20/04/2016.
   */
@@ -7,6 +9,7 @@ object ConsumerStarter {
   kafkaTunnel.connectHARDCODE("root", "Ugent2012")
 
   def main(args: Array[String]) {
+    BasicConfigurator.configure()
     val consumer = new KafkaConsumerManager
     consumer.start()
   }
@@ -18,6 +21,7 @@ object ProducerStarter {
   kafkaTunnel.connectHARDCODE("root", "Ugent2012")
 
   def main(args: Array[String]) {
+    BasicConfigurator.configure()
     val producer = new KafkaProducerManager
     producer.startCounter()
   }
@@ -25,6 +29,8 @@ object ProducerStarter {
 
 object CombinedStarter {
   def main(args: Array[String]) {
+    BasicConfigurator.configure()
+
     val kafkaTunnel = new SSHTunnel
     kafkaTunnel.connect("root", "Ugent2012", "cloudera.ugent.be", "cl06.ugent.be", 9092, 9092)
 
