@@ -1,4 +1,4 @@
-package tcp
+package workers
 
 import akka.actor.Actor
 import akka.util.ByteString
