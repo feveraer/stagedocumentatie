@@ -27,7 +27,7 @@ class Client(remote: InetSocketAddress, listener: ActorRef) extends Actor {
 
     // If successful, a Connected message is received.
     case c@Connected(remote, local) =>
-      // Send Connected message to original sender of the Connect message.
+      // Send Connected message to the listening actor
       listener ! c
       // The reference sender Actor of the last received message.
       val connection = sender()
@@ -38,8 +38,6 @@ class Client(remote: InetSocketAddress, listener: ActorRef) extends Actor {
       connection ! Register(self)
       // Use 'become' to switch from unconnected to connected operation.
       context become {
-        case data: ByteString =>
-          connection ! Write(data)
         case CommandFailed(w: Write) =>
           // O/S buffer was full
           listener ! "write failed"

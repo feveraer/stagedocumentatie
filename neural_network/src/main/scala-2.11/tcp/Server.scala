@@ -5,7 +5,7 @@ import java.net.InetSocketAddress
 import akka.actor.{Actor, Props}
 import akka.io.{IO, Tcp}
 
-class Server extends Actor {
+class Server(tcpSocket: String, port: Int) extends Actor {
 
   import Tcp._
   import context.system
@@ -13,7 +13,7 @@ class Server extends Actor {
   // Send Bind command to TCP manager.
   // This will instruct the TCP manager to listen for TCP connections on a particular InetSocketAddress.
   // The port may be specified as 0 in order to bind to a random port.
-  IO(Tcp) ! Bind(self, new InetSocketAddress("localhost", 0))
+  IO(Tcp) ! Bind(self, new InetSocketAddress(tcpSocket, port))
 
   def receive = {
     case b@Bound(localAddress) =>
