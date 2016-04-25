@@ -1,5 +1,5 @@
 import cassandra.CassandraConnection
-import ssh_tunnel.SSHTunnel
+import connections.SSHTunnel
 
 /**
   * Created by Lorenz on 25/04/2016.

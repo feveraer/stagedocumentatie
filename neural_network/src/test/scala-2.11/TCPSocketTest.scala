@@ -1,8 +1,9 @@
 import java.net.InetSocketAddress
 
 import akka.actor.{ActorSystem, Props}
+import connections.Connections
 import tcp.{Client, QbusConstants}
-import workers.SimplisticHandler
+import workers.CassandraWorker
 
 /**
   * Created by Frederic on 25/04/2016.
@@ -10,9 +11,11 @@ import workers.SimplisticHandler
 object TCPSocketTest {
 
   def main(args: Array[String]) {
+    Connections.connect
+
     val actorSystem = ActorSystem("ActorSystem")
 
-    val handler = actorSystem.actorOf(Props[SimplisticHandler], name = "handler")
+    val handler = actorSystem.actorOf(Props[CassandraWorker], name = "handler")
 
     val client = actorSystem.actorOf(
       Props(

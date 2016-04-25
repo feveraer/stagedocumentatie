@@ -1,7 +1,7 @@
 package cassandra
 
 import com.datastax.driver.core.{Cluster, ResultSet, Session}
-import ssh_tunnel.SSHTunnel
+import connections.SSHTunnel
 
 
 /**
@@ -51,14 +51,16 @@ object CassandraConnection {
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_logs (output_id, date, time, regime, measuredtemperature, settemperature) " +
-        "VALUES(" + log.sensorId + "," + log.date + "," + log.time + "," +
-        log.regime + "," + log.measuredTemp + "," + log.setTemp + ");"
+        "VALUES(" + log.sensorId + ",\"" + log.date + "\",\"" + log.time + "\",\"" + log.regime + "\","
+        + log.measuredTemp + "," + log.setTemp + ");"
 
     val result = executeQuery(cqlStatement)
 
     if (result.isEmpty) {
-      throw new RuntimeException("Insert failed.")
+      throw new RuntimeException("Insert log failed.")
     }
+
+    println("Log inserted")
   }
 
   def insertSensorInfo(info: SensorInfo): Unit = {
@@ -73,8 +75,10 @@ object CassandraConnection {
     val result = executeQuery(cqlStatement)
 
     if (result.isEmpty) {
-      throw new RuntimeException("Insert failed.")
+      throw new RuntimeException("Insert info failed.")
     }
+
+    println("Info inserted")
   }
 
   // close connection with Cassandra cluster
