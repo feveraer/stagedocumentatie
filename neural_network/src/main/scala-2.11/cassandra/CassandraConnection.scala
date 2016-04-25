@@ -17,8 +17,8 @@ object CassandraConnection {
   // create connection to cluster
   def connect(): Session = {
     cluster = Cluster.builder().addContactPoint("localhost").withPort(SSHTunnel.lportCassandra).build()
-    val metadata = cluster.getMetadata()
-    printf("Connected to cluster: %s\n", metadata.getClusterName())
+    val metadata = cluster.getMetadata
+    printf("Connected to cluster: %s\n", metadata.getClusterName)
 
     session = cluster.connect(keyspace)
     session
