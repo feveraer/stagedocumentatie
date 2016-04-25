@@ -3,6 +3,7 @@ package ann
 import java.io.{File, FileInputStream, ObjectInputStream}
 import java.util.Date
 
+import cassandra.SensorLog
 import org.encog.ml.MLRegression
 import org.encog.ml.data.MLData
 import org.encog.ml.data.versatile.NormalizationHelper
@@ -32,6 +33,21 @@ class NeuralNetwork {
       }
     }
     bestMethod = EncogDirectoryPersistence.loadObject(new File(pathToBestModel)).asInstanceOf[MLRegression]
+  }
+
+  // Predict next temperature from Cassandra
+  // Table header for sensor_logs:
+  // outputid - date - time - measuredtemperature - regime - settemperature
+  // 346922   - dd/mm/yyyy - hh:mm:ss.ms - 21.5 - Comfort - 22.0
+
+  def predict(log: SensorLog): Double = {
+    // take last x values from Cassandra where x = Constants.WINDOW_SIZE
+
+    // make list of those values + current SensorLog
+
+    // predict...
+
+    -1
   }
 
   def predictFromCSV(filename: String): Vector[(Seq[Long], Seq[Double])] = {
