@@ -44,13 +44,24 @@ object CassandraConnection {
     }
   }
 
-  def insertSensorLog(sensorLog: SensorLog): Unit = {
-    if(session == null){
+  def insertSensorLog(log: SensorLog): Unit = {
+    if (session == null) {
       throw new RuntimeException("Cassandra session not initialized")
+    }
+
+    val cqlStatement =
+      "INSERT INTO " + keyspace + ".sensor_logs (output_id, date, time, regime, measuredtemperature, settemperature) " +
+        "VALUES(" + log.sensorId + "," + log.date + "," + log.time + "," +
+        log.regime + "," + log.measuredTemp + "," + log.setTemp + ");"
+
+    val result = executeQuery(cqlStatement)
+
+    if (result.isEmpty) {
+      throw new RuntimeException("Insert failed.")
     }
   }
 
-  def insertSensorInfo(sensorInfo: SensorInfo): Unit ={
+  def insertSensorInfo(sensorInfo: SensorInfo): Unit = {
 
   }
 
