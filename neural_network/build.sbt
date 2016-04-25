@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   "com.quantifind" %% "wisp" % "0.0.4",
   "com.typesafe.akka" %% "akka-actor" % "2.4.4",
   "com.datastax.cassandra" % "cassandra-driver-core" % "3.0.0",
-  "com.jcraft" % "jsch" % "0.1.53"
+  "com.jcraft" % "jsch" % "0.1.53",
+  "io.argonaut" %% "argonaut" % "6.1"
 )
