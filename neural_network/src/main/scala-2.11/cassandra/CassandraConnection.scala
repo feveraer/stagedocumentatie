@@ -20,8 +20,8 @@ object CassandraConnection {
     val metadata = cluster.getMetadata()
     printf("Connected to cluster: %s\n", metadata.getClusterName())
 
-    session = cluster.connect(keyspace);
-    session;
+    session = cluster.connect(keyspace)
+    session
   }
 
   def getSession(): Session = {
@@ -42,6 +42,16 @@ object CassandraConnection {
         println(e.getMessage)
         None
     }
+  }
+
+  def insertSensorLog(sensorLog: SensorLog): Unit = {
+    if(session == null){
+      throw new RuntimeException("Cassandra session not initialized")
+    }
+  }
+
+  def insertSensorInfo(sensorInfo: SensorInfo): Unit ={
+
   }
 
   // close connection with Cassandra cluster
