@@ -1,8 +1,7 @@
 import java.net.InetSocketAddress
 
 import akka.actor.{ActorSystem, Props}
-import akka.io.Tcp.Received
-import tcp.{Client, QbusConstants, Server, SimplisticHandler}
+import tcp.{Client, QbusConstants, SimplisticHandler}
 
 /**
   * Created by Frederic on 25/04/2016.
