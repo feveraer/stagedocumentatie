@@ -38,9 +38,9 @@ object TcpJsonLog {
   }
 
   object Decoder {
-    def decodeLogJson(jsonString: String): Unit = {
+    def decodeLogJson(jsonString: String): Log = {
       val logOption = Parse.decodeOption[Log](jsonString)
-      val log = logOption.get
+      logOption.get
     }
   }
 }
