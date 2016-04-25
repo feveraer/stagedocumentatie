@@ -61,8 +61,20 @@ object CassandraConnection {
     }
   }
 
-  def insertSensorInfo(sensorInfo: SensorInfo): Unit = {
+  def insertSensorInfo(info: SensorInfo): Unit = {
+    if (session == null) {
+      throw new RuntimeException("Cassandra session not initialized")
+    }
 
+    val cqlStatement =
+      "INSERT INTO " + keyspace + ".sensor_logs (output_id, location, user " +
+        "VALUES(" + info.sensorId + "," + info.location + "," + info.user + ");"
+
+    val result = executeQuery(cqlStatement)
+
+    if (result.isEmpty) {
+      throw new RuntimeException("Insert failed.")
+    }
   }
 
   // close connection with Cassandra cluster
