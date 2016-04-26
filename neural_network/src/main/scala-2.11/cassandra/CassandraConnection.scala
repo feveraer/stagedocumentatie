@@ -24,7 +24,7 @@ object CassandraConnection {
     session
   }
 
-  def getSession(): Session = {
+  def getSession: Session = {
     if (session != null) {
       session
     } else {
@@ -57,9 +57,7 @@ object CassandraConnection {
    */
 
   def insertSensorLog(log: SensorLog): Unit = {
-    if (session == null) {
-      throw new RuntimeException("Cassandra session not initialized")
-    }
+    checkSession
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_logs (outputid, date, time, regime, measuredtemperature, settemperature) " +
@@ -68,13 +66,11 @@ object CassandraConnection {
 
     executeQuery(cqlStatement)
 
-//    println("Log inserted")
+    //    println("Log inserted")
   }
 
   def insertSensorInfo(info: SensorInfo): Unit = {
-    if (session == null) {
-      throw new RuntimeException("Cassandra session not initialized")
-    }
+    checkSession
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_info (outputid, location, user) " +
@@ -83,21 +79,37 @@ object CassandraConnection {
 
     executeQuery(cqlStatement)
 
-//    println("Info inserted")
+    //    println("Info inserted")
   }
 
-  def insertSensorPrediction(prediction: SensorPrediction): Unit ={
-    if (session == null) {
-      throw new RuntimeException("Cassandra session not initialized")
-    }
+  def insertSensorPrediction(prediction: SensorPrediction): Unit = {
+    checkSession
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_prediction(outputid, date, time, prediction) " +
-      "VALUES (" + prediction.sensorId + ",'" + prediction.date + "','" + prediction.time + "', " +
-        prediction.predictedTemp +");"
+        "VALUES (" + prediction.sensorId + ",'" + prediction.date + "','" + prediction.time + "', " +
+        prediction.predictedTemp + ");"
 
     executeQuery(cqlStatement)
 
-//    println("Prediction added")
+    //    println("Prediction added")
+  }
+
+  def insertSensorModels(model: SensorModel): Unit = {
+    checkSession
+
+    val cqlStatement =
+      "INSERT INTO " + keyspace + ".sensor_models(outputid, model, normalizer ) " +
+      "VALUES(" + model.sensorId + ",'" + model.model + "','" + model.normalizer +"');"
+
+    executeQuery(cqlStatement)
+
+    //    println("Model added")
+  }
+
+  private def checkSession(): Unit = {
+    if (session == null) {
+      throw new RuntimeException("Cassandra session not initialized")
+    }
   }
 }
