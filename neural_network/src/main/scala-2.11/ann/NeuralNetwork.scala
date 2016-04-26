@@ -91,8 +91,8 @@ class NeuralNetwork {
 
     // Create a vector to hold each time−slice , as we build them.
     // These will be grouped together into windows.
-    val window: VectorWindow = new VectorWindow(Constants.WINDOW_SIZE + 1)
-    val input: MLData = helper.allocateInputVector(Constants.WINDOW_SIZE + 1)
+    val window: VectorWindow = new VectorWindow(Constants.WINDOW_SIZE)
+    val input: MLData = helper.allocateInputVector(Constants.WINDOW_SIZE)
 
     testConvertedLogs.foreach(log => {
       for (i <- log.indices) {
