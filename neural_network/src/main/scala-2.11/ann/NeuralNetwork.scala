@@ -47,23 +47,31 @@ class NeuralNetwork {
     // make list of those values + current SensorLog
     val testSensorLogs = Vector(
       new SensorLog(1, "26/04/2016", "09:34:16.00", "Comfort", 21, 22),
-      new SensorLog(2, "26/04/2016", "09:44:16.00", "Comfort", 21.5, 22),
-      new SensorLog(3, "26/04/2016", "09:54:16.00", "Comfort", 22, 22)
+      new SensorLog(2, "26/04/2016", "09:50:16.00", "Comfort", 21.5, 22),
+      new SensorLog(3, "26/04/2016", "10:01:16.00", "Comfort", 22, 22)
     )
     var testConvertedLogs: Vector[Vector[Double]] = Vector.empty
     // convert SensorLogs
-    for (i <- 1 until testSensorLogs.size) {
+    // format: DayDiff - HourDiff - MinuteDiff - SecondDiff - MeasuredTemp - SetTemp
+    for (i <- testSensorLogs.indices) {
       val dateTime = new DateTime(
         new LocalDate(testSensorLogs(i).date),
         new LocalTime(testSensorLogs(i).time)
       )
-      val dateTimePrev = new DateTime(
-        new LocalDate(testSensorLogs(i-1).date),
-        new LocalTime(testSensorLogs(i-1).time)
-      )
-      val diff = dateTimePrev.difference(dateTime)
+      // days - hours - minutes - seconds
+      var diffToNext: Vector[Double] = Vector.empty
+      if (i < testSensorLogs.size - 1) {
+        val dateTimeNext = new DateTime(
+          new LocalDate(testSensorLogs(i + 1).date),
+          new LocalTime(testSensorLogs(i + 1).time)
+        )
+        val diff = dateTime.difference(dateTimeNext)
+        diffToNext = Vector(diff.days, diff.hours, diff.minutes, diff.seconds)
+      } else {
+        diffToNext = Constants.DIFF_TO_PREDICTION
+      }
       testConvertedLogs :+= Vector(
-        diff.days, diff.hours, diff.minutes, diff.seconds,
+        diffToNext(0), diffToNext(1), diffToNext(2),diffToNext(3),
         testSensorLogs(i).measuredTemp, testSensorLogs(i).setTemp
       )
     }
@@ -153,9 +161,9 @@ class NeuralNetwork {
     setValues +:= 21.0
     setValues = setValues.slice(0, setValues.size - 1)
 
-    outputVector :+= (times, predictedValues)
-    outputVector :+= (times, measuredValues)
-    outputVector :+= (times, setValues)
+    outputVector :+=(times, predictedValues)
+    outputVector :+=(times, measuredValues)
+    outputVector :+=(times, setValues)
     outputVector
   }
 }
