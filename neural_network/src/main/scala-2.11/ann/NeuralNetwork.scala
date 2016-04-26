@@ -1,6 +1,7 @@
 package ann
 
 import java.io.{File, FileInputStream, ObjectInputStream}
+import java.time.{LocalDate, LocalTime}
 import java.util.Date
 
 import cassandra.SensorLog
@@ -44,8 +45,28 @@ class NeuralNetwork {
     // take last x values from Cassandra where x = Constants.WINDOW_SIZE
 
     // make list of those values + current SensorLog
-
-    // predict...
+    val testSensorLogs = Vector(
+      new SensorLog(1, "26/04/2016", "09:34:16.00", "Comfort", 21, 22),
+      new SensorLog(2, "26/04/2016", "09:44:16.00", "Comfort", 21.5, 22),
+      new SensorLog(3, "26/04/2016", "09:54:16.00", "Comfort", 22, 22)
+    )
+    var testConvertedLogs: Vector[Vector[Double]] = Vector.empty
+    // convert SensorLogs
+    for (i <- 1 until testSensorLogs.size) {
+      val dateTime = new DateTime(
+        new LocalDate(testSensorLogs(i).date),
+        new LocalTime(testSensorLogs(i).time)
+      )
+      val dateTimePrev = new DateTime(
+        new LocalDate(testSensorLogs(i-1).date),
+        new LocalTime(testSensorLogs(i-1).time)
+      )
+      val diff = dateTimePrev.difference(dateTime)
+      testConvertedLogs :+= Vector(
+        diff.days, diff.hours, diff.minutes, diff.seconds,
+        testSensorLogs(i).measuredTemp, testSensorLogs(i).setTemp
+      )
+    }
 
     -1
   }
