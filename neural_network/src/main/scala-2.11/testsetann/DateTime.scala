@@ -1,5 +1,6 @@
 package testsetann
 
+import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.time.{LocalDate, LocalTime}
 
@@ -10,6 +11,10 @@ case class DateTime(date: LocalDate, time: LocalTime) {
 
   def this(year: Int, month: Int, day: Int, hour: Int, minutes: Int, seconds: Int)
   = this(LocalDate.of(year, month, day), LocalTime.of(hour, minutes, seconds))
+
+  def this(dateString: String, timeString: String)
+  = this(LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+    LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm:ss.SSS")))
 
   def difference(time: DateTime): DateTimeDifference = {
     // Build dates and times of the Time objects

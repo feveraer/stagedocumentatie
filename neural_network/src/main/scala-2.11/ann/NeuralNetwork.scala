@@ -54,25 +54,16 @@ class NeuralNetwork {
       new SensorLog(2, "2016-04-26", "09:50:16.000", "Comfort", 21.5, 22),
       new SensorLog(3, "2016-04-26", "10:01:16.000", "Comfort", 22, 22)
     )
-    // DateTime formatter
-    val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
 
     var testConvertedLogs: Vector[Vector[Double]] = Vector.empty
     // convert SensorLogs
     // format: DayDiff - HourDiff - MinuteDiff - SecondDiff - MeasuredTemp - SetTemp
     for (i <- testSensorLogs.indices) {
-      val dateTime = new DateTime(
-        LocalDate.parse(testSensorLogs(i).date, dateFormatter),
-        LocalTime.parse(testSensorLogs(i).time, timeFormatter)
-      )
+      val dateTime = new DateTime(testSensorLogs(i).date, testSensorLogs(i).time)
       // days - hours - minutes - seconds
       var diffToNext: Vector[Double] = Vector.empty
       if (i < testSensorLogs.size - 1) {
-        val dateTimeNext = new DateTime(
-          LocalDate.parse(testSensorLogs(i + 1).date, dateFormatter),
-          LocalTime.parse(testSensorLogs(i + 1).time, timeFormatter)
-        )
+        val dateTimeNext = new DateTime(testSensorLogs(i + 1).date, testSensorLogs(i + 1).time)
         val diff = dateTime.difference(dateTimeNext)
         diffToNext = Vector(diff.days, diff.hours, diff.minutes, diff.seconds)
       } else {
@@ -120,6 +111,8 @@ class NeuralNetwork {
       // Add data to window.
       window.add(slice)
     })
+
+    //TODO: write prediction output to Cassandra
 
     output
   }
