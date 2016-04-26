@@ -37,6 +37,11 @@ class NeuralNetwork {
     bestMethod = EncogDirectoryPersistence.loadObject(new File(pathToBestModel)).asInstanceOf[MLRegression]
   }
 
+  def loadModel(normalizer: NormalizationHelper, mLRegression: MLRegression): Unit ={
+    helper = normalizer
+    bestMethod = mLRegression
+  }
+
   // Predict next temperature from Cassandra
   // Table header for sensor_logs:
   // outputid - date - time - measuredtemperature - regime - settemperature
