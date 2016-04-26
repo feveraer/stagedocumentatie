@@ -44,23 +44,31 @@ object CassandraConnection {
     }
   }
 
+  // close connection with Cassandra cluster
+  def close() {
+    if (cluster != null) {
+      cluster.close()
+      println("Connection closed")
+    }
+  }
+
+  /*
+  INSERTS
+   */
+
   def insertSensorLog(log: SensorLog): Unit = {
     if (session == null) {
       throw new RuntimeException("Cassandra session not initialized")
     }
 
     val cqlStatement =
-      "INSERT INTO " + keyspace + ".sensor_logs (output_id, date, time, regime, measuredtemperature, settemperature) " +
-        "VALUES(" + log.sensorId + ",\"" + log.date + "\",\"" + log.time + "\",\"" + log.regime + "\","
-        + log.measuredTemp + "," + log.setTemp + ");"
+      "INSERT INTO " + keyspace + ".sensor_logs (outputid, date, time, regime, measuredtemperature, settemperature) " +
+        "VALUES(" + log.sensorId + ",'" + log.date + "','" + log.time + "','" + log.regime + "'," +
+        log.measuredTemp + "," + log.setTemp + ");"
 
-    val result = executeQuery(cqlStatement)
+    executeQuery(cqlStatement)
 
-    if (result.isEmpty) {
-      throw new RuntimeException("Insert log failed.")
-    }
-
-    println("Log inserted")
+//    println("Log inserted")
   }
 
   def insertSensorInfo(info: SensorInfo): Unit = {
@@ -69,23 +77,27 @@ object CassandraConnection {
     }
 
     val cqlStatement =
-      "INSERT INTO " + keyspace + ".sensor_logs (output_id, location, user " +
-        "VALUES(" + info.sensorId + "," + info.location + "," + info.user + ");"
+      "INSERT INTO " + keyspace + ".sensor_info (outputid, location, user) " +
+        "VALUES(" + info.sensorId + ",'" + info.location + "','" + info.user + "')" +
+        "IF NOT EXISTS;"
 
-    val result = executeQuery(cqlStatement)
+    executeQuery(cqlStatement)
 
-    if (result.isEmpty) {
-      throw new RuntimeException("Insert info failed.")
-    }
-
-    println("Info inserted")
+//    println("Info inserted")
   }
 
-  // close connection with Cassandra cluster
-  def close() {
-    if (cluster != null) {
-      cluster.close()
-      println("Connection closed")
+  def insertSensorPrediction(prediction: SensorPrediction): Unit ={
+    if (session == null) {
+      throw new RuntimeException("Cassandra session not initialized")
     }
+
+    val cqlStatement =
+      "INSERT INTO " + keyspace + ".sensor_prediction(outputid, date, time, prediction) " +
+      "VALUES (" + prediction.sensorId + ",'" + prediction.date + "','" + prediction.time + "', " +
+        prediction.predictedTemp +");"
+
+    executeQuery(cqlStatement)
+
+//    println("Prediction added")
   }
 }

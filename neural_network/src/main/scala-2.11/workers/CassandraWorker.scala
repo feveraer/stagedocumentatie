@@ -3,9 +3,7 @@ package workers
 import akka.actor.Actor
 import akka.util.ByteString
 import cassandra.CassandraConnection
-import json.TcpJsonLog
 import json.TcpJsonLog.Decoder
-import connections.SSHTunnel
 
 /**
   * Created by Frederic on 25/04/2016.
