@@ -80,7 +80,7 @@ object CassandraConnection {
     }
 
     val cqlStatement =
-      "INSERT INTO " + keyspace + ".sensor_prediction(outputid, date, time, predictedTemp) " +
+      "INSERT INTO " + keyspace + ".sensor_prediction(outputid, date, time, prediction) " +
       "VALUES (" + prediction.sensorId + ",'" + prediction.date + "','" + prediction.time + "', " +
         prediction.predictedTemp +");"
 
