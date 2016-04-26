@@ -44,6 +44,18 @@ object CassandraConnection {
     }
   }
 
+  // close connection with Cassandra cluster
+  def close() {
+    if (cluster != null) {
+      cluster.close()
+      println("Connection closed")
+    }
+  }
+
+  /*
+  INSERTS
+   */
+
   def insertSensorLog(log: SensorLog): Unit = {
     if (session == null) {
       throw new RuntimeException("Cassandra session not initialized")
@@ -87,13 +99,5 @@ object CassandraConnection {
     executeQuery(cqlStatement)
 
 //    println("Prediction added")
-  }
-
-  // close connection with Cassandra cluster
-  def close() {
-    if (cluster != null) {
-      cluster.close()
-      println("Connection closed")
-    }
   }
 }
