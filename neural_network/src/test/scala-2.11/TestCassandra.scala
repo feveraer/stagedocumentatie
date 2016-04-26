@@ -1,6 +1,6 @@
 import java.io.{File, FileInputStream, ObjectInputStream}
 
-import ann.{Constants, NeuralNetwork}
+import ann.{Constants}
 import cassandra.{CassandraConnection, SensorModel}
 import connections.SSHTunnel
 import org.encog.ml.MLRegression
@@ -39,13 +39,15 @@ object TestCassandra {
       val entry = SensorModel.build(17, model, helper)
 
       CassandraConnection.insertSensorModels(entry)
+
+      val result = CassandraConnection.getANNModelsForOutput(17)
+      val model_result = result._1
+      val normalizer_result = result._2
     }
     catch {
       case e: Any => {
         e.printStackTrace
       }
     }
-
-
   }
 }

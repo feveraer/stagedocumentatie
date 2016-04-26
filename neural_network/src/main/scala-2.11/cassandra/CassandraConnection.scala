@@ -2,6 +2,8 @@ package cassandra
 
 import com.datastax.driver.core.{Cluster, ResultSet, Session}
 import connections.SSHTunnel
+import org.encog.ml.MLRegression
+import org.encog.ml.data.versatile.NormalizationHelper
 
 
 /**
@@ -53,7 +55,7 @@ object CassandraConnection {
   }
 
   /*
-  INSERTS
+   * INSERTS
    */
 
   def insertSensorLog(log: SensorLog): Unit = {
@@ -106,6 +108,31 @@ object CassandraConnection {
 
     //    println("Model added")
   }
+
+  /*
+   * Retrieve data
+   */
+
+  def getANNModelsForOutput(id: Int): Tuple2[MLRegression, NormalizationHelper] ={
+    checkSession
+
+    val cqlStatement = "SELECT * FROM " + keyspace + ".sensor_models;"
+    val result = executeQuery(cqlStatement)
+
+    if(result.isEmpty) {
+      throw new RuntimeException("No results for output " + id)
+    }
+
+    val row = result.get.one()
+    val hexStringModel = row.getString("model")
+    val hexStringNormalizer = row.getString("normalizer")
+
+    (EncogSerializer.deserializeModel(hexStringModel), EncogSerializer.deserializeNormalizationHelper(hexStringNormalizer))
+  }
+
+  /*
+   * Helpers
+   */
 
   private def checkSession(): Unit = {
     if (session == null) {
