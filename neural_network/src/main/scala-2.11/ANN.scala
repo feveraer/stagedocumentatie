@@ -33,9 +33,10 @@ object ANN {
       trainNetwork
     }
     predict
-    draw
-    style
-    stopWisp
+    // predictFromCsv
+    // draw
+    // style
+    // stopWisp
   }
 
   def trainNetwork {
@@ -45,6 +46,16 @@ object ANN {
   }
 
   def predict {
+    ann = new NeuralNetwork
+    ann.loadModel(
+      Constants.RESOURCES_PATH + Constants.ENCOG_NORMALIZATION_HELPER_PATH,
+      Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH)
+
+    println("Prediction test for next temperature")
+    println("Output: " + ann.predict(null))
+  }
+
+  def predictFromCsv {
     ann = new NeuralNetwork
     ann.loadModel(
       Constants.RESOURCES_PATH + Constants.ENCOG_NORMALIZATION_HELPER_PATH,

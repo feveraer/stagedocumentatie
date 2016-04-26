@@ -1,6 +1,7 @@
 package ann
 
 import java.io.{File, FileInputStream, ObjectInputStream}
+import java.time.format.DateTimeFormatter
 import java.time.{LocalDate, LocalTime}
 import java.util.Date
 
@@ -39,31 +40,38 @@ class NeuralNetwork {
   // Predict next temperature from Cassandra
   // Table header for sensor_logs:
   // outputid - date - time - measuredtemperature - regime - settemperature
-  // 346922   - dd/mm/yyyy - hh:mm:ss.ms - 21.5 - Comfort - 22.0
+  // 346922   - yyyy-MM-dd - HH:mm:ss.SSS - 21.5 - Comfort - 22.0
 
-  def predict(log: SensorLog): Double = {
-    // take last x values from Cassandra where x = Constants.WINDOW_SIZE
+  def predict(currentLog: SensorLog): Double = {
+    // Initialize empty prediction output
+    var output: Double = 0.0
+
+    // TODO: take last x values from Cassandra where x = Constants.WINDOW_SIZE
 
     // make list of those values + current SensorLog
     val testSensorLogs = Vector(
-      new SensorLog(1, "26/04/2016", "09:34:16.00", "Comfort", 21, 22),
-      new SensorLog(2, "26/04/2016", "09:50:16.00", "Comfort", 21.5, 22),
-      new SensorLog(3, "26/04/2016", "10:01:16.00", "Comfort", 22, 22)
+      new SensorLog(1, "2016-04-26", "09:34:16.000", "Comfort", 21, 22),
+      new SensorLog(2, "2016-04-26", "09:50:16.000", "Comfort", 21.5, 22),
+      new SensorLog(3, "2016-04-26", "10:01:16.000", "Comfort", 22, 22)
     )
+    // DateTime formatter
+    val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
+
     var testConvertedLogs: Vector[Vector[Double]] = Vector.empty
     // convert SensorLogs
     // format: DayDiff - HourDiff - MinuteDiff - SecondDiff - MeasuredTemp - SetTemp
     for (i <- testSensorLogs.indices) {
       val dateTime = new DateTime(
-        new LocalDate(testSensorLogs(i).date),
-        new LocalTime(testSensorLogs(i).time)
+        LocalDate.parse(testSensorLogs(i).date, dateFormatter),
+        LocalTime.parse(testSensorLogs(i).time, timeFormatter)
       )
       // days - hours - minutes - seconds
       var diffToNext: Vector[Double] = Vector.empty
       if (i < testSensorLogs.size - 1) {
         val dateTimeNext = new DateTime(
-          new LocalDate(testSensorLogs(i + 1).date),
-          new LocalTime(testSensorLogs(i + 1).time)
+          LocalDate.parse(testSensorLogs(i + 1).date, dateFormatter),
+          LocalTime.parse(testSensorLogs(i + 1).time, timeFormatter)
         )
         val diff = dateTime.difference(dateTimeNext)
         diffToNext = Vector(diff.days, diff.hours, diff.minutes, diff.seconds)
@@ -71,12 +79,49 @@ class NeuralNetwork {
         diffToNext = Constants.DIFF_TO_PREDICTION
       }
       testConvertedLogs :+= Vector(
-        diffToNext(0), diffToNext(1), diffToNext(2),diffToNext(3),
+        diffToNext(0), diffToNext(1), diffToNext(2), diffToNext(3),
         testSensorLogs(i).measuredTemp, testSensorLogs(i).setTemp
       )
     }
 
-    -1
+    // Create empty arrays for later usage.
+    // This will be needed to store the columns of a row.
+    val line: Array[String] = new Array[String](testConvertedLogs(0).size)
+    val slice: Array[Double] = new Array[Double](testConvertedLogs(0).size)
+
+    // Create a vector to hold each time−slice , as we build them.
+    // These will be grouped together into windows.
+    val window: VectorWindow = new VectorWindow(Constants.WINDOW_SIZE + 1)
+    val input: MLData = helper.allocateInputVector(Constants.WINDOW_SIZE + 1)
+
+    testConvertedLogs.foreach(log => {
+      for (i <- log.indices) {
+        line(i) = log(i).toString
+      }
+
+      // Normalize the input.
+      // input array - output array - shuffle
+      // Never shuffle time series.
+      helper.normalizeInputVector(line, slice, false)
+
+      // Check if window is ready and there is enough data to build a full window.
+      if (window.isReady) {
+        // Copy the window.
+        // data - start position
+        window.copyWindow(input.getData, 0)
+
+        // Compute prediction
+        val prediction: MLData = bestMethod.compute(input)
+
+        // Denormalize prediction, save as output.
+        output = helper.denormalizeOutputVectorToString(prediction)(0).toDouble
+      }
+
+      // Add data to window.
+      window.add(slice)
+    })
+
+    output
   }
 
   def predictFromCSV(filename: String): Vector[(Seq[Long], Seq[Double])] = {
