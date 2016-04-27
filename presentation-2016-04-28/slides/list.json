@@ -3,9 +3,7 @@
     [
         "real-time-verwerking.html",
         "/kafka/idee.html",
-        "/kafka/afb.html",
-        "/kafka/kafka.html",
-        "/kafka/kafka-app.html"
+        "/kafka/afb.html"
     ],
     "scala-app.html",
     [
