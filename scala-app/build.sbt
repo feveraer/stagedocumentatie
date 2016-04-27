@@ -22,7 +22,7 @@ libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4",
   "org.scala-lang.modules" %% "scala-xml" % "1.0.4",
   "org.slf4j" % "slf4j-api" % "1.7.10",
-  "com.datastax.spark" %% "spark-cassandra-connector" % "1.6.0-M1",
+  "com.datastax.spark" %% "spark-cassandra-connector" % "1.6.0-M1" % "provided",
   "com.jcraft" % "jsch" % "0.1.53"
 )
 
