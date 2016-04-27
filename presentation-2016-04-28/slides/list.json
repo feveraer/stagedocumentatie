@@ -15,6 +15,9 @@
         "/ann/dataset.html",
         "/ann/encog.html"
     ],
-    "cloudera.html",
+    [
+        "cloudera.html",
+        "cdh/kafka-problemen.html"
+    ],
     "qbus-applicatie.html"
 ]
