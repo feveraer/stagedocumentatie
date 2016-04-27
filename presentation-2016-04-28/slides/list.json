@@ -1,7 +1,7 @@
 [
     "index.md",
     [
-        "virtuele-omgeving.html",
+        "real-time-verwerking.html",
         "/vo/vo-afb.html",
         "/vo/vo-kafka.html",
         "/vo/vo-kafka-app.html"
