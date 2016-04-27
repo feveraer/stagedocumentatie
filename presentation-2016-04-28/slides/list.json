@@ -8,7 +8,14 @@
         "/kafka/kafka-app.html"
     ],
     "scala-app.html",
-    "neuraal-netwerk.html",
+    [
+        "neuraal-netwerk.html",
+        "/ann/frameworks1.html",
+        "/ann/eigen-ann.html",
+        "/ann/neuroph.html",
+        "/ann/ann-frameworks2.html",
+        "/ann/encog.html"
+    ],
     "cloudera.html",
     "qbus-applicatie.html"
 ]
