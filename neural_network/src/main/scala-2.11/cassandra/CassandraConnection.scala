@@ -88,7 +88,7 @@ object CassandraConnection {
     checkSession
 
     val cqlStatement =
-      "INSERT INTO " + keyspace + ".sensor_prediction(outputid, date, time, prediction) " +
+      "INSERT INTO " + keyspace + ".sensor_predictions(outputid, date, time, prediction) " +
         "VALUES (" + prediction.sensorId + ",'" + prediction.date + "','" + prediction.time + "', " +
         prediction.predictedTemp + ");"
 

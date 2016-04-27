@@ -1,0 +1,9 @@
+{
+  "generator-reveal": {
+    "presentationTitle": "Stage Presentatie",
+    "packageVersion": "0.0.1",
+    "revealTheme": "moon",
+    "useSass": false,
+    "deployToGithubPages": false
+  }
+}
