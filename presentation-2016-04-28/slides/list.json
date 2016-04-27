@@ -1,5 +1,8 @@
 [
     "index.md",
-    "kafka-vm.html",
-    "develop-vm.html"
+    "virtuele-omgeving.html",
+    "scala-app.html",
+    "neuraal-netwerk.html",
+    "cloudera.html",
+    "qbus-applicatie.html"
 ]
