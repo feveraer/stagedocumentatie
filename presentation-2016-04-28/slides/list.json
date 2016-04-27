@@ -2,9 +2,9 @@
     "index.md",
     [
         "real-time-verwerking.html",
-        "/vo/vo-afb.html",
-        "/vo/vo-kafka.html",
-        "/vo/vo-kafka-app.html"
+        "/kafka/afb.html",
+        "/kafka/kafka.html",
+        "/kafka/kafka-app.html"
     ],
     "scala-app.html",
     "neuraal-netwerk.html",
