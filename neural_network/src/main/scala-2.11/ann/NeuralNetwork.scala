@@ -52,7 +52,13 @@ class NeuralNetwork {
     var output: Double = 0.0
 
     // Take last x values from Cassandra where x = Constants.WINDOW_SIZE.
-    val sensorLogs = CassandraConnection.getMostRecentTemperatureEntries(currentLog.sensorId, Constants.WINDOW_SIZE)
+    var sensorLogs = CassandraConnection.getMostRecentTemperatureEntries(
+      currentLog.sensorId, Constants.WINDOW_SIZE + 1)
+    // Only add currentLog if it's not yet stored in Cassandra
+    if (sensorLogs.last != currentLog) {
+      sensorLogs = sensorLogs.slice(1, sensorLogs.size)
+      sensorLogs :+= currentLog
+    }
 
     // Test without Cassandra
 //    val testSensorLogs = Vector(
