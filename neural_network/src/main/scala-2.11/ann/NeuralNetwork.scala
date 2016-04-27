@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter
 import java.time.{LocalDate, LocalTime}
 import java.util.Date
 
-import cassandra.{CassandraConnection, SensorLog}
+import cassandra.{CassandraConnection, SensorLog, SensorPrediction}
 import org.encog.ml.MLRegression
 import org.encog.ml.data.MLData
 import org.encog.ml.data.versatile.NormalizationHelper
@@ -47,12 +47,18 @@ class NeuralNetwork {
   // outputid - date - time - measuredtemperature - regime - settemperature
   // 346922   - yyyy-MM-dd - HH:mm:ss.SSS - 21.5 - Comfort - 22.0
 
-  def predict(outputId: Int, currentLog: SensorLog): Double = {
+  def predict(currentLog: SensorLog): Double = {
     // Initialize empty prediction output.
     var output: Double = 0.0
 
     // Take last x values from Cassandra where x = Constants.WINDOW_SIZE.
-    val sensorLogs = CassandraConnection.getMostRecentTemperatureEntries(outputId, Constants.WINDOW_SIZE + 1)
+    var sensorLogs = CassandraConnection.getMostRecentTemperatureEntries(
+      currentLog.sensorId, Constants.WINDOW_SIZE + 1)
+    // Only add currentLog if it's not yet stored in Cassandra
+    if (sensorLogs.last != currentLog) {
+      sensorLogs = sensorLogs.slice(1, sensorLogs.size)
+      sensorLogs :+= currentLog
+    }
 
     // Test without Cassandra
 //    val testSensorLogs = Vector(
@@ -100,7 +106,15 @@ class NeuralNetwork {
       window.add(slice)
     })
 
-    //TODO: write prediction output to Cassandra
+    val predictedDateTime = new DateTime(currentLog.date, currentLog.time).plus(Constants.DIFF_TO_PREDICTION)
+
+    // Write prediction output to Cassandra.
+    CassandraConnection.insertSensorPrediction(new SensorPrediction(
+      currentLog.sensorId,
+      predictedDateTime.date.toString,
+      predictedDateTime.time.toString,
+      output
+    ))
 
     output
   }
@@ -112,16 +126,16 @@ class NeuralNetwork {
     for (i <- logs.indices) {
       val dateTime = new DateTime(logs(i).date, logs(i).time)
       // days - hours - minutes - seconds
-      var diffToNext: Vector[Double] = Vector.empty
+      var diffToNext: DateTimeDifference = null
       if (i < logs.size - 1) {
         val dateTimeNext = new DateTime(logs(i + 1).date, logs(i + 1).time)
         val diff = dateTime.difference(dateTimeNext)
-        diffToNext = Vector(diff.days, diff.hours, diff.minutes, diff.seconds)
+        diffToNext = new DateTimeDifference(diff.days, diff.hours, diff.minutes, diff.seconds)
       } else {
         diffToNext = Constants.DIFF_TO_PREDICTION
       }
       output :+= Vector(
-        diffToNext(0), diffToNext(1), diffToNext(2), diffToNext(3),
+        diffToNext.days, diffToNext.hours, diffToNext.minutes, diffToNext.seconds,
         logs(i).measuredTemp, logs(i).setTemp
       )
     }

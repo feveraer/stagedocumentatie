@@ -16,6 +16,17 @@ case class DateTime(date: LocalDate, time: LocalTime) {
   = this(LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
     LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm:ss.SSS")))
 
+  def plus(difference: DateTimeDifference): DateTime = {
+    val date = this.date
+      .plusDays(difference.days)
+    val time = this.time
+      .plusHours(difference.hours)
+      .plusMinutes(difference.minutes)
+      .plusSeconds(difference.seconds)
+
+    new DateTime(date, time)
+  }
+
   def difference(time: DateTime): DateTimeDifference = {
     // Build dates and times of the Time objects
     val date1 = this.date

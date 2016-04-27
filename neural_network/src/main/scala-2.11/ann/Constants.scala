@@ -1,6 +1,7 @@
 package ann
 
 import org.encog.util.csv.CSVFormat
+import testsetann.DateTimeDifference
 
 /**
   * Created by Lorenz on 19/04/2016.
@@ -14,5 +15,5 @@ object Constants {
   val ENCOG_NORMALIZATION_HELPER_PATH = "network/normalization_helper.eg"
 
   // time difference to prediction in days, hours, minutes, seconds
-  val DIFF_TO_PREDICTION: Vector[Double] = Vector(0, 0, 15, 0)
+  val DIFF_TO_PREDICTION: DateTimeDifference = new DateTimeDifference(0, 0, 15, 0)
 }
