@@ -2,9 +2,9 @@
     "index.md",
     [
         "virtuele-omgeving.html",
-        "vo-afb.html",
-        "vo-kafka.html",
-        "vo-kafka-app.html"
+        "/vo/vo-afb.html",
+        "/vo/vo-kafka.html",
+        "/vo/vo-kafka-app.html"
     ],
     "scala-app.html",
     "neuraal-netwerk.html",
