@@ -43,6 +43,10 @@ object TestCassandra {
       val result = CassandraConnection.getANNModelsForOutput(17)
       val model_result = result._1
       val normalizer_result = result._2
+
+      val resultQueryRecent = CassandraConnection.getMostRecentTemperatureEntries(206252,3)
+
+      println(resultQueryRecent)
     }
     catch {
       case e: Any => {

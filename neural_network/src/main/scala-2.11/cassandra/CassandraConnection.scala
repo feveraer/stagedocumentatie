@@ -130,6 +130,46 @@ object CassandraConnection {
     (EncogSerializer.deserializeModel(hexStringModel), EncogSerializer.deserializeNormalizationHelper(hexStringNormalizer))
   }
 
+  def getMostRecentTemperatureEntries(id: Int, numberOfEntries: Int): Vector[SensorLog] = {
+    checkSession
+
+    var result: Vector[SensorLog] = Vector.empty
+
+    val cqlStatement =
+      "SELECT * FROM " + keyspace + ".sensor_logs " +
+      "WHERE outputid = " + id + " " +
+      "ORDER BY date DESC, time DESC " +
+      "LIMIT " + numberOfEntries + ";"
+
+
+    val queryResult = executeQuery(cqlStatement)
+
+    if(queryResult.isEmpty) {
+      throw new RuntimeException("No results for output " + id)
+    }
+
+    val resultSet = queryResult.get
+
+    val resultIterator = resultSet.iterator()
+
+    while(resultIterator.hasNext){
+      val row = resultIterator.next
+
+      val id = row.getLong("outputid")
+      val date = row.getString("date")
+      val time = row.getString("time")
+      val regime = row.getString("regime")
+      val measuredTemp = row.getDouble("measuredtemperature")
+      val setTemp = row.getDouble("settemperature")
+
+      val log = new SensorLog(id.toInt, date, time, regime, measuredTemp, setTemp)
+
+      result +:= log
+    }
+
+    result
+  }
+
   /*
    * Helpers
    */
