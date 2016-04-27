@@ -1,6 +1,7 @@
 import java.nio.file.{Files, Paths}
 
 import ann.{Constants, NetworkTrainer, NeuralNetwork}
+import cassandra.SensorLog
 import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts.AxisType
 import connections.Connections
@@ -55,7 +56,8 @@ object ANN {
     println("Prediction test for next temperature")
     // Make connection with Mesos and Cassandra
     Connections.connect()
-    val output = ann.predict(206252, null)
+    // TODO: this is just a test, needs to be handled by worker and to be given recent SensorLog
+    val output = ann.predict(new SensorLog(206252, "2016-04-28", "09:34:16.000", "Comfort", 21, 22))
     Connections.close()
     println("Output: " + output)
   }
