@@ -1,6 +1,11 @@
 [
     "index.md",
-    "virtuele-omgeving.html",
+    [
+        "virtuele-omgeving.html",
+        "vo-afb.html",
+        "vo-kafka.html",
+        "vo-kafka-app.html"
+    ],
     "scala-app.html",
     "neuraal-netwerk.html",
     "cloudera.html",
