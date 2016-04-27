@@ -60,25 +60,7 @@ class NeuralNetwork {
       new SensorLog(3, "2016-04-26", "10:01:16.000", "Comfort", 22, 22)
     )
 
-    var testConvertedLogs: Vector[Vector[Double]] = Vector.empty
-    // convert SensorLogs
-    // format: DayDiff - HourDiff - MinuteDiff - SecondDiff - MeasuredTemp - SetTemp
-    for (i <- testSensorLogs.indices) {
-      val dateTime = new DateTime(testSensorLogs(i).date, testSensorLogs(i).time)
-      // days - hours - minutes - seconds
-      var diffToNext: Vector[Double] = Vector.empty
-      if (i < testSensorLogs.size - 1) {
-        val dateTimeNext = new DateTime(testSensorLogs(i + 1).date, testSensorLogs(i + 1).time)
-        val diff = dateTime.difference(dateTimeNext)
-        diffToNext = Vector(diff.days, diff.hours, diff.minutes, diff.seconds)
-      } else {
-        diffToNext = Constants.DIFF_TO_PREDICTION
-      }
-      testConvertedLogs :+= Vector(
-        diffToNext(0), diffToNext(1), diffToNext(2), diffToNext(3),
-        testSensorLogs(i).measuredTemp, testSensorLogs(i).setTemp
-      )
-    }
+    val testConvertedLogs = formatSensorLogs(testSensorLogs)
 
     // Create empty arrays for later usage.
     // This will be needed to store the columns of a row.
@@ -119,6 +101,29 @@ class NeuralNetwork {
 
     //TODO: write prediction output to Cassandra
 
+    output
+  }
+
+  // Format SensorLogs:
+  // DayDiff - HourDiff - MinuteDiff - SecondDiff - MeasuredTemp - SetTemp
+  private def formatSensorLogs(logs: Vector[SensorLog]): Vector[Vector[Double]] = {
+    var output: Vector[Vector[Double]] = Vector.empty
+    for (i <- logs.indices) {
+      val dateTime = new DateTime(logs(i).date, logs(i).time)
+      // days - hours - minutes - seconds
+      var diffToNext: Vector[Double] = Vector.empty
+      if (i < logs.size - 1) {
+        val dateTimeNext = new DateTime(logs(i + 1).date, logs(i + 1).time)
+        val diff = dateTime.difference(dateTimeNext)
+        diffToNext = Vector(diff.days, diff.hours, diff.minutes, diff.seconds)
+      } else {
+        diffToNext = Constants.DIFF_TO_PREDICTION
+      }
+      output :+= Vector(
+        diffToNext(0), diffToNext(1), diffToNext(2), diffToNext(3),
+        logs(i).measuredTemp, logs(i).setTemp
+      )
+    }
     output
   }
 
