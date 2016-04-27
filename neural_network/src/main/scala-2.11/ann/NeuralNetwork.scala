@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter
 import java.time.{LocalDate, LocalTime}
 import java.util.Date
 
-import cassandra.SensorLog
+import cassandra.{CassandraConnection, SensorLog}
 import org.encog.ml.MLRegression
 import org.encog.ml.data.MLData
 import org.encog.ml.data.versatile.NormalizationHelper
@@ -42,37 +42,38 @@ class NeuralNetwork {
     bestMethod = mLRegression
   }
 
-  // Predict next temperature from Cassandra
+  // Predict next temperature for SensorLogs from Cassandra with a specific output id.
   // Table header for sensor_logs:
   // outputid - date - time - measuredtemperature - regime - settemperature
   // 346922   - yyyy-MM-dd - HH:mm:ss.SSS - 21.5 - Comfort - 22.0
 
-  def predict(currentLog: SensorLog): Double = {
-    // Initialize empty prediction output
+  def predict(outputId: Int, currentLog: SensorLog): Double = {
+    // Initialize empty prediction output.
     var output: Double = 0.0
 
-    // TODO: take last x values from Cassandra where x = Constants.WINDOW_SIZE
+    // Take last x values from Cassandra where x = Constants.WINDOW_SIZE.
+    val sensorLogs = CassandraConnection.getMostRecentTemperatureEntries(outputId, Constants.WINDOW_SIZE + 1)
 
-    // make list of those values + current SensorLog
-    val testSensorLogs = Vector(
-      new SensorLog(1, "2016-04-26", "09:34:16.000", "Comfort", 21, 22),
-      new SensorLog(2, "2016-04-26", "09:50:16.000", "Comfort", 21.5, 22),
-      new SensorLog(3, "2016-04-26", "10:01:16.000", "Comfort", 22, 22)
-    )
+    // Test without Cassandra
+//    val testSensorLogs = Vector(
+//      new SensorLog(1, "2016-04-26", "09:34:16.000", "Comfort", 21, 22),
+//      new SensorLog(2, "2016-04-26", "09:50:16.000", "Comfort", 21.5, 22),
+//      new SensorLog(3, "2016-04-26", "10:01:16.000", "Comfort", 22, 22)
+//    )
 
-    val testConvertedLogs = formatSensorLogs(testSensorLogs)
+    val convertedLogs = formatSensorLogs(sensorLogs)
 
     // Create empty arrays for later usage.
     // This will be needed to store the columns of a row.
-    val line: Array[String] = new Array[String](testConvertedLogs(0).size)
-    val slice: Array[Double] = new Array[Double](testConvertedLogs(0).size)
+    val line: Array[String] = new Array[String](convertedLogs(0).size)
+    val slice: Array[Double] = new Array[Double](convertedLogs(0).size)
 
     // Create a vector to hold each time−slice , as we build them.
     // These will be grouped together into windows.
     val window: VectorWindow = new VectorWindow(Constants.WINDOW_SIZE)
     val input: MLData = helper.allocateInputVector(Constants.WINDOW_SIZE)
 
-    testConvertedLogs.foreach(log => {
+    convertedLogs.foreach(log => {
       for (i <- log.indices) {
         line(i) = log(i).toString
       }
