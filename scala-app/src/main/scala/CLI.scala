@@ -170,7 +170,7 @@ class CLI(sqlContext: SQLContext) {
       temps = temps :+ (tempsTimes, tempsValues)
     })
 
-    line(temps(0)._1.zip(temps(1)._2))
+    line(temps(0)._1.zip(temps(0)._2))
     hold()
     line(temps(1)._1.zip(temps(1)._2))
     stack()

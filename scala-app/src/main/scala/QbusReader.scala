@@ -7,9 +7,9 @@ import org.apache.spark.sql.{DataFrame, SQLContext}
 object QbusReader {
 
   // on Windows:
-  // val baseDir = "d:\\Qbus\\"
+  val baseDir = "d:\\Qbus\\"
   // on Linux:
-  val baseDir = "/home/frederic/ASUS_D_Drive/Qbus/"
+  // val baseDir = "/home/frederic/ASUS_D_Drive/Qbus/"
 
   private val locations = ("Locations.csv", StructType(Array(
     StructField("Id", StringType),
