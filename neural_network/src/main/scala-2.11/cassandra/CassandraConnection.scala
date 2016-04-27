@@ -130,14 +130,14 @@ object CassandraConnection {
     (EncogSerializer.deserializeModel(hexStringModel), EncogSerializer.deserializeNormalizationHelper(hexStringNormalizer))
   }
 
-  def getMostRecentTemperatureEntries(id: Int, numberOfEntries: Int): Vector[SensorLog] = {
+  def getMostRecentTemperatureEntries(outputId: Int, numberOfEntries: Int): Vector[SensorLog] = {
     checkSession
 
     var result: Vector[SensorLog] = Vector.empty
 
     val cqlStatement =
       "SELECT * FROM " + keyspace + ".sensor_logs " +
-      "WHERE outputid = " + id + " " +
+      "WHERE outputid = " + outputId + " " +
       "ORDER BY date DESC, time DESC " +
       "LIMIT " + numberOfEntries + ";"
 
@@ -145,7 +145,7 @@ object CassandraConnection {
     val queryResult = executeQuery(cqlStatement)
 
     if(queryResult.isEmpty) {
-      throw new RuntimeException("No results for output " + id)
+      throw new RuntimeException("No results for output " + outputId)
     }
 
     val resultSet = queryResult.get

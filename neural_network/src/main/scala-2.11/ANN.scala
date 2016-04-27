@@ -3,6 +3,7 @@ import java.nio.file.{Files, Paths}
 import ann.{Constants, NetworkTrainer, NeuralNetwork}
 import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts.AxisType
+import connections.Connections
 import org.apache.commons.io.FileExistsException
 
 import scala.io.StdIn
@@ -52,7 +53,11 @@ object ANN {
       Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH)
 
     println("Prediction test for next temperature")
-    println("Output: " + ann.predict(null))
+    // Make connection with Mesos and Cassandra
+    Connections.connect()
+    val output = ann.predict(206252, null)
+    Connections.close()
+    println("Output: " + output)
   }
 
   def predictFromCsv {
