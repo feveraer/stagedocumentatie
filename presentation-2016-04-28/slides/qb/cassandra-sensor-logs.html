@@ -1,11 +1,11 @@
 <h2>Cassandra sensor_logs</h2>
-<h4>Partitionering</h4>
+<h4>Where en partitionering</h4>
 
 <ul>
   <li>Partitionering op id en datum</li>
-  <li>Clusteren op tijd</li>
+  <li>Clustering op tijd</li>
   <ul>
-    <li>Niet mogelijk om makkelijk data van 2 verschillende datums ophalen</li>
+    <li>Probleem bij data ophalen</li>
   </ul>
 </ul>
 
@@ -14,9 +14,10 @@
 
 <ul class="fragment fade-in">
   <li>Partitionering op id</li>
-  <li>Clusteren op datum en tijd</li>
+  <li>Clustering op datum en tijd</li>
   <ul>
-    <li>Nadeel:<br/> er mogen nooit meer dan 2 miljard entries komen voor een id</li>
+    <li>Nadeel:<br/>
+      Per id maximum 2 miljard entries</li>
   </ul>
 </ul>
 
