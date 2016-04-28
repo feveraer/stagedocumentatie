@@ -1,9 +1,15 @@
 [
     "index.md",
+    "inhoudstafel.html",
     [
         "real-time-verwerking.html",
-        "kafka/idee.html",
-        "kafka/afb.html"
+        "/kafka/idee.html",
+        {
+          "attr": {
+            "data-background": "img/kafka_update.jpg"
+          }
+        },
+        "/kafka/afb.html"
     ],
     [
         "scala-app.html",
