@@ -170,6 +170,61 @@ object CassandraConnection {
     result
   }
 
+  def getDistinctUsers():Vector[String]={
+    checkSession
+
+    var result: Vector[String] = Vector.empty
+
+    val cqlStatement =
+      "SELECT DISTINCT user from " + keyspace + ".sensor_info;"
+
+    val queryResult = executeQuery(cqlStatement)
+
+    if(queryResult.isEmpty) {
+      throw new RuntimeException("No users in sytem")
+    }
+
+    val resultSet = queryResult.get
+    val resultIterator = resultSet.iterator()
+
+    while(resultIterator.hasNext){
+      val row = resultIterator.next()
+      result :+=  row.getString("user")
+    }
+
+    result
+  }
+
+  def getSensorsForUser(user:String):Vector[SensorInfo]={
+    checkSession()
+
+    var result: Vector[SensorInfo] = Vector.empty
+
+    val cqlStatement =
+      "SELECT * FROM " + keyspace + ".sensor_info " +
+      "WHERE user = '" + user + "';"
+
+    val queryResult = executeQuery(cqlStatement)
+
+    if(queryResult.isEmpty) {
+      throw new RuntimeException("No users in sytem")
+    }
+
+    val resultSet = queryResult.get
+    val resultIterator = resultSet.iterator()
+
+    while(resultIterator.hasNext){
+      val row = resultIterator.next()
+
+      val user = row.getString("user")
+      val outputId = row.getLong("outputid").toInt
+      val location = row.getString("location")
+
+      result :+= new SensorInfo(outputId, user, location)
+    }
+    result
+  }
+
   /*
    * Helpers
    */
