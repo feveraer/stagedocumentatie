@@ -30,6 +30,12 @@
     ],
     [
         "cloudera.html",
+        {
+            "attr": {
+                "data-background": "img/cdh5.png",
+                "data-background-size":"100%"
+            }
+        },
         "cdh/kafka-problemen.html"
     ],
     [
