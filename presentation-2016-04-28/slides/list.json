@@ -18,6 +18,8 @@
     ],
     [
         "neuraal-netwerk.html",
+        "ann/waarom.html",
+        "ann/hoe.html",
         "ann/frameworks1.html",
         "ann/eigen-ann.html",
         "ann/neuroph.html",
