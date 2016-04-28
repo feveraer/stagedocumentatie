@@ -1,5 +1,5 @@
 
-# Stage Presentatie
+# Data analyse en machine learning
 
-### Frederic en Lorenz
+###### Frederic en Lorenz
 ###### 28-04-2016

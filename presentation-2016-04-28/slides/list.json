@@ -1,13 +1,19 @@
 [
     "index.md",
+    "inhoudstafel.html",
     [
         "real-time-verwerking.html",
         "/kafka/idee.html",
+        {
+          "attr": {
+            "data-background": "img/kafka_update.jpg"
+          }
+        },
         "/kafka/afb.html"
     ],
     [
-      "scala-app.html",
-      "/scala-app/inhoud.html"
+        "scala-app.html",
+        "/scala-app/inhoud.html"
     ],
     [
         "neuraal-netwerk.html",
