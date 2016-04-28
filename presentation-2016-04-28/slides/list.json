@@ -21,9 +21,12 @@
         "ann/frameworks1.html",
         "ann/eigen-ann.html",
         "ann/neuroph.html",
-        "ann/ann-frameworks2.html",
+        "ann/frameworks2.html",
         "ann/dataset.html",
-        "ann/encog.html"
+        "ann/encog.html",
+        "ann/encog2.html",
+        "ann/overfitting1.html",
+        "ann/overfitting2.html"
     ],
     [
         "cloudera.html",
@@ -35,6 +38,5 @@
         "qb/cassandra-data-modelling.html",
         "qb/cassandra-sensor-logs.html",
         "qb/voorspellingen.html"
-    ],
-    "gebruikte-frameworks.html"
+    ]
 ]
