@@ -115,7 +115,7 @@ object CassandraConnection {
     val cqlStatement =
       "INSERT INTO " + keyspace + ".set_temperatures(outputid, season, day, hour, quartile, settemperature) " +
         "VALUES(" + log.sensorId + ",'" + log.season + "','" + log.day + "'," +
-          log.hour + "," + log.quartile + "," + log.setTemperature + ")"
+        log.hour + "," + log.quartile + "," + log.setTemperature + ");"
 
     executeQuery(cqlStatement)
   }
@@ -234,6 +234,38 @@ object CassandraConnection {
       result :+= new SensorInfo(outputId, user, location)
     }
     result
+  }
+
+  def getAverageSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
+    val cqlStatement =
+      "SELECT settemperature FROM " + keyspace + ".set_temperatures " +
+        "WHERE outputid = " + sensorId + " " +
+        "and season = '" + season + "' " +
+        "and day = '" + day + "' " +
+        "and hour = " + hour + " " +
+        "and quartile = " + quartile +
+        ";"
+
+    val queryResult = executeQuery(cqlStatement)
+
+    if (queryResult.isEmpty) {
+      throw new RuntimeException("No users in sytem")
+    }
+
+    val resultSet = queryResult.get
+    val resultIterator = resultSet.iterator()
+    var sum = 0
+    var count = 0
+
+    while (resultIterator.hasNext) {
+      val row = resultIterator.next()
+
+      val temp = row.getDouble("settemperature")
+      sum += temp
+      count+=1
+
+    }
+    sum/count
   }
 
   /*
