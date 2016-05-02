@@ -14,6 +14,8 @@ case class SensorPrediction(sensorId: Int, date: String, time: String, predicted
 
 case class SensorModel(sensorId: Int, model: String, normalizer: String)
 
+case class SetTemperatureLog(sensorId: Int, season: String, day: String, hour: Int, quartile: Int, setTemperature: Double)
+
 object SensorModel {
   def build(sensorId: Int, model: MLRegression, normalizer: NormalizationHelper): SensorModel = {
     SensorModel(sensorId, EncogSerializer.serialize(model), EncogSerializer.serialize(normalizer))

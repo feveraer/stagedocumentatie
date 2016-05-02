@@ -102,24 +102,35 @@ object CassandraConnection {
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_models(outputid, model, normalizer ) " +
-      "VALUES(" + model.sensorId + ",'" + model.model + "','" + model.normalizer +"');"
+        "VALUES(" + model.sensorId + ",'" + model.model + "','" + model.normalizer + "');"
 
     executeQuery(cqlStatement)
 
     //    println("Model added")
   }
 
+  def insertSetTemperature(log: SetTemperatureLog): Unit = {
+    checkSession()
+
+    val cqlStatement =
+      "INSERT INTO " + keyspace + ".set_temperatures(outputid, season, day, hour, quartile, settemperature) " +
+        "VALUES(" + log.sensorId + ",'" + log.season + "','" + log.day + "'," +
+          log.hour + "," + log.quartile + "," + log.setTemperature + ")"
+
+    executeQuery(cqlStatement)
+  }
+
   /*
    * Retrieve data
    */
 
-  def getANNModelsForOutput(id: Int): Tuple2[MLRegression, NormalizationHelper] ={
+  def getANNModelsForOutput(id: Int): Tuple2[MLRegression, NormalizationHelper] = {
     checkSession
 
     val cqlStatement = "SELECT * FROM " + keyspace + ".sensor_models;"
     val result = executeQuery(cqlStatement)
 
-    if(result.isEmpty) {
+    if (result.isEmpty) {
       throw new RuntimeException("No results for output " + id)
     }
 
@@ -137,14 +148,14 @@ object CassandraConnection {
 
     val cqlStatement =
       "SELECT * FROM " + keyspace + ".sensor_logs " +
-      "WHERE outputid = " + outputId + " " +
-      "ORDER BY date DESC, time DESC " +
-      "LIMIT " + numberOfEntries + ";"
+        "WHERE outputid = " + outputId + " " +
+        "ORDER BY date DESC, time DESC " +
+        "LIMIT " + numberOfEntries + ";"
 
 
     val queryResult = executeQuery(cqlStatement)
 
-    if(queryResult.isEmpty) {
+    if (queryResult.isEmpty) {
       throw new RuntimeException("No results for output " + outputId)
     }
 
@@ -152,7 +163,7 @@ object CassandraConnection {
 
     val resultIterator = resultSet.iterator()
 
-    while(resultIterator.hasNext){
+    while (resultIterator.hasNext) {
       val row = resultIterator.next
 
       val id = row.getLong("outputid")
@@ -170,7 +181,7 @@ object CassandraConnection {
     result
   }
 
-  def getDistinctUsers():Vector[String]={
+  def getDistinctUsers(): Vector[String] = {
     checkSession
 
     var result: Vector[String] = Vector.empty
@@ -180,40 +191,40 @@ object CassandraConnection {
 
     val queryResult = executeQuery(cqlStatement)
 
-    if(queryResult.isEmpty) {
+    if (queryResult.isEmpty) {
       throw new RuntimeException("No users in sytem")
     }
 
     val resultSet = queryResult.get
     val resultIterator = resultSet.iterator()
 
-    while(resultIterator.hasNext){
+    while (resultIterator.hasNext) {
       val row = resultIterator.next()
-      result :+=  row.getString("user")
+      result :+= row.getString("user")
     }
 
     result
   }
 
-  def getSensorsForUser(user:String):Vector[SensorInfo]={
+  def getSensorsForUser(user: String): Vector[SensorInfo] = {
     checkSession()
 
     var result: Vector[SensorInfo] = Vector.empty
 
     val cqlStatement =
       "SELECT * FROM " + keyspace + ".sensor_info " +
-      "WHERE user = '" + user + "';"
+        "WHERE user = '" + user + "';"
 
     val queryResult = executeQuery(cqlStatement)
 
-    if(queryResult.isEmpty) {
+    if (queryResult.isEmpty) {
       throw new RuntimeException("No users in sytem")
     }
 
     val resultSet = queryResult.get
     val resultIterator = resultSet.iterator()
 
-    while(resultIterator.hasNext){
+    while (resultIterator.hasNext) {
       val row = resultIterator.next()
 
       val user = row.getString("user")

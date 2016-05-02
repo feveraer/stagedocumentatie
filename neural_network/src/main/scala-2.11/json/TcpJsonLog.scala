@@ -4,7 +4,7 @@ import java.time.{LocalDate, LocalTime}
 
 import argonaut.{CodecJson, DecodeJson, Parse}
 import argonaut.Argonaut.{casecodec4, casecodec6}
-import cassandra.{SensorInfo, SensorLog}
+import cassandra.{SensorInfo, SensorLog, SetTemperatureLog}
 
 
 /**
@@ -34,6 +34,53 @@ object TcpJsonLog {
 
     def toSensorInfo(): SensorInfo = {
       new SensorInfo(Id, Location, User)
+    }
+
+    def toSetTemperatures(): SetTemperatureLog = {
+      val date = LocalDate.now()
+      val time = LocalTime.now()
+
+      val season = Season.getSeason(date)
+      val quartile = Quartile.getQuartile(time)
+
+      new SetTemperatureLog(Id, season, date.getDayOfWeek.toString, time.getHour, quartile , Status.SetTemp )
+    }
+  }
+
+  object Season {
+    def getSeason(date: LocalDate): String = {
+      val month = date.getMonthValue
+      val day = date.getDayOfMonth
+
+      if (month < 4) {
+        return "Winter"
+      }
+      if (month < 7) {
+        return "Spring"
+      }
+      if (month < 10){
+        return "Summer"
+      }
+      "Fall"
+    }
+  }
+
+  object Quartile {
+    def getQuartile(time: LocalTime): Int = {
+      val minutes = time.getMinute
+
+      if (minutes < 15){
+        return 1
+      }
+
+      if (minutes < 30){
+        return 2
+      }
+
+      if (minutes < 45){
+        return 3
+      }
+      4
     }
   }
 
