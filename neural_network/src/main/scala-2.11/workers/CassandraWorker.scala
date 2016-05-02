@@ -17,6 +17,7 @@ class CassandraWorker extends Actor {
       CassandraConnection.insertSensorLog(log.toSensorLog())
       // Insert SensorInfo in Cassandra DB
       CassandraConnection.insertSensorInfo(log.toSensorInfo())
+      CassandraConnection.insertSetTemperature(log.toSetTemperatures())
       context.stop(self)
     }
     case default => {
