@@ -3,7 +3,7 @@ import java.net.InetSocketAddress
 import akka.actor.{ActorSystem, Props}
 import connections.Connections
 import tcp.{Client, QbusConstants}
-import workers.CassandraWorker
+import workers.{CassandraWorker, ParentWorker}
 
 /**
   * Created by Frederic on 25/04/2016.
@@ -15,7 +15,7 @@ object TCPSocketTest {
 
     val actorSystem = ActorSystem("ActorSystem")
 
-    val handler = actorSystem.actorOf(Props[CassandraWorker], name = "handler")
+    val handler = actorSystem.actorOf(Props[ParentWorker], name = "handler")
 
     val client = actorSystem.actorOf(
       Props(
@@ -25,6 +25,5 @@ object TCPSocketTest {
       ),
       name = "client"
     )
-
   }
 }
