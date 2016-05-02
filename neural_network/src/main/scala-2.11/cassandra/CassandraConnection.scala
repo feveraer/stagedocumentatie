@@ -113,9 +113,9 @@ object CassandraConnection {
     checkSession()
 
     val cqlStatement =
-      "INSERT INTO " + keyspace + ".set_temperatures(outputid, season, day, hour, quartile, settemperature) " +
+      "INSERT INTO " + keyspace + ".set_temperatures(outputid, season, day, hour, quartile, time, settemperature) " +
         "VALUES(" + log.sensorId + ",'" + log.season + "','" + log.day + "'," +
-        log.hour + "," + log.quartile + "," + log.setTemperature + ");"
+        log.hour + "," + log.quartile + ", dateof(now()), " + log.setTemperature + ");"
 
     executeQuery(cqlStatement)
   }
@@ -254,7 +254,7 @@ object CassandraConnection {
 
     val resultSet = queryResult.get
     val resultIterator = resultSet.iterator()
-    var sum = 0
+    var sum = 0.0
     var count = 0
 
     while (resultIterator.hasNext) {
@@ -262,10 +262,10 @@ object CassandraConnection {
 
       val temp = row.getDouble("settemperature")
       sum += temp
-      count+=1
+      count += 1
 
     }
-    sum/count
+    sum / count
   }
 
   /*
