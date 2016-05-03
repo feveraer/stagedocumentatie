@@ -124,7 +124,7 @@ object CassandraConnection {
    * Retrieve data
    */
 
-  def getANNModelsForOutput(id: Int): Tuple2[MLRegression, NormalizationHelper] = {
+  def getANNModelsForOutput(id: Int): (NormalizationHelper, MLRegression) = {
     checkSession
 
     val cqlStatement = "SELECT * FROM " + keyspace + ".sensor_models;"
@@ -138,7 +138,7 @@ object CassandraConnection {
     val hexStringModel = row.getString("model")
     val hexStringNormalizer = row.getString("normalizer")
 
-    (EncogSerializer.deserializeModel(hexStringModel), EncogSerializer.deserializeNormalizationHelper(hexStringNormalizer))
+    (EncogSerializer.deserializeNormalizationHelper(hexStringNormalizer), EncogSerializer.deserializeModel(hexStringModel))
   }
 
   def getMostRecentTemperatureEntries(outputId: Int, numberOfEntries: Int): Vector[SensorLog] = {
