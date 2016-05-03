@@ -3,6 +3,7 @@ package workers
 import akka.actor.Actor
 import ann.{Constants, NeuralNetwork}
 import cassandra.{CassandraConnection, SensorLog, SensorPrediction}
+import org.apache.log4j.Logger
 import org.encog.ml.MLRegression
 import org.encog.ml.data.versatile.NormalizationHelper
 import testsetann.DateTime
@@ -11,6 +12,7 @@ import testsetann.DateTime
   * Created by Frederic on 2/05/2016.
   */
 class PredictWorker extends Actor{
+  private val logger = Logger.getLogger("PredictWorker")
 
   override def receive = {
     case sensorLog: SensorLog => {
@@ -30,10 +32,10 @@ class PredictWorker extends Actor{
       }
     }
     ann.loadModel(model._1, model._2)
-    println("Prediction test for next temperature")
-    println("Current log: " + sensorLog.toString)
+    logger.debug("Prediction test for next temperature")
+    logger.debug("Current log: " + sensorLog.toString)
     var prediction = ann.predict(sensorLog)
-    println("Prediction: " + prediction)
+    logger.info("Prediction: " + prediction)
     if (prediction > sensorLog.setTemp) {
       // If our prediction is higher than the desired temperature, set the set temperature
       // equal to the measured temperature.
@@ -47,9 +49,11 @@ class PredictWorker extends Actor{
         sensorLog.measuredTemp
       )
       prediction = ann.predict(adjustedSensorLog)
-      println("Adjusted log: " + adjustedSensorLog.toString)
-      println("Prediction 2: " + prediction)
+      logger.debug("Adjusted log: " + adjustedSensorLog.toString)
+      logger.info("Prediction 2: " + prediction)
     }
+
+    logger.info("Write log to Cassandra")
     writePredictionToCassandra(sensorLog, prediction)
   }
 
@@ -62,6 +66,6 @@ class PredictWorker extends Actor{
       predictedDateTime.time.toString,
       prediction
     ))
-    println("Wrote prediction to Cassandra.")
+    logger.info("Wrote prediction to Cassandra.")
   }
 }
