@@ -16,5 +16,5 @@ object Constants {
   val DEFAULT_USER_ID = 0
 
   // time difference to prediction in days, hours, minutes, seconds
-  val DIFF_TO_PREDICTION: DateTimeDifference = new DateTimeDifference(0, 0, 15, 0)
+  val DIFF_TO_PREDICTION: DateTimeDifference = new DateTimeDifference(0, 0, 6, 0)
 }
