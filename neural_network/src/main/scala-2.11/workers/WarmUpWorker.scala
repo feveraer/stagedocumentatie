@@ -6,7 +6,7 @@ import cassandra.{CassandraConnection, SensorLog, SensorPrediction}
 import org.apache.log4j.Logger
 import org.encog.ml.MLRegression
 import org.encog.ml.data.versatile.NormalizationHelper
-import testsetann.DateTime
+import time.DateTime
 
 /**
   * Created by Frederic on 2/05/2016.

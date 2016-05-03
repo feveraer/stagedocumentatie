@@ -1,7 +1,7 @@
 package ann
 
 import org.encog.util.csv.CSVFormat
-import testsetann.DateTimeDifference
+import time.DateTimeDifference
 
 /**
   * Created by Lorenz on 19/04/2016.

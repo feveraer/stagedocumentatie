@@ -12,7 +12,8 @@ import org.encog.ml.data.versatile.NormalizationHelper
 import org.encog.persist.EncogDirectoryPersistence
 import org.encog.util.arrayutil.VectorWindow
 import org.encog.util.csv.ReadCSV
-import testsetann.{DateTime, DateTimeDifference}
+import testsetann.DateTimeDifference
+import time.{DateTime, DateTimeDifference}
 
 /**
   * Created by Lorenz on 19/04/2016.

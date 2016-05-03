@@ -1,7 +1,8 @@
 import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Assert._
 import org.junit.Test
-import testsetann.{DateTime, DateTimeDifference}
+import testsetann.DateTimeDifference
+import time.{DateTime, DateTimeDifference}
 
 /**
   * Created by Lorenz on 13/04/2016.

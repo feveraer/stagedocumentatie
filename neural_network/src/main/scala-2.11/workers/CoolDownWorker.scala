@@ -4,7 +4,7 @@ import akka.actor.Actor
 import ann.Constants
 import cassandra.{CassandraConnection, SensorLog, SensorPrediction}
 import org.apache.log4j.Logger
-import testsetann.DateTime
+import time.DateTime
 
 /**
   * Created by Frederic on 3/05/2016.

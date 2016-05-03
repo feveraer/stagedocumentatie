@@ -1,5 +1,7 @@
 package testsetann
 
+import time.{DateTime, DateTimeDifference}
+
 /**
   * Created by Lorenz on 13/04/2016.
   */

@@ -2,9 +2,11 @@ package cassandra
 
 import com.datastax.driver.core.{Cluster, ResultSet, Session}
 import connections.SSHTunnel
+import helpers.Helpers.{Quartile, Season}
 import org.apache.log4j.Logger
 import org.encog.ml.MLRegression
 import org.encog.ml.data.versatile.NormalizationHelper
+import time.DateTime
 
 
 /**
@@ -238,8 +240,6 @@ object CassandraConnection {
     result
   }
 
-  // Get returns the average set temp for this sensor.
-  // If no logs for this time, return the most recent setTemp
   def getAverageSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
     val cqlStatement =
       "SELECT settemperature FROM " + keyspace + ".set_temperatures " +
@@ -274,6 +274,17 @@ object CassandraConnection {
 
   // Returns average temperature for specified settings
   // If average is not available then return most recent set temp
+  // Convenience method
+  def getSetTempFor(log: SensorLog): Double = {
+    val dateTime = new DateTime(log.date, log.time)
+    val date = dateTime.date
+    val time = dateTime.time
+
+    getSetTempFor(log.sensorId, Season.getSeason(date), date.getDayOfWeek.toString, time.getHour, Quartile.getQuartile(time))
+  }
+
+  // Returns average temperature for specified settings
+  // If average is not available then return most recent set temp
   def getSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
     try{
       val average = getAverageSetTempFor(sensorId, season, day, hour, quartile)
@@ -289,7 +300,6 @@ object CassandraConnection {
   /*
    * Helpers
    */
-
   private def checkSession(): Unit = {
     if (session == null) {
       throw new RuntimeException("Cassandra session not initialized")
