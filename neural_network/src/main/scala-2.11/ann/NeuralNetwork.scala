@@ -5,14 +5,13 @@ import java.time.format.DateTimeFormatter
 import java.time.{LocalDate, LocalTime}
 import java.util.Date
 
-import cassandra.{CassandraConnection, SensorLog, SensorPrediction}
+import cassandra.{CassandraConnection, SensorLog}
 import org.encog.ml.MLRegression
 import org.encog.ml.data.MLData
 import org.encog.ml.data.versatile.NormalizationHelper
 import org.encog.persist.EncogDirectoryPersistence
 import org.encog.util.arrayutil.VectorWindow
 import org.encog.util.csv.ReadCSV
-import testsetann.DateTimeDifference
 import time.{DateTime, DateTimeDifference}
 
 /**

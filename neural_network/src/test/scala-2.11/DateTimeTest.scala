@@ -1,7 +1,6 @@
 import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Assert._
 import org.junit.Test
-import testsetann.DateTimeDifference
 import time.{DateTime, DateTimeDifference}
 
 /**
