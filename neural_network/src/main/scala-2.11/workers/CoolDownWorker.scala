@@ -19,15 +19,7 @@ class CoolDownWorker extends Actor {
     }
   }
 
-  private def writePredictionToCassandra(sensorLog: SensorLog, prediction: Double) {
-    val predictedDateTime = new DateTime(sensorLog.date, sensorLog.time).plus(Constants.DIFF_TO_PREDICTION)
-    // Write prediction output to Cassandra.
-    CassandraConnection.insertSensorPrediction(new SensorPrediction(
-      sensorLog.sensorId,
-      predictedDateTime.date.toString,
-      predictedDateTime.time.toString,
-      prediction
-    ))
-    logger.info("Wrote prediction to Cassandra.")
+  private def correctSetTemp {
+
   }
 }
