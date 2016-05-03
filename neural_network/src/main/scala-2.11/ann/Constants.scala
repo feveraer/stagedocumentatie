@@ -13,6 +13,7 @@ object Constants {
   val DEFAULT_TRAINING_SET_PATH = "training_set.tsv"
   val ENCOG_BEST_METHOD_PATH = "network/best_method.eg"
   val ENCOG_NORMALIZATION_HELPER_PATH = "network/normalization_helper.eg"
+  val DEFAULT_USER_ID = 0
 
   // time difference to prediction in days, hours, minutes, seconds
   val DIFF_TO_PREDICTION: DateTimeDifference = new DateTimeDifference(0, 0, 15, 0)
