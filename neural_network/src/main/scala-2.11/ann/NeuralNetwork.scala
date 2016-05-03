@@ -60,6 +60,14 @@ class NeuralNetwork {
       sensorLogs :+= currentLog
     }
 
+    // If the current log is a modified version of the last log,
+    // then replace the last log with this modified version.
+    // Occurs when a second prediction is needed.
+    if(sensorLogs.last.isSetTempModified(currentLog)){
+      sensorLogs = sensorLogs.slice(0,sensorLogs.size - 1)
+      sensorLogs :+= currentLog
+    }
+
     // Test without Cassandra
 //    val testSensorLogs = Vector(
 //      new SensorLog(1, "2016-04-26", "09:34:16.000", "Comfort", 21, 22),

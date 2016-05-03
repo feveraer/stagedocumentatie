@@ -33,7 +33,7 @@ class PredictWorker extends Actor{
     }
     ann.loadModel(model._1, model._2)
     logger.debug("Prediction test for next temperature")
-    logger.debug("Current log: " + sensorLog.toString)
+    logger.info("Current log: " + sensorLog.toString)
     var prediction = ann.predict(sensorLog)
     logger.info("Prediction: " + prediction)
     if (prediction > sensorLog.setTemp) {
@@ -53,7 +53,7 @@ class PredictWorker extends Actor{
       logger.info("Prediction 2: " + prediction)
     }
 
-    logger.info("Write log to Cassandra")
+    logger.info("Write prediction to Cassandra")
     writePredictionToCassandra(sensorLog, prediction)
   }
 
