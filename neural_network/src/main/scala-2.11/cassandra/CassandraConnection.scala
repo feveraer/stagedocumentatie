@@ -240,8 +240,8 @@ object CassandraConnection {
     val cqlStatement =
       "SELECT settemperature FROM " + keyspace + ".set_temperatures " +
         "WHERE outputid = " + sensorId + " " +
-        "and season = '" + season + "' " +
-        "and day = '" + day + "' " +
+        "and season = '" + season.toUpperCase + "' " +
+        "and day = '" + day.toUpperCase + "' " +
         "and hour = " + hour + " " +
         "and quartile = " + quartile +
         ";"
