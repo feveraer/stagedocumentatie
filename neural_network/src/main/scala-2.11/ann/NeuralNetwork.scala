@@ -106,16 +106,6 @@ class NeuralNetwork {
       window.add(slice)
     })
 
-    val predictedDateTime = new DateTime(currentLog.date, currentLog.time).plus(Constants.DIFF_TO_PREDICTION)
-
-    // Write prediction output to Cassandra.
-    CassandraConnection.insertSensorPrediction(new SensorPrediction(
-      currentLog.sensorId,
-      predictedDateTime.date.toString,
-      predictedDateTime.time.toString,
-      output
-    ))
-
     output
   }
 
