@@ -11,13 +11,22 @@ class ParentWorker extends Actor {
 
   override def receive = {
     case data: ByteString => {
-
       val cassandraWorker = context.actorOf(Props[CassandraWorker])
-      val predictWorker = context.actorOf(Props[PredictWorker])
-
       val log = decode(data)
+      val sensorLog = log.toSensorLog()
+
+      // Send Log to CassandraWorker.
       cassandraWorker ! log
-      predictWorker ! log.toSensorLog()
+
+      // If measured temperature is less than the set temperature, let
+      // WarmUpWorker handle the SensorLog, else CoolDownWorker.
+      if (sensorLog.measuredTemp < sensorLog.setTemp) {
+        val warmUpWorker = context.actorOf(Props[WarmUpWorker])
+        warmUpWorker ! sensorLog
+      } else {
+        val coolDownWorker = context.actorOf(Props[CoolDownWorker])
+        coolDownWorker ! sensorLog
+      }
     }
   }
 

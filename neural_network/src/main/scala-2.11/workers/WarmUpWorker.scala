@@ -11,8 +11,8 @@ import testsetann.DateTime
 /**
   * Created by Frederic on 2/05/2016.
   */
-class PredictWorker extends Actor{
-  private val logger = Logger.getLogger("PredictWorker")
+class WarmUpWorker extends Actor{
+  private val logger = Logger.getLogger("WarmUpWorker")
 
   override def receive = {
     case sensorLog: SensorLog => {
