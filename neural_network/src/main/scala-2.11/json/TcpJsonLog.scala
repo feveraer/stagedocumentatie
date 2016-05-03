@@ -53,15 +53,15 @@ object TcpJsonLog {
       val day = date.getDayOfMonth
 
       if (month < 4) {
-        return "Winter"
+        return "WINTER"
       }
       if (month < 7) {
-        return "Spring"
+        return "SPRING"
       }
       if (month < 10){
-        return "Summer"
+        return "SUMMER"
       }
-      "Fall"
+      "FALL"
     }
   }
 
