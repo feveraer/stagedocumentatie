@@ -14,12 +14,13 @@ class CoolDownWorker extends Actor {
 
   override def receive = {
     case sensorLog: SensorLog => {
-      // TODO: Correct set temperature of sensorLog
+      correctSetTemp(sensorLog)
       context.stop(self)
     }
   }
 
-  private def correctSetTemp {
-
+  private def correctSetTemp(sensorLog: SensorLog) {
+    val correctSetTemp = CassandraConnection.getSetTempFor(sensorLog)
+    logger.info("Set " + correctSetTemp + " as set temperature in sensor with id: " + sensorLog.sensorId)
   }
 }
