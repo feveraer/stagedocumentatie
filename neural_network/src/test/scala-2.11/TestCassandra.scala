@@ -36,7 +36,7 @@ object TestCassandra {
 
       val model = EncogDirectoryPersistence.loadObject(new File(pathToModel)).asInstanceOf[MLRegression]
 
-      val entry = SensorModel.build(17, model, helper)
+      val entry = SensorModel.build(0, model, helper)
 
       CassandraConnection.insertSensorModels(entry)
 
