@@ -2,8 +2,10 @@ import java.net.InetSocketAddress
 
 import akka.actor.{ActorSystem, Props}
 import connections.Connections
+import logging.LoggingConstants
+import org.apache.log4j.{BasicConfigurator, Logger}
 import tcp.{Client, QbusConstants}
-import workers.{CassandraWorker, ParentWorker}
+import workers.ParentWorker
 
 /**
   * Created by Frederic on 25/04/2016.
@@ -11,6 +13,9 @@ import workers.{CassandraWorker, ParentWorker}
 object TCPSocketTest {
 
   def main(args: Array[String]) {
+    BasicConfigurator.configure()
+    Logger.getRootLogger().setLevel(LoggingConstants.level)
+
     Connections.connect
 
     val actorSystem = ActorSystem("ActorSystem")

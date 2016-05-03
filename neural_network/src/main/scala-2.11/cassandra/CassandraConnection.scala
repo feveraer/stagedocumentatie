@@ -2,6 +2,7 @@ package cassandra
 
 import com.datastax.driver.core.{Cluster, ResultSet, Session}
 import connections.SSHTunnel
+import org.apache.log4j.Logger
 import org.encog.ml.MLRegression
 import org.encog.ml.data.versatile.NormalizationHelper
 
@@ -10,6 +11,7 @@ import org.encog.ml.data.versatile.NormalizationHelper
   * Created by Lorenz on 31.03.16.
   */
 object CassandraConnection {
+  private val logger = Logger.getLogger("CassandraConnection")
   // config variables
   val keyspace = "qbus"
 
@@ -20,7 +22,7 @@ object CassandraConnection {
   def connect(): Session = {
     cluster = Cluster.builder().addContactPoint("localhost").withPort(SSHTunnel.lportCassandra).build()
     val metadata = cluster.getMetadata
-    printf("Connected to cluster: %s\n", metadata.getClusterName)
+    logger.info("Connected to cluster: "+ metadata.getClusterName +"\n")
 
     session = cluster.connect(keyspace)
     session
@@ -41,7 +43,7 @@ object CassandraConnection {
     }
     catch {
       case e: Exception =>
-        println(e.getMessage)
+        logger.warn(e.getMessage)
         None
     }
   }
@@ -50,7 +52,7 @@ object CassandraConnection {
   def close() {
     if (cluster != null) {
       cluster.close()
-      println("Connection closed")
+      logger.info("Connection closed")
     }
   }
 
@@ -68,7 +70,7 @@ object CassandraConnection {
 
     executeQuery(cqlStatement)
 
-    //    println("Log inserted")
+    logger.debug("Log inserted")
   }
 
   def insertSensorInfo(info: SensorInfo): Unit = {
@@ -81,7 +83,7 @@ object CassandraConnection {
 
     executeQuery(cqlStatement)
 
-    //    println("Info inserted")
+    logger.debug("Info inserted")
   }
 
   def insertSensorPrediction(prediction: SensorPrediction): Unit = {
@@ -94,7 +96,7 @@ object CassandraConnection {
 
     executeQuery(cqlStatement)
 
-    //    println("Prediction added")
+    logger.debug("Prediction added")
   }
 
   def insertSensorModels(model: SensorModel): Unit = {
@@ -106,7 +108,7 @@ object CassandraConnection {
 
     executeQuery(cqlStatement)
 
-    //    println("Model added")
+    logger.debug("Model added")
   }
 
   def insertSetTemperature(log: SetTemperatureLog): Unit = {
