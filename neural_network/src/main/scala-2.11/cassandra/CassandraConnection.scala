@@ -238,6 +238,8 @@ object CassandraConnection {
     result
   }
 
+  // Get returns the average set temp for this sensor.
+  // If no logs for this time, return the most recent setTemp
   def getAverageSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
     val cqlStatement =
       "SELECT settemperature FROM " + keyspace + ".set_temperatures " +
@@ -251,7 +253,7 @@ object CassandraConnection {
     val queryResult = executeQuery(cqlStatement)
 
     if (queryResult.isEmpty) {
-      throw new RuntimeException("No users in sytem")
+      throw new RuntimeException("Nothing to calculate average from")
     }
 
     val resultSet = queryResult.get
@@ -268,6 +270,20 @@ object CassandraConnection {
 
     }
     sum / count
+  }
+
+  // Returns average temperature for specified settings
+  // If average is not available then return most recent set temp
+  def getSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
+    try{
+      val average = getAverageSetTempFor(sensorId, season, day, hour, quartile)
+      average
+    } catch {
+      case e: RuntimeException => {
+        val mostRecentLog = getMostRecentTemperatureEntries(sensorId, 1)
+        mostRecentLog(0).setTemp
+      }
+    }
   }
 
   /*
