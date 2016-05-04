@@ -61,6 +61,11 @@ object CassandraTestDataImporter {
 
     CassandraTestConnection.executeQuery(cqlStatement)
 
+    cqlStatement =
+      "insert into sensor_logs(outputid, date, time, regime, settemperature, measuredtemperature) " +
+        "values(0, '2014-11-25', '02:08:40.000', 'SOME_REGIME', 17,22);"
+
+    CassandraTestConnection.executeQuery(cqlStatement)
 
     try {
       // put model in Cassandra
