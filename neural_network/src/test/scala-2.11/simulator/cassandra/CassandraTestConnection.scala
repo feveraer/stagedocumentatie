@@ -64,7 +64,7 @@ object CassandraTestConnection {
    */
 
   def insertSensorLog(log: SensorLog): Unit = {
-    checkSession
+    checkSession()
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_logs (outputid, date, time, regime, measuredtemperature, settemperature) " +
@@ -76,34 +76,21 @@ object CassandraTestConnection {
     logger.debug("Log inserted")
   }
 
-  def insertSensorInfo(info: SensorInfo): Unit = {
-    checkSession
+  def insertHistoricSensorLog(log: SensorLog): Unit = {
+    checkSession()
 
     val cqlStatement =
-      "INSERT INTO " + keyspace + ".sensor_info (outputid, location, user) " +
-        "VALUES(" + info.sensorId + ",'" + info.location + "','" + info.user + "')" +
-        "IF NOT EXISTS;"
+      "INSERT INTO " + keyspace + ".historic_sensor_logs (outputid, date, time, regime, measuredtemperature, settemperature) " +
+        "VALUES(" + log.sensorId + ",'" + log.date + "','" + log.time + "','" + log.regime + "'," +
+        log.measuredTemp + "," + log.setTemp + ");"
 
     executeQuery(cqlStatement)
 
-    logger.debug("Info inserted")
-  }
-
-  def insertSensorPrediction(prediction: SensorPrediction): Unit = {
-    checkSession
-
-    val cqlStatement =
-      "INSERT INTO " + keyspace + ".sensor_predictions(outputid, date, time, prediction) " +
-        "VALUES (" + prediction.sensorId + ",'" + prediction.date + "','" + prediction.time + "', " +
-        prediction.predictedTemp + ");"
-
-    executeQuery(cqlStatement)
-
-    logger.debug("Prediction added")
+    logger.debug("Log inserted")
   }
 
   def insertSensorModels(model: SensorModel): Unit = {
-    checkSession
+    checkSession()
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_models(outputid, model, normalizer ) " +
@@ -130,7 +117,7 @@ object CassandraTestConnection {
    */
 
   def getANNModelsForOutput(id: Int): (NormalizationHelper, MLRegression) = {
-    checkSession
+    checkSession()
 
     val cqlStatement = "SELECT * FROM " + keyspace + ".sensor_models;"
     val result = executeQuery(cqlStatement)
@@ -147,7 +134,7 @@ object CassandraTestConnection {
   }
 
   def getMostRecentTemperatureEntries(outputId: Int, numberOfEntries: Int): Vector[SensorLog] = {
-    checkSession
+    checkSession()
 
     var result: Vector[SensorLog] = Vector.empty
 
@@ -186,62 +173,9 @@ object CassandraTestConnection {
     result
   }
 
-  def getDistinctUsers(): Vector[String] = {
-    checkSession
-
-    var result: Vector[String] = Vector.empty
-
-    val cqlStatement =
-      "SELECT DISTINCT user from " + keyspace + ".sensor_info;"
-
-    val queryResult = executeQuery(cqlStatement)
-
-    if (queryResult.isEmpty) {
-      throw new RuntimeException("No users in sytem")
-    }
-
-    val resultSet = queryResult.get
-    val resultIterator = resultSet.iterator()
-
-    while (resultIterator.hasNext) {
-      val row = resultIterator.next()
-      result :+= row.getString("user")
-    }
-
-    result
-  }
-
-  def getSensorsForUser(user: String): Vector[SensorInfo] = {
+  def getAverageSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
     checkSession()
 
-    var result: Vector[SensorInfo] = Vector.empty
-
-    val cqlStatement =
-      "SELECT * FROM " + keyspace + ".sensor_info " +
-        "WHERE user = '" + user + "';"
-
-    val queryResult = executeQuery(cqlStatement)
-
-    if (queryResult.isEmpty) {
-      throw new RuntimeException("No users in sytem")
-    }
-
-    val resultSet = queryResult.get
-    val resultIterator = resultSet.iterator()
-
-    while (resultIterator.hasNext) {
-      val row = resultIterator.next()
-
-      val user = row.getString("user")
-      val outputId = row.getLong("outputid").toInt
-      val location = row.getString("location")
-
-      result :+= new SensorInfo(outputId, user, location)
-    }
-    result
-  }
-
-  def getAverageSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
     val cqlStatement =
       "SELECT settemperature FROM " + keyspace + ".set_temperatures " +
         "WHERE outputid = " + sensorId + " " +
@@ -277,6 +211,8 @@ object CassandraTestConnection {
   // If average is not available then return most recent set temp
   // Convenience method
   def getSetTempFor(log: SensorLog): Double = {
+    checkSession()
+
     val dateTime = new DateTime(log.date, log.time)
     val date = dateTime.date
     val time = dateTime.time
@@ -287,6 +223,8 @@ object CassandraTestConnection {
   // Returns average temperature for specified settings
   // If average is not available then return most recent set temp
   def getSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
+    checkSession()
+
     try{
       val average = getAverageSetTempFor(sensorId, season, day, hour, quartile)
       average
