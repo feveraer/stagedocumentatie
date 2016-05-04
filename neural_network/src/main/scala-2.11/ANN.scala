@@ -34,11 +34,11 @@ object ANN {
       } while (!correctName)
       trainNetwork
     }
-//    predict
-     predictFromCsv
-     draw
-     style
-     stopWisp
+    predict
+//     predictFromCsv
+//     draw
+//     style
+//     stopWisp
   }
 
   def trainNetwork {
