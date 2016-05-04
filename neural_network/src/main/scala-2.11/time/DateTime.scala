@@ -17,12 +17,16 @@ case class DateTime(date: LocalDate, time: LocalTime) {
     LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm:ss.SSS")))
 
   def plus(difference: DateTimeDifference): DateTime = {
-    val date = this.date
+    var date = this.date
       .plusDays(difference.days)
     val time = this.time
       .plusHours(difference.hours)
       .plusMinutes(difference.minutes)
       .plusSeconds(difference.seconds)
+
+    if(time.isBefore(this.time)){
+      date = date.plusDays(1)
+    }
 
     new DateTime(date, time)
   }

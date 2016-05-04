@@ -1,5 +1,5 @@
 
-package simulator.cassandra
+package simulator.cassandraTestPackage
 
 import cassandra.{EncogSerializer, _}
 import com.datastax.driver.core.{Cluster, ResultSet, Session}
@@ -241,7 +241,7 @@ object CassandraTestConnection {
    */
   private def checkSession(): Unit = {
     if (session == null) {
-      throw new RuntimeException("Cassandra session not initialized")
+      throw new RuntimeException("CassandraTestConnection session not initialized")
     }
   }
 }

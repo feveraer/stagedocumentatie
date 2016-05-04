@@ -1,4 +1,4 @@
-package simulator.cassandra.importers
+package simulator.cassandraTestPackage.importers
 
 import java.io.{File, FileInputStream, ObjectInputStream}
 
@@ -9,7 +9,7 @@ import helpers.Helpers.{Quartile, Season}
 import org.encog.ml.MLRegression
 import org.encog.ml.data.versatile.NormalizationHelper
 import org.encog.persist.EncogDirectoryPersistence
-import simulator.cassandra.CassandraTestConnection
+import simulator.cassandraTestPackage.CassandraTestConnection
 import time.DateTime
 
 import scala.io.Source
@@ -51,12 +51,13 @@ object CassandraTestDataImporter {
     // Put initial logs in sensor_logs
     var cqlStatement =
       "insert into sensor_logs(outputid, date, time, regime, settemperature, measuredtemperature) " +
-        "values(0, '2014-11-24', '22:57:32', 'SOME_REGIME', 17,23);"
+        "values(0, '2014-11-24', '22:57:32.000', 'SOME_REGIME', 17,23);"
 
     CassandraTestConnection.executeQuery(cqlStatement)
 
     cqlStatement =
-      "insert into sensor_logs(outputid, date, time, regime, settemperature, measuredtemperature) values(0, '2014-11-25', '00:55:28', 'SOME_REGIME', 17,22);"
+      "insert into sensor_logs(outputid, date, time, regime, settemperature, measuredtemperature) " +
+        "values(0, '2014-11-25', '00:55:28.000', 'SOME_REGIME', 17,22);"
 
     CassandraTestConnection.executeQuery(cqlStatement)
 

@@ -12,6 +12,7 @@ import org.encog.ml.data.versatile.NormalizationHelper
 import org.encog.persist.EncogDirectoryPersistence
 import org.encog.util.arrayutil.VectorWindow
 import org.encog.util.csv.ReadCSV
+import simulator.cassandraTestPackage.CassandraTestConnection
 import time.{DateTime, DateTimeDifference}
 
 /**
