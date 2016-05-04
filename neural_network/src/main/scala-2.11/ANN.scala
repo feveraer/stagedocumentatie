@@ -34,11 +34,11 @@ object ANN {
       } while (!correctName)
       trainNetwork
     }
-    predict
-    // predictFromCsv
-    // draw
-    // style
-    // stopWisp
+//    predict
+     predictFromCsv
+     draw
+     style
+     stopWisp
   }
 
   def trainNetwork {
@@ -76,6 +76,9 @@ object ANN {
         }
       } while (!correctName)
     }
+    ann.loadModel(
+      Constants.RESOURCES_PATH + Constants.ENCOG_NORMALIZATION_HELPER_PATH,
+      Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH)
     data = ann.predictFromCSV(Constants.RESOURCES_PATH + trainingSetFileName)
   }
 
