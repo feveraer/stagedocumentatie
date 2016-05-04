@@ -48,6 +48,19 @@ object CassandraTestDataImporter {
       CassandraTestConnection.insertSetTemperature(setTempLog)
     }
 
+    // Put initial logs in sensor_logs
+    var cqlStatement =
+      "insert into sensor_logs(outputid, date, time, regime, settemperature, measuredtemperature) " +
+        "values(0, '2014-11-24', '22:57:32', 'SOME_REGIME', 17,23);"
+
+    CassandraTestConnection.executeQuery(cqlStatement)
+
+    cqlStatement =
+      "insert into sensor_logs(outputid, date, time, regime, settemperature, measuredtemperature) values(0, '2014-11-25', '00:55:28', 'SOME_REGIME', 17,22);"
+
+    CassandraTestConnection.executeQuery(cqlStatement)
+
+
     try {
       // put model in Cassandra
       val fin: FileInputStream = new FileInputStream(pathToNormalizationHelper)
