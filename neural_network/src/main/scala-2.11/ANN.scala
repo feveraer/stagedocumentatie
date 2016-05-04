@@ -64,9 +64,6 @@ object ANN {
 
   def predictFromCsv {
     ann = new NeuralNetwork
-    ann.loadModel(
-      Constants.RESOURCES_PATH + Constants.ENCOG_NORMALIZATION_HELPER_PATH,
-      Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH)
     if (!shouldTrain) {
       var correctName = false
       do {

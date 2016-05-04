@@ -40,7 +40,7 @@ object TestCassandra {
 
       CassandraConnection.insertSensorModels(entry)
 
-      val result = CassandraConnection.getANNModelsForOutput(17)
+      val result = CassandraConnection.getANNModelsForOutput(0)
       val model_result = result._1
       val normalizer_result = result._2
 

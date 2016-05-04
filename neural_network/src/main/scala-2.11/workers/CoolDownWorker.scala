@@ -21,6 +21,7 @@ class CoolDownWorker extends Actor {
 
   private def correctSetTemp(sensorLog: SensorLog) {
     val correctSetTemp = CassandraConnection.getSetTempFor(sensorLog)
-    logger.info("Set " + correctSetTemp + " as set temperature in sensor with id: " + sensorLog.sensorId)
+    logger.info("Send correct set temperature to sensor")
+    println("Set " + correctSetTemp + " as set temperature in sensor with id: " + sensorLog.sensorId)
   }
 }
