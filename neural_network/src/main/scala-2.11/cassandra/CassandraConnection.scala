@@ -63,7 +63,7 @@ object CassandraConnection {
    */
 
   def insertSensorLog(log: SensorLog): Unit = {
-    checkSession
+    checkSession()
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_logs (outputid, date, time, regime, measuredtemperature, settemperature) " +
@@ -76,7 +76,7 @@ object CassandraConnection {
   }
 
   def insertSensorInfo(info: SensorInfo): Unit = {
-    checkSession
+    checkSession()
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_info (outputid, location, user) " +
@@ -89,7 +89,7 @@ object CassandraConnection {
   }
 
   def insertSensorPrediction(prediction: SensorPrediction): Unit = {
-    checkSession
+    checkSession()
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_predictions(outputid, date, time, prediction) " +
@@ -102,7 +102,7 @@ object CassandraConnection {
   }
 
   def insertSensorModels(model: SensorModel): Unit = {
-    checkSession
+    checkSession()
 
     val cqlStatement =
       "INSERT INTO " + keyspace + ".sensor_models(outputid, model, normalizer ) " +
@@ -129,7 +129,7 @@ object CassandraConnection {
    */
 
   def getANNModelsForOutput(id: Int): (NormalizationHelper, MLRegression) = {
-    checkSession
+    checkSession()
 
     val cqlStatement = "SELECT * FROM " + keyspace + ".sensor_models;"
     val result = executeQuery(cqlStatement)
@@ -146,7 +146,7 @@ object CassandraConnection {
   }
 
   def getMostRecentTemperatureEntries(outputId: Int, numberOfEntries: Int): Vector[SensorLog] = {
-    checkSession
+    checkSession()
 
     var result: Vector[SensorLog] = Vector.empty
 
@@ -186,7 +186,7 @@ object CassandraConnection {
   }
 
   def getDistinctUsers(): Vector[String] = {
-    checkSession
+    checkSession()
 
     var result: Vector[String] = Vector.empty
 
@@ -241,6 +241,8 @@ object CassandraConnection {
   }
 
   def getAverageSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
+    checkSession()
+
     val cqlStatement =
       "SELECT settemperature FROM " + keyspace + ".set_temperatures " +
         "WHERE outputid = " + sensorId + " " +
@@ -286,6 +288,8 @@ object CassandraConnection {
   // Returns average temperature for specified settings
   // If average is not available then return most recent set temp
   def getSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
+    checkSession()
+
     try{
       val average = getAverageSetTempFor(sensorId, season, day, hour, quartile)
       average
