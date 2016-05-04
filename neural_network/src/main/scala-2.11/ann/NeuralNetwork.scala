@@ -51,22 +51,7 @@ class NeuralNetwork {
     // Initialize empty prediction output.
     var output: Double = 0.0
 
-    // Take last x values from Cassandra where x = Constants.WINDOW_SIZE.
-    var sensorLogs = CassandraConnection.getMostRecentTemperatureEntries(
-      currentLog.sensorId, Constants.WINDOW_SIZE + 1)
-    // Only add currentLog if it's not yet stored in Cassandra
-    if (sensorLogs.last != currentLog) {
-      sensorLogs = sensorLogs.slice(1, sensorLogs.size)
-      sensorLogs :+= currentLog
-    }
-
-    // If the current log is a modified version of the last log,
-    // then replace the last log with this modified version.
-    // Occurs when a second prediction is needed.
-    if(sensorLogs.last.isSetTempModified(currentLog)){
-      sensorLogs = sensorLogs.slice(0,sensorLogs.size - 1)
-      sensorLogs :+= currentLog
-    }
+    val sensorLogs = fetchSensorLogs(currentLog)
 
     // Test without Cassandra
 //    val testSensorLogs = Vector(
@@ -115,6 +100,26 @@ class NeuralNetwork {
     })
 
     output
+  }
+
+  private def fetchSensorLogs(currentLog: SensorLog): Vector[SensorLog] = {
+    // Take last x values from Cassandra where x = Constants.WINDOW_SIZE.
+    var sensorLogs = CassandraConnection.getMostRecentTemperatureEntries(
+      currentLog.sensorId, Constants.WINDOW_SIZE + 1)
+    // Only add currentLog if it's not yet stored in Cassandra
+    if (sensorLogs.last != currentLog) {
+      sensorLogs = sensorLogs.slice(1, sensorLogs.size)
+      sensorLogs :+= currentLog
+    }
+
+    // If the current log is a modified version of the last log,
+    // then replace the last log with this modified version.
+    // Occurs when a second prediction is needed.
+    if(sensorLogs.last.isSetTempModified(currentLog)){
+      sensorLogs = sensorLogs.slice(0,sensorLogs.size - 1)
+      sensorLogs :+= currentLog
+    }
+    sensorLogs
   }
 
   // Format SensorLogs:
