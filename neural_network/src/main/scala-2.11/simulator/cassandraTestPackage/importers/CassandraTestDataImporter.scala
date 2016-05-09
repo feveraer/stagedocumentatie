@@ -1,6 +1,7 @@
 package simulator.cassandraTestPackage.importers
 
 import java.io.{File, FileInputStream, ObjectInputStream}
+import java.time.format.DateTimeFormatter
 
 import ann.Constants
 import cassandra.{SensorLog, SensorModel, SetTemperatureLog}
@@ -97,7 +98,8 @@ object CassandraTestDataImporter {
 
       // Create params for SensorLog
       val date = dateTime.date.toString
-      val time = dateTime.time.toString
+      val formatter =  DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+      val time = dateTime.time.format(formatter)
       val setTemp = parts(9).toInt
       val measured = parts(10).toInt
 
