@@ -11,6 +11,7 @@ object Constants {
   val FORMAT = new CSVFormat('.', '\t')
   val RESOURCES_PATH = "src/main/resources/"
   val DEFAULT_TRAINING_SET_PATH = "training_set.tsv"
+  val DEFAULT_TRAINING_SET_PATH_V2 = "training_set.tsv"
   val ENCOG_BEST_METHOD_PATH = "network/best_method.eg"
   val ENCOG_NORMALIZATION_HELPER_PATH = "network/normalization_helper.eg"
   val DEFAULT_USER_ID = 0

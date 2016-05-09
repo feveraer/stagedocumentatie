@@ -91,5 +91,9 @@ object TimeHelper{
   def differenceBetweenInMinutes(fromDate: LocalDateTime, toDate: LocalDateTime): Long ={
     fromDate.until( toDate, ChronoUnit.MINUTES)
   }
+
+  def differenceInMinutesToMillis(minutes: Long): Long ={
+    minutes * 60 * 1000
+  }
 }
 

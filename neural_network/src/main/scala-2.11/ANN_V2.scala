@@ -1,6 +1,6 @@
 import java.nio.file.{Files, Paths}
 
-import ann.{Constants, NetworkTrainer, NeuralNetwork}
+import ann._
 import cassandra.SensorLog
 import com.quantifind.charts.Highcharts._
 import com.quantifind.charts.highcharts.AxisType
@@ -12,11 +12,11 @@ import scala.io.StdIn
 /**
   * Created by Frederic on 19/04/2016.
   */
-object ANN {
-  private var networkTrainer: NetworkTrainer = null
+object ANN_V2 {
+  private var networkTrainer: NetworkTrainerV2 = null
   private var shouldTrain = false
   private var trainingSetFileName: String = null
-  private var ann: NeuralNetwork = null
+  private var ann: NeuralNetworkV2 = null
   private var data: Vector[(Seq[Long], Seq[Double])] = Vector.empty
 
   def main(args: Array[String]) {
@@ -35,20 +35,20 @@ object ANN {
       trainNetwork
     }
 //    predict
-     predictFromCsv
-     draw
-     style
-     stopWisp
+         predictFromCsv
+         draw
+         style
+         stopWisp
   }
 
   def trainNetwork {
-    networkTrainer = new NetworkTrainer(Constants.RESOURCES_PATH + trainingSetFileName)
+    networkTrainer = new NetworkTrainerV2(Constants.RESOURCES_PATH + trainingSetFileName)
     networkTrainer.train
     networkTrainer.exportModel
   }
 
   def predict {
-    ann = new NeuralNetwork
+    ann = new NeuralNetworkV2
     ann.loadModel(
       Constants.RESOURCES_PATH + Constants.ENCOG_NORMALIZATION_HELPER_PATH,
       Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH)
@@ -63,7 +63,7 @@ object ANN {
   }
 
   def predictFromCsv {
-    ann = new NeuralNetwork
+    ann = new NeuralNetworkV2
     if (!shouldTrain) {
       var correctName = false
       do {
@@ -124,3 +124,4 @@ object ANN {
     stopWispServer
   }
 }
+
