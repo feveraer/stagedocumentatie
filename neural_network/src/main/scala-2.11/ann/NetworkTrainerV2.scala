@@ -61,7 +61,7 @@ class NetworkTrainerV2 (val pathToTrainingsData: String) {
     // Make trainingsArgs an empty string
     model.selectMethod(data,
       MLMethodFactory.TYPE_FEEDFORWARD,
-      "?:B->SIGMOID->42:B->SIGMOID->?",
+      "?:B->SIGMOID->7:B->SIGMOID->?",
       MLTrainFactory.TYPE_BACKPROP,
       "")
 

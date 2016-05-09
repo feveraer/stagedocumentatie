@@ -1,8 +1,6 @@
 package ann
 
 import java.io.{File, FileInputStream, ObjectInputStream}
-import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, LocalTime}
 import java.util.Date
 
 import cassandra.{CassandraConnection, SensorLog}
@@ -21,7 +19,7 @@ import time.{DateTime, DateTimeDifference, TimeHelper}
 class NeuralNetworkV2 {
   // number of columns in training_set - 1
   // wished output doesn't count as input
-  private val numberOfColumns: Int = 4
+  private val numberOfColumns: Int = 3
   private var helper: NormalizationHelper = null
   private var bestMethod: MLRegression = null
 
