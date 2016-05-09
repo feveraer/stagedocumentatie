@@ -1,8 +1,10 @@
 package simulator
 
 import java.io.{File, FileInputStream, ObjectInputStream}
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-import ann.{Constants, NeuralNetwork}
+import ann.{Constants, NeuralNetwork, NeuralNetworkV2}
 import cassandra.SensorLog
 import connections.SSHTunnel
 import helpers.Helpers.{Quartile, Season}
@@ -17,7 +19,11 @@ import time.DateTime
   */
 object TestSmoothing {
   private val sensorID = 0
-  private val ann = new NeuralNetwork
+  private val ann = new NeuralNetworkV2
+
+  //    val (normalizationhelper, model) = CassandraTestConnection.getANNModelsForOutput(sensorID)
+  val normalizationhelper = getNormHelper()
+  val model = getModel()
 
   def main(args: Array[String]) {
     SSHTunnel.connect("root", "Ugent2015")
@@ -25,12 +31,32 @@ object TestSmoothing {
 
     println("Starting")
 
-//    val (normalizationhelper, model) = CassandraTestConnection.getANNModelsForOutput(sensorID)
-    val normalizationhelper = getNormHelper()
-    val model = getModel()
-
     ann.loadModel(normalizationhelper, model)
 
+    //    withAdjustments
+    withoutAdjustments
+
+    CassandraTestConnection.close()
+    SSHTunnel.disconnect()
+  }
+
+  private def withoutAdjustments: Unit = {
+    val logs = CassandraTestConnection.getAllLogsForSensor(0)
+    var currentLog = logs(0)
+    var counter = 1
+
+    while (counter < 100) {
+      println("Start iteration: " + counter)
+      val prediction = ann.predictFromDataSequence(logs.slice(counter-1, counter+2))
+      println("Date: " + currentLog.date + "\tTime: " + currentLog.time + "\tPrediction in " +
+        Constants.DIFF_TO_PREDICTION_MINUTES + ": " + prediction)
+      println("Measured: " + currentLog.measuredTemp + "\tSet: " + currentLog.setTemp)
+      currentLog = logs(counter)
+      counter += 1
+    }
+  }
+
+  private def withAdjustments(): Unit = {
     var currentLog = CassandraTestConnection.getMostRecentTemperatureEntries(sensorID, 1)(0)
     var counter = 1
 
@@ -45,9 +71,6 @@ object TestSmoothing {
       currentLog = CassandraTestConnection.getMostRecentTemperatureEntries(sensorID, 1)(0)
       counter += 1
     }
-
-    CassandraTestConnection.close()
-    SSHTunnel.disconnect()
   }
 
   private def warmUp(sensorLog: SensorLog): Unit = {
@@ -86,24 +109,25 @@ object TestSmoothing {
   }
 
   private def writePredictionLog(log: SensorLog, prediction: Double): Unit = {
-    val predictedDateTime = new DateTime(log.date, log.time).plus(Constants.DIFF_TO_PREDICTION)
+    val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+    val predictedDateTime = LocalDateTime.parse(log.date + " " + log.time, dateTimeFormatter)
 
-    val season = Season.getSeason(predictedDateTime.date)
-    val quartile = Quartile.getQuartile(predictedDateTime.time)
+    val season = Season.getSeason(predictedDateTime.toLocalDate)
+    val quartile = Quartile.getQuartile(predictedDateTime.toLocalTime)
 
     val predictedSetTemp = CassandraTestConnection.getSetTempFor(
       sensorID,
       season,
-      predictedDateTime.date.getDayOfWeek.toString,
-      predictedDateTime.time.getHour,
+      predictedDateTime.toLocalDate.getDayOfWeek.toString,
+      predictedDateTime.toLocalTime.getHour,
       quartile
     )
 
     val predictionSensorLog =
       new SensorLog(
         sensorID,
-        predictedDateTime.date.toString,
-        predictedDateTime.time.toString + ".000",
+        predictedDateTime.toLocalDate.toString,
+        predictedDateTime.toLocalTime.toString + ".000",
         "SOME_REGIME",
         prediction,
         predictedSetTemp
@@ -130,4 +154,6 @@ object TestSmoothing {
     val pathToModel = Constants.RESOURCES_PATH + Constants.ENCOG_BEST_METHOD_PATH
     EncogDirectoryPersistence.loadObject(new File(pathToModel)).asInstanceOf[MLRegression]
   }
+
+
 }

@@ -95,5 +95,9 @@ object TimeHelper{
   def differenceInMinutesToMillis(minutes: Long): Long ={
     minutes * 60 * 1000
   }
+
+  def addMinutesToDateTime(dateTime: LocalDateTime, difference: Long): LocalDateTime = {
+    dateTime.plusMinutes(difference)
+  }
 }
 

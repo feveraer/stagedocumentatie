@@ -25,7 +25,7 @@ object CassandraTestConnection {
   def connect(): Session = {
     cluster = Cluster.builder().addContactPoint("localhost").withPort(SSHTunnel.lportCassandra).build()
     val metadata = cluster.getMetadata
-    logger.info("Connected to cluster: "+ metadata.getClusterName +"\n")
+    logger.info("Connected to cluster: " + metadata.getClusterName + "\n")
 
     session = cluster.connect(keyspace)
     session
@@ -225,7 +225,7 @@ object CassandraTestConnection {
   def getSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
     checkSession()
 
-    try{
+    try {
       val average = getAverageSetTempFor(sensorId, season, day, hour, quartile)
       average
     } catch {
@@ -234,6 +234,45 @@ object CassandraTestConnection {
         mostRecentLog(0).setTemp
       }
     }
+  }
+
+  def getAllLogsForSensor(outputId: Int): Vector[SensorLog] = {
+    checkSession()
+
+    var result: Vector[SensorLog] = Vector.empty
+
+    val cqlStatement =
+      "SELECT * FROM " + keyspace + ".sensor_logs " +
+        "WHERE outputid = " + outputId + " " +
+        "ORDER BY date DESC, time DESC " + ";"
+
+
+    val queryResult = executeQuery(cqlStatement)
+
+    if (queryResult.isEmpty) {
+      throw new RuntimeException("No results for output " + outputId)
+    }
+
+    val resultSet = queryResult.get
+
+    val resultIterator = resultSet.iterator()
+
+    while (resultIterator.hasNext) {
+      val row = resultIterator.next
+
+      val id = row.getLong("outputid")
+      val date = row.getString("date")
+      val time = row.getString("time")
+      val regime = row.getString("regime")
+      val measuredTemp = row.getDouble("measuredtemperature")
+      val setTemp = row.getDouble("settemperature")
+
+      val log = new SensorLog(id.toInt, date, time, regime, measuredTemp, setTemp)
+
+      result +:= log
+    }
+
+    result
   }
 
   /*

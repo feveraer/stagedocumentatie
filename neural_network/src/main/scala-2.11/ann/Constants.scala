@@ -18,4 +18,5 @@ object Constants {
 
   // time difference to prediction in days, hours, minutes, seconds
   val DIFF_TO_PREDICTION: DateTimeDifference = new DateTimeDifference(0, 0, 6, 0)
+  val DIFF_TO_PREDICTION_MINUTES: Long = 6
 }
