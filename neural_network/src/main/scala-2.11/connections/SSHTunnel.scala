@@ -11,7 +11,7 @@ object SSHTunnel {
   private val host = "157.193.228.108"
 
   val lportCassandra = 9042
-  val rhostCassandra = "10.11.12.110"
+  val rhostCassandra = "10.11.12.120"
   val rportCassandra = 9042
 
   private var sessionCassandra: Session = null
