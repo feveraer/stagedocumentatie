@@ -45,10 +45,11 @@ object TestSmoothing {
     var currentLog = logs(0)
     var counter = 1
 
-    while (counter < 100) {
+    while (counter < 10) {
       println("Start iteration: " + counter)
-      val prediction = ann.predictFromDataSequence(logs.slice(counter-1, counter+2))
-      println("Date: " + currentLog.date + "\tTime: " + currentLog.time + "\tPrediction in " +
+      val prediction = ann.predictFromDataSequence(logs.slice(counter-1, counter+3))
+      val lastLog = logs(counter+2)
+      println("Date: " + lastLog.date + "\tTime: " + lastLog.time + "\tPrediction in " +
         Constants.DIFF_TO_PREDICTION_MINUTES + ": " + prediction)
       println("Measured: " + currentLog.measuredTemp + "\tSet: " + currentLog.setTemp)
       currentLog = logs(counter)
