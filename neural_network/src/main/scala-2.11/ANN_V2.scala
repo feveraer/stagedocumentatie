@@ -35,10 +35,10 @@ object ANN_V2 {
       trainNetwork
     }
 //    predict
-         predictFromCsv
-         draw
-         style
-         stopWisp
+    predictFromCsv
+    draw
+    style
+    stopWisp
   }
 
   def trainNetwork {
