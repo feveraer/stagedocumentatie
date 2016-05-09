@@ -2,7 +2,7 @@ package time
 
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.time.{LocalDate, LocalTime}
+import java.time.{LocalDate, LocalDateTime, LocalTime}
 
 /**
   * Created by Lorenz on 13/04/2016.
@@ -84,6 +84,12 @@ case class DateTimeDifference(days: Int, hours: Int, minutes: Int, seconds: Int)
     long += (hours * 60 * 60 * 1000)
     long += (days * 24 * 60 * 60 * 1000)
     long
+  }
+}
+
+object TimeHelper{
+  def differenceBetweenInMinutes(fromDate: LocalDateTime, toDate: LocalDateTime): Long ={
+    fromDate.until( toDate, ChronoUnit.MINUTES)
   }
 }
 
