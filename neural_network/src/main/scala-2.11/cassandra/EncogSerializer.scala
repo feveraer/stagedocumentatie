@@ -10,6 +10,7 @@ import org.encog.ml.data.versatile.NormalizationHelper
   * Created by Lorenz on 26/04/2016.
   */
 object EncogSerializer {
+  //returns a hexstring
   def serialize(obj: Object): String  = {
     val b = new ByteArrayOutputStream()
     val o = new ObjectOutputStream(b)
@@ -17,6 +18,7 @@ object EncogSerializer {
     Bytes.toHexString(b.toByteArray)
   }
 
+  // returns an Object from a hexstring
   def deserialize(hexString: String): Object = {
     val ex = Bytes.fromHexString(hexString);
     val ois = new ObjectInputStream(new ByteArrayInputStream(ex.array()))

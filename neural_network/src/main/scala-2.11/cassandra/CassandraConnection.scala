@@ -22,9 +22,10 @@ object CassandraConnection {
 
   // create connection to cluster
   def connect(): Session = {
+    // contactPoint: Localhost door SSH binding
     cluster = Cluster.builder().addContactPoint("localhost").withPort(SSHTunnel.lportCassandra).build()
     val metadata = cluster.getMetadata
-    logger.info("Connected to cluster: "+ metadata.getClusterName +"\n")
+    logger.info("Connected to cluster: " + metadata.getClusterName + "\n")
 
     session = cluster.connect(keyspace)
     session
@@ -39,6 +40,7 @@ object CassandraConnection {
     }
   }
 
+  // Returns an option, in case query fails returns None
   def executeQuery(cqlStatement: String): Option[ResultSet] = {
     try {
       Option(session.execute(cqlStatement))
@@ -138,6 +140,7 @@ object CassandraConnection {
       throw new RuntimeException("No results for output " + id)
     }
 
+    // Mapping
     val row = result.get.one()
     val hexStringModel = row.getString("model")
     val hexStringNormalizer = row.getString("normalizer")
@@ -167,6 +170,7 @@ object CassandraConnection {
 
     val resultIterator = resultSet.iterator()
 
+    // Mapping
     while (resultIterator.hasNext) {
       val row = resultIterator.next
 
@@ -185,7 +189,7 @@ object CassandraConnection {
     result
   }
 
-  def getDistinctUsers(): Vector[String] = {
+  def getDistinctUsers: Vector[String] = {
     checkSession()
 
     var result: Vector[String] = Vector.empty
@@ -202,6 +206,7 @@ object CassandraConnection {
     val resultSet = queryResult.get
     val resultIterator = resultSet.iterator()
 
+    // Mapping
     while (resultIterator.hasNext) {
       val row = resultIterator.next()
       result :+= row.getString("user")
@@ -228,6 +233,7 @@ object CassandraConnection {
     val resultSet = queryResult.get
     val resultIterator = resultSet.iterator()
 
+    // Mapping
     while (resultIterator.hasNext) {
       val row = resultIterator.next()
 
@@ -260,6 +266,9 @@ object CassandraConnection {
 
     val resultSet = queryResult.get
     val resultIterator = resultSet.iterator()
+
+    // Mapping
+
     var sum = 0.0
     var count = 0
 
@@ -290,14 +299,13 @@ object CassandraConnection {
   def getSetTempFor(sensorId: Int, season: String, day: String, hour: Int, quartile: Int): Double = {
     checkSession()
 
-    try{
+    try {
       val average = getAverageSetTempFor(sensorId, season, day, hour, quartile)
       average
     } catch {
-      case e: RuntimeException => {
+      case e: RuntimeException =>
         val mostRecentLog = getMostRecentTemperatureEntries(sensorId, 1)
         mostRecentLog(0).setTemp
-      }
     }
   }
 
