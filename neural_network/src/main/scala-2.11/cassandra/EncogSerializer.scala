@@ -20,7 +20,7 @@ object EncogSerializer {
 
   // returns an Object from a hexstring
   def deserialize(hexString: String): Object = {
-    val ex = Bytes.fromHexString(hexString);
+    val ex = Bytes.fromHexString(hexString)
     val ois = new ObjectInputStream(new ByteArrayInputStream(ex.array()))
     ois.readObject()
   }
