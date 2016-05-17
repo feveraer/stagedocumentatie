@@ -10,10 +10,11 @@ import helpers.Helpers.{Quartile, Season}
 
 /**
   * Created by Lorenz on 25/04/2016.
+  * Helper vor json to scala classes
   */
 object TcpJsonLog {
-
   object Status {
+    // Converts JSON to Scala case class Status below
     implicit def StatusCodecJson: CodecJson[Status] =
       casecodec6(Status.apply, Status.unapply)("Regime", "Temperature", "SetTemp", "Mode", "Max", "Min")
   }
@@ -21,23 +22,24 @@ object TcpJsonLog {
   case class Status(Regime: String, Temperature: Double, SetTemp: Double, Mode: Int, Max: Double, Min: Double)
 
   object Log {
+    // Converts JSON to Scala case class Log below
     implicit def LogCodecJson: CodecJson[Log] =
       casecodec4(Log.apply, Log.unapply)("Id", "Status", "Location", "User")
   }
 
   case class Log(Id: Int, Status: Status, Location: String, User: String) {
-    def toSensorLog(): SensorLog = {
+    def toSensorLog: SensorLog = {
       val date = LocalDate.now()
       val time = LocalTime.now()
 
       new SensorLog(Id, date.toString, time.toString, Status.Regime, Status.Temperature, Status.SetTemp)
     }
 
-    def toSensorInfo(): SensorInfo = {
+    def toSensorInfo: SensorInfo = {
       new SensorInfo(Id, Location, User)
     }
 
-    def toSetTemperatures(): SetTemperatureLog = {
+    def toSetTemperatures: SetTemperatureLog = {
       val date = LocalDate.now()
       val time = LocalTime.now()
 
@@ -49,6 +51,7 @@ object TcpJsonLog {
   }
 
   object Decoder {
+    // Decodes a JSON string to the case class Log (see above)
     def decodeLogJson(jsonString: String): Log = {
       val logOption = Parse.decodeOption[Log](jsonString)
       logOption.get
