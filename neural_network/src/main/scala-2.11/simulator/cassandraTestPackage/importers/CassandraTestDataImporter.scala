@@ -81,9 +81,8 @@ object CassandraTestDataImporter {
 
       CassandraTestConnection.insertSensorModels(entry)
     } catch {
-      case e: Any => {
+      case e: Any =>
         e.printStackTrace
-      }
     }
   }
 
@@ -98,7 +97,7 @@ object CassandraTestDataImporter {
 
       // Create params for SensorLog
       val date = dateTime.date.toString
-      val formatter =  DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+      val formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
       val time = dateTime.time.format(formatter)
       val setTemp = parts(9).toInt
       val measured = parts(10).toInt

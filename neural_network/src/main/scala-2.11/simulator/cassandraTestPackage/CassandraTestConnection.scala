@@ -229,10 +229,9 @@ object CassandraTestConnection {
       val average = getAverageSetTempFor(sensorId, season, day, hour, quartile)
       average
     } catch {
-      case e: RuntimeException => {
+      case e: RuntimeException =>
         val mostRecentLog = getMostRecentTemperatureEntries(sensorId, 1)
         mostRecentLog(0).setTemp
-      }
     }
   }
 
