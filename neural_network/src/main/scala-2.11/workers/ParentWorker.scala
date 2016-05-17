@@ -1,6 +1,6 @@
 package workers
 
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.{Actor, Props}
 import akka.util.ByteString
 import json.TcpJsonLog.{Decoder, Log}
 
@@ -10,10 +10,10 @@ import json.TcpJsonLog.{Decoder, Log}
 class ParentWorker extends Actor {
 
   override def receive = {
-    case data: ByteString => {
+    case data: ByteString =>
       val cassandraWorker = context.actorOf(Props[CassandraWorker])
       val log = decode(data)
-      val sensorLog = log.toSensorLog()
+      val sensorLog = log.toSensorLog
 
       // Send Log to CassandraWorker.
       cassandraWorker ! log
@@ -27,7 +27,6 @@ class ParentWorker extends Actor {
         val coolDownWorker = context.actorOf(Props[CoolDownWorker])
         coolDownWorker ! sensorLog
       }
-    }
   }
 
   def decode(data: ByteString): Log = {

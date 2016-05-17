@@ -13,18 +13,16 @@ class CassandraWorker extends Actor {
 
   def receive = {
     // Data received over TCP socket is of type ByteString
-    case log: Log => {
+    case log: Log =>
       // Insert SensorLog in Cassandra DB
-      CassandraConnection.insertSensorLog(log.toSensorLog())
+      CassandraConnection.insertSensorLog(log.toSensorLog)
       // Insert SensorInfo in Cassandra DB
-      CassandraConnection.insertSensorInfo(log.toSensorInfo())
-      CassandraConnection.insertSetTemperature(log.toSetTemperatures())
+      CassandraConnection.insertSensorInfo(log.toSensorInfo)
+      CassandraConnection.insertSetTemperature(log.toSetTemperatures)
       logger.info("Wrote log to Cassandra")
       context.stop(self)
-    }
-    case default => {
+    case default =>
       println(default)
       context.stop(self)
-    }
   }
 }

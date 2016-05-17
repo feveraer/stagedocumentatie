@@ -15,10 +15,9 @@ class WarmUpWorker extends Actor{
   private val logger = Logger.getLogger("WarmUpWorker")
 
   override def receive = {
-    case sensorLog: SensorLog => {
+    case sensorLog: SensorLog =>
       predict(sensorLog)
       context.stop(self)
-    }
   }
 
   private def predict(sensorLog: SensorLog) {
@@ -27,9 +26,8 @@ class WarmUpWorker extends Actor{
     try {
       model = CassandraConnection.getANNModelsForOutput(sensorLog.sensorId)
     } catch {
-      case e: RuntimeException => {
+      case e: RuntimeException =>
         model = CassandraConnection.getANNModelsForOutput(Constants.DEFAULT_USER_ID)
-      }
     }
     ann.loadModel(model._1, model._2)
     logger.debug("Prediction test for next temperature")
