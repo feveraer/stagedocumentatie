@@ -77,7 +77,7 @@ case class DateTime(date: LocalDate, time: LocalTime) {
 }
 
 case class DateTimeDifference(days: Int, hours: Int, minutes: Int, seconds: Int) {
-  def toMillis(): Long = {
+  def toMillis: Long = {
     var long = 0
     long += (seconds * 1000)
     long += (minutes * 60 * 1000)
