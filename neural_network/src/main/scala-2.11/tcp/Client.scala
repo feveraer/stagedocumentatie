@@ -2,7 +2,6 @@ package tcp
 
 import akka.actor.{Actor, ActorRef, Props}
 import akka.io.{IO, Tcp}
-import akka.util.ByteString
 import java.net.InetSocketAddress
 
 object Client {
